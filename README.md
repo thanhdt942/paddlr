@@ -78,30 +78,33 @@ agy plugin install https://github.com/thanhdt942/paddlr
 
 ### Claude Code
 
-Install inside your Claude Code session:
+Install inside your Claude Code session (one step):
 
 ```text
 /plugin install paddlr --marketplace thanhdt942/paddlr
 ```
 
-*Or install directly from git repository:*
+*Or in two steps (for versions without `--marketplace`):*
+
 ```text
-/plugin install thanhdt942/paddlr
+/plugin marketplace add thanhdt942/paddlr
+/plugin install paddlr@paddlr
 ```
 
 ### OpenCode
 
-Install via the OpenCode CLI:
+Install via the OpenCode CLI (adds Paddlr to `.opencode/opencode.json`; pass `-g` to install globally):
 
 ```bash
-opencode plugin add paddlr@git+https://github.com/thanhdt942/paddlr.git
+opencode plugin paddlr@git+https://github.com/thanhdt942/paddlr.git
 ```
 
 Or configure inside your project's `opencode.json`:
 
 ```json
 {
-  "plugins": [
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
     "paddlr@git+https://github.com/thanhdt942/paddlr.git"
   ]
 }
@@ -111,40 +114,29 @@ See [.opencode/INSTALL.md](.opencode/INSTALL.md) for local linking and full docu
 
 ### OpenAI Codex (`codex`)
 
-Add the Paddlr marketplace and install:
+Add the Paddlr marketplace, then install the plugin from it:
 
 ```bash
-codex plugin marketplace add https://github.com/thanhdt942/paddlr
-codex plugin add paddlr
+codex plugin marketplace add thanhdt942/paddlr
+codex plugin add paddlr@paddlr
 ```
 
 ---
 
-## 5. CLI Identity (`pdl`) & Slash Commands
+## 5. Agent Skills & Slash Commands
 
-Paddlr separates CLI ergonomics from brand identity, providing the concise `pdl` command:
+Once installed, describe your task in natural language and your coding agent will load the matching skill. In Claude Code, skills are also exposed as slash commands under the plugin namespace (`/paddlr:<skill>`):
 
-```bash
-pdl init      # Onboard repository and initialize docs/paddlr/
-pdl spec      # Clarify requirements and draft reviewable specifications
-pdl plan      # Decompose specifications into bite-sized, contract-first plans
-pdl test      # Execute Test-Driven Development (RED -> GREEN -> REFACTOR)
-pdl debug     # Scientific root cause analysis and troubleshooting
-pdl release   # Governed release management lifecycle
-```
-
-### Slash Commands in Chat Environments
-
-| Slash Command | Companion Skill | Purpose |
+| Skill | Directory | Purpose |
 |---|---|---|
-| `/pdl:feature-development` | `skills/feature-development` | Orchestrate end-to-end feature delivery across all phases |
-| `/pdl:writing-specs` | `skills/writing-specs` | Requirements discovery and specification authoring |
-| `/pdl:writing-plans` | `skills/writing-plans` | Bite-sized implementation plans in `docs/paddlr/plans/` |
-| `/pdl:test-driven-development` | `skills/test-driven-development` | Iron-law TDD (no code without a failing test first) |
-| `/pdl:sre-debugging` | `skills/sre-debugging` | Evidence-based root-cause investigation before fixing |
-| `/pdl:code-review` | `skills/code-review` | Read-only code review against specifications |
-| `/pdl:release-management` | `skills/release-management` | Semantic versioning and release lifecycle in `RELEASE.md` |
-| `/pdl:skill-creator` | `skills/skill-creator` | Design, test, and package reusable AI agent skills |
+| `feature-development` | `skills/feature-development` | Orchestrate end-to-end feature delivery across all phases |
+| `writing-specs` | `skills/writing-specs` | Requirements discovery and specification authoring |
+| `writing-plans` | `skills/writing-plans` | Bite-sized implementation plans in `docs/paddlr/plans/` |
+| `test-driven-development` | `skills/test-driven-development` | Iron-law TDD (no code without a failing test first) |
+| `sre-debugging` | `skills/sre-debugging` | Evidence-based root-cause investigation before fixing |
+| `code-review` | `skills/code-review` | Read-only code review against specifications |
+| `release-management` | `skills/release-management` | Semantic versioning and release lifecycle in `RELEASE.md` |
+| `skill-creator` | `skills/skill-creator` | Design, test, and package reusable AI agent skills |
 
 ---
 

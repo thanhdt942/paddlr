@@ -11,30 +11,17 @@ Paddlr natively conforms to the OpenCode plugin specification (supporting both O
 
 ### Option A: OpenCode CLI (Recommended)
 
-Run in your terminal:
+Run in your project directory:
 
 ```bash
-opencode plugin add paddlr@git+https://github.com/thanhdt942/paddlr.git
+opencode plugin paddlr@git+https://github.com/thanhdt942/paddlr.git
 ```
 
-This installs the package and registers it in your global configuration.
+This adds Paddlr to `.opencode/opencode.json`. Pass `-g` to install it in your global OpenCode configuration instead.
 
 ### Option B: Configuration File (`opencode.json`)
 
 Add Paddlr to your project or global `opencode.json` (or `opencode.jsonc`):
-
-#### OpenCode v2 (`plugins` array):
-
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugins": [
-    "paddlr@git+https://github.com/thanhdt942/paddlr.git"
-  ]
-}
-```
-
-#### OpenCode v1 (`plugin` array):
 
 ```json
 {
