@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Paddlr — Simple on the Surface. Sophisticated Underneath.</title>
-  <meta name="description" content="Paddlr is an agent-agnostic software engineering framework turning proven engineering practices into practical, reusable AI Agent Skills for Google Antigravity, Claude Code, OpenCode, and OpenAI Codex." />
+  <meta name="description" content="Paddlr is an agent-agnostic software engineering framework turning proven engineering practices into practical, reusable AI Agent Skills for Claude Code, Google Antigravity, OpenCode, and OpenAI Codex." />
   <link rel="canonical" href="https://thanhdt942.github.io/paddlr/" />
 
   <!-- Open Graph / Social -->
@@ -36,12 +36,12 @@
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <!-- =====================================================================
-       Header & Navigation
+       1. Navigation
        ===================================================================== -->
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Paddlr Home">
-        <img class="brand-logo" src="./assets/images/logo.svg" alt="" width="30" height="30" />
+        <img class="brand-logo" src="./assets/images/logo.svg" alt="" width="26" height="26" />
         <span>Paddlr</span>
         <span class="brand-version">v1.0.0</span>
       </a>
@@ -49,14 +49,13 @@
       <nav class="nav-desktop" aria-label="Primary">
         <ul class="nav-links">
           <li><a href="#features">Features</a></li>
+          <li><a class="nav-link-agents" href="#agents">Agents</a></li>
           <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#quick-start">Quick Start</a></li>
           <li><a href="#docs">Documentation</a></li>
-          <li><a href="#faq">FAQ</a></li>
         </ul>
 
         <div class="nav-actions">
-          <a class="github-link-btn" href="https://github.com/thanhdt942/paddlr" target="_blank" rel="noopener noreferrer" aria-label="View Paddlr on GitHub">
+          <a class="github-link-btn" href="https://github.com/thanhdt942/paddlr" target="_blank" rel="noopener noreferrer" aria-label="Explore Paddlr on GitHub">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
             </svg>
@@ -94,77 +93,80 @@
     <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
       <ul class="mobile-nav-links">
         <li><a href="#features">Features</a></li>
+        <li><a href="#agents">Agents <span>4 Supported</span></a></li>
         <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#quick-start">Quick Start</a></li>
         <li><a href="#docs">Documentation</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="https://github.com/thanhdt942/paddlr" target="_blank" rel="noopener noreferrer">View on GitHub</a></li>
+        <li><a href="https://github.com/thanhdt942/paddlr" target="_blank" rel="noopener noreferrer">Explore on GitHub</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main">
     <!-- ===================================================================
-         Hero Section
+         2. Hero / Product Introduction
          =================================================================== -->
     <section class="hero" id="top">
       <div class="container hero-grid">
         <div>
-          <div class="hero-badge">
-            <span class="hero-badge-dot" aria-hidden="true"></span>
-            <span>Simple on the Surface. Sophisticated Underneath.</span>
+          <div class="hero-brand-line">
+            <span class="hero-wordmark">Paddlr</span>
+            <span class="hero-tagline-pill">
+              <span class="hero-badge-dot" aria-hidden="true"></span>
+              <span>Simple on the Surface. Sophisticated Underneath.</span>
+            </span>
           </div>
 
-          <h1 class="hero-title">Engineering discipline for AI coding agents.</h1>
+          <h1 class="hero-title">Disciplined software engineering for AI coding agents.</h1>
 
           <p class="hero-subtitle">
-            <strong>Paddlr</strong> is an agent-agnostic software engineering framework that turns proven practices&mdash;specs, contract-first plans, TDD, SRE debugging, and persistent project memory&mdash;into reusable AI Agent Skills.
+            Paddlr is an open-source, agent-agnostic engineering framework that equips your AI coding agent with reusable skills for specifications, contract-first planning, Test-Driven Development, scientific debugging, and Git-tracked project memory.
           </p>
 
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#quick-start">Get Started</a>
+            <a class="btn btn-primary" href="#agents">Get Started</a>
             <a class="btn btn-secondary" href="https://github.com/thanhdt942/paddlr" target="_blank" rel="noopener noreferrer">
-              View on GitHub
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+              <span>Explore on GitHub</span>
             </a>
           </div>
 
-          <div class="hero-meta" aria-label="Supported platforms and standards">
-            <span>Google Antigravity</span>
+          <div class="hero-meta">
+            <span>Works with:</span>
+            <a href="#agents" data-select-agent="claude">Claude Code</a>
             <span class="hero-meta-dot" aria-hidden="true"></span>
-            <span>Claude Code</span>
+            <a href="#agents" data-select-agent="antigravity">Google Antigravity</a>
             <span class="hero-meta-dot" aria-hidden="true"></span>
-            <span>OpenCode</span>
+            <a href="#agents" data-select-agent="opencode">OpenCode</a>
             <span class="hero-meta-dot" aria-hidden="true"></span>
-            <span>OpenAI Codex</span>
-            <span class="hero-meta-dot" aria-hidden="true"></span>
-            <span>Apache-2.0</span>
+            <a href="#agents" data-select-agent="codex">OpenAI Codex</a>
           </div>
         </div>
 
-        <div class="terminal" aria-label="Example Paddlr installation and session workflow">
+        <div class="terminal" aria-label="Verified Paddlr terminal session">
           <div class="terminal-bar">
             <div class="terminal-dots" aria-hidden="true">
               <span></span><span></span><span></span>
             </div>
-            <span class="terminal-title">paddlr &mdash; session</span>
+            <span class="terminal-title">paddlr &mdash; engineering session</span>
           </div>
           <div class="terminal-body">
-<pre><code><span class="t-comment"># 1. Install Paddlr as a native plugin</span>
-<span class="t-prompt">$</span> <span class="t-cmd">agy plugin install https://github.com/thanhdt942/paddlr</span>
+<pre><code><span class="t-comment"># 1. Install Paddlr in your coding agent</span>
+<span class="t-prompt">$</span> <span class="t-cmd">agy plugin install</span> <span class="t-arg">https://github.com/thanhdt942/paddlr</span>
 
-<span class="t-comment"># 2. SessionStart hook activates Paddlr discipline automatically</span>
+<span class="t-comment"># 2. hooks/session-start.py activates engineering discipline</span>
 <span class="t-ok">=== Paddlr Engineering Discipline Active ===</span>
-<span class="t-muted">Authority: rules/AGENTS.md | Memory: docs/paddlr/</span>
-<span class="t-muted">Loaded 8 Agent Skills &amp; 8 /pdl:* slash commands</span>
+<span class="t-muted">Authority: rules/AGENTS.md | Project Memory: docs/paddlr/</span>
 
-<span class="t-comment"># 3. Start a structured feature workflow in chat</span>
-<span class="t-prompt">&gt;</span> <span class="t-cmd">/pdl:feature-development Add webhook signature verification</span>
-<span class="t-muted">  -&gt; Spec: docs/paddlr/specs/2026-11-19-webhook-auth.md</span>
-<span class="t-muted">  -&gt; Plan: docs/paddlr/plans/2026-11-19-webhook-auth.md</span>
-<span class="t-muted">  -&gt; TDD:  RED -&gt; GREEN -&gt; REFACTOR</span>
+<span class="t-comment"># 3. Orchestrate a feature via slash command</span>
+<span class="t-prompt">&gt;</span> <span class="t-cmd">/pdl:feature-development</span> <span class="t-arg">Add webhook signature verification</span>
+<span class="t-muted">  [Spec] docs/paddlr/specs/2026-11-19-webhook-auth.md</span>
+<span class="t-muted">  [Plan] docs/paddlr/plans/2026-11-19-webhook-auth.md</span>
+<span class="t-muted">  [TDD]  RED -&gt; GREEN -&gt; REFACTOR</span>
 
-<span class="t-comment"># 4. Verify skill conformance &amp; repository test suite</span>
-<span class="t-prompt">$</span> <span class="t-cmd">python scripts/validate_skills.py</span>
+<span class="t-comment"># 4. Run repository skill &amp; test suite verification</span>
+<span class="t-prompt">$</span> <span class="t-cmd">python scripts/validate_skills.py</span> <span class="t-flag">--verbose</span>
 <span class="t-ok">Total: 8 | Valid: 8 | Invalid: 0</span>
 <span class="t-ok">All skills conform to the Agent Skills open standard!</span></code></pre>
           </div>
@@ -173,42 +175,68 @@
     </section>
 
     <!-- ===================================================================
-         Introduction
+         3. Why Paddlr
          =================================================================== -->
-    <section class="section section--tinted" id="introduction">
+    <section class="section section--tinted" id="why-paddlr">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Philosophy</span>
+          <span class="section-eyebrow">Why Paddlr</span>
           <h2 class="section-title">Handle the complexity. Simplify the experience.</h2>
           <p class="section-lead">
-            AI coding agents can write code quickly, but without structure they skip discovery, lose context between sessions, guess at fixes, and claim success without evidence. Paddlr embeds real software engineering discipline into reusable skills so teams get predictable results without memorizing checklists.
+            Unstructured agent prompting breaks down on real codebases: agents edit files before inspecting conventions, store plans in ephemeral chat threads, guess fixes without isolating root causes, and report completion without running verification.
           </p>
+        </div>
+
+        <div class="why-grid">
+          <article class="why-card">
+            <span class="why-card-label">The Problem</span>
+            <h3>Ad-hoc prompts don't scale</h3>
+            <p>
+              Repeating long procedural prompts in every session leads to inconsistent quality, forgotten architectural decisions, and fragile edits across multi-file features.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <span class="why-card-label">Why Paddlr Exists</span>
+            <h3>Codified engineering habits</h3>
+            <p>
+              Paddlr packages proven engineering workflows&mdash;spec authoring, contract-first task decomposition, iron-law TDD, and SRE debugging&mdash;into standard, reusable Agent Skills.
+            </p>
+          </article>
+
+          <article class="why-card">
+            <span class="why-card-label">Key Differentiator</span>
+            <h3>Git-tracked project memory</h3>
+            <p>
+              Instead of losing context when a chat window closes, Paddlr persists specs, per-request implementation plans, and immutable ADRs directly in <code>docs/paddlr/</code>.
+            </p>
+          </article>
         </div>
 
         <div class="surface-split">
           <div class="surface-panel">
             <span class="surface-label">Above the Surface</span>
-            <h3>Calm, frictionless developer experience</h3>
+            <h3>Calm, frictionless developer workflow</h3>
             <p>
-              Invoke one clear slash command or let the agent select the right skill for your task. Every skill has a single, unmistakable purpose and requires zero vendor lock-in.
+              Like a duck gliding across water, the day-to-day interface stays effortless: one plugin install, automatic session bootstrap, and intuitive <code>/pdl:*</code> slash commands.
             </p>
             <ul class="surface-list">
-              <li>Native plugin manifests for Antigravity, Claude Code, OpenCode, and Codex</li>
-              <li>Automatic session bootstrap via <code>hooks/session-start.py</code></li>
-              <li>Direct <code>/pdl:*</code> slash commands for every engineering stage</li>
+              <li>Zero memorization of sprawling checklists</li>
+              <li>Proportional process: small fixes stay fast (Level 1)</li>
+              <li>Identical skills and commands across 4 coding agents</li>
             </ul>
           </div>
 
           <div class="surface-panel surface-panel--below">
             <span class="surface-label">Below the Surface</span>
-            <h3>Disciplined, verifiable engineering rigor</h3>
+            <h3>Rigorous, verifiable engineering discipline</h3>
             <p>
-              Beneath the simple interface, Paddlr enforces structured discovery, risk-proportional planning, test-first execution, scientific debugging, and Git-tracked project memory.
+              Underneath the simple command surface, Paddlr coordinates quality gates and deterministic artifacts at every phase of development.
             </p>
             <ul class="surface-list">
-              <li>Persistent specs, plans, and immutable ADRs in <code>docs/paddlr/</code></li>
-              <li>Iron-law TDD (<code>RED &rarr; GREEN &rarr; REFACTOR</code>) &amp; SRE root-cause analysis</li>
-              <li>Evidence-based verification (<code>PASS</code> / <code>FAIL</code> / <code>BLOCKED</code>) and Git safety guardrails</li>
+              <li>Mandatory codebase inspection before modifying files</li>
+              <li>Contract-first plans (<code>Consumes</code> / <code>Produces</code>) &amp; TDD cycles</li>
+              <li>Concrete verification statuses (<code>PASS</code>, <code>FAIL</code>, <code>BLOCKED</code>)</li>
             </ul>
           </div>
         </div>
@@ -223,20 +251,20 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>A collection of reusable AI Agent Skills</strong> conforming to the Agent Skills open standard</td>
-                <td>Not an AI coding agent or LLM runtime itself</td>
+                <td><strong>A collection of 8 reusable AI Agent Skills</strong> conforming to the Agent Skills open standard</td>
+                <td>Not a standalone AI coding agent or LLM provider</td>
               </tr>
               <tr>
-                <td><strong>A practical Software Engineering Framework</strong> backed by rules, hooks, scripts, and tests</td>
-                <td>Not an IDE or closed development environment</td>
+                <td><strong>A practical Software Engineering Framework</strong> with rules, lifecycle hooks, scanner scripts, and tests</td>
+                <td>Not an IDE or closed proprietary platform</td>
               </tr>
               <tr>
-                <td><strong>A system for applying proven engineering practices</strong> with deterministic, checkable artifacts</td>
-                <td>Not an arbitrary collection of ad-hoc prompts</td>
+                <td><strong>A system for producing checkable engineering artifacts</strong> in <code>docs/paddlr/</code></td>
+                <td>Not a loose list of copy-paste prompt snippets</td>
               </tr>
               <tr>
-                <td><strong>Agent-agnostic by design</strong> across Antigravity, Claude Code, OpenCode, and Codex</td>
-                <td>Not tied to a single AI vendor or platform</td>
+                <td><strong>Agent-agnostic by design</strong> across Claude Code, Antigravity, OpenCode, and Codex</td>
+                <td>Not locked into a single vendor ecosystem</td>
               </tr>
             </tbody>
           </table>
@@ -245,388 +273,551 @@
     </section>
 
     <!-- ===================================================================
-         Features
+         4. Agent Compatibility & Installation Hub (#agents)
          =================================================================== -->
-    <section class="section" id="features">
+    <section class="section" id="agents">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Capabilities</span>
-          <h2 class="section-title">Built for real repositories, not toy demos.</h2>
+          <span class="section-eyebrow">Agent Compatibility &amp; Installation Hub</span>
+          <h2 class="section-title">Works With Your Favorite Coding Agents.</h2>
           <p class="section-lead">
-            Every capability in Paddlr maps directly to verified files, skills, hooks, and tests in the repository.
+            Use Paddlr with the coding agent you already love. Choose your agent and follow the installation instructions.
           </p>
         </div>
 
-        <div class="features-grid">
-          <article class="feature-item">
-            <span class="feature-tag">01 / Multi-Agent</span>
-            <h3>Agent-Agnostic Plugins</h3>
+        <div class="agent-hub" id="agent-hub">
+          <!-- 4.1 Interactive Agent Directory Cards -->
+          <div class="agent-directory" id="agent-directory" role="listbox" aria-label="Supported coding agents">
+            <!-- Claude Code -->
+            <button class="agent-card is-selected" type="button" role="option" id="agent-card-claude" aria-selected="true" data-agent="claude">
+              <div class="agent-card-top">
+                <span class="agent-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 17 10 11 4 5" />
+                    <line x1="12" y1="19" x2="20" y2="19" />
+                  </svg>
+                </span>
+                <span class="status-badge"><span class="status-badge-dot" aria-hidden="true"></span>Supported</span>
+              </div>
+              <div class="agent-card-name">Claude Code</div>
+              <div class="agent-card-id">Anthropic CLI &amp; IDE agent &middot; <code>.claude-plugin/</code></div>
+            </button>
+
+            <!-- Google Antigravity -->
+            <button class="agent-card" type="button" role="option" id="agent-card-antigravity" aria-selected="false" data-agent="antigravity">
+              <div class="agent-card-top">
+                <span class="agent-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                    <polyline points="2 17 12 22 22 17" />
+                    <polyline points="2 12 12 17 22 12" />
+                  </svg>
+                </span>
+                <span class="status-badge"><span class="status-badge-dot" aria-hidden="true"></span>Supported</span>
+              </div>
+              <div class="agent-card-name">Google Antigravity</div>
+              <div class="agent-card-id">Agentic IDE &amp; <code>agy</code> CLI &middot; <code>plugin.json</code></div>
+            </button>
+
+            <!-- OpenCode -->
+            <button class="agent-card" type="button" role="option" id="agent-card-opencode" aria-selected="false" data-agent="opencode">
+              <div class="agent-card-top">
+                <span class="agent-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6" />
+                    <polyline points="8 6 2 12 8 18" />
+                  </svg>
+                </span>
+                <span class="status-badge"><span class="status-badge-dot" aria-hidden="true"></span>Supported</span>
+              </div>
+              <div class="agent-card-name">OpenCode</div>
+              <div class="agent-card-id">OpenCode v1 &amp; v2 runtime plugin &middot; <code>index.js</code></div>
+            </button>
+
+            <!-- OpenAI Codex -->
+            <button class="agent-card" type="button" role="option" id="agent-card-codex" aria-selected="false" data-agent="codex">
+              <div class="agent-card-top">
+                <span class="agent-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="3" />
+                    <path d="M8 12h8" />
+                    <path d="M12 8v8" />
+                  </svg>
+                </span>
+                <span class="status-badge"><span class="status-badge-dot" aria-hidden="true"></span>Supported</span>
+              </div>
+              <div class="agent-card-name">OpenAI Codex</div>
+              <div class="agent-card-id">Codex CLI plugin &amp; marketplace &middot; <code>.codex-plugin/</code></div>
+            </button>
+          </div>
+
+          <!-- 4.2 & 4.3 Connected Inline Installation Panel -->
+          <div class="install-workbench" id="agent-workbench" aria-live="polite">
+            <div class="workbench-header">
+              <div class="workbench-agent-info">
+                <div class="workbench-title-row">
+                  <h3 class="workbench-agent-name" id="wb-agent-name">Claude Code</h3>
+                  <span class="status-badge" id="wb-agent-status"><span class="status-badge-dot" aria-hidden="true"></span>Supported</span>
+                  <span class="workbench-manifest-tag" id="wb-agent-manifest">.claude-plugin/plugin.json</span>
+                </div>
+                <p class="workbench-agent-desc" id="wb-agent-desc">
+                  Native Claude Code plugin shipping 8 skills, 8 /pdl:* slash commands, SessionStart hook (hooks/hooks.json), and rules/CLAUDE.md instruction router.
+                </p>
+              </div>
+
+              <div class="method-switcher" id="wb-method-switcher" role="tablist" aria-label="Installation method">
+                <span class="method-label">Method:</span>
+                <button class="method-btn is-active" type="button" role="tab" aria-selected="true" data-method-index="0">Marketplace (Recommended)</button>
+                <button class="method-btn" type="button" role="tab" aria-selected="false" data-method-index="1">Direct Git Repository</button>
+              </div>
+            </div>
+
+            <div class="workbench-body">
+              <!-- Left column: Prerequisites & Step-by-Step Commands -->
+              <div>
+                <div class="workbench-col-title">Prerequisites</div>
+                <ul class="workbench-prereqs" id="wb-prereqs">
+                  <li>Claude Code CLI</li>
+                  <li>Git</li>
+                  <li>Python 3.10+ (SessionStart hook)</li>
+                </ul>
+
+                <div class="workbench-col-title">Installation Instructions</div>
+                <p class="workbench-method-note" id="wb-method-note">
+                  Run inside an interactive Claude Code session to install Paddlr from the repository marketplace catalog (.claude-plugin/marketplace.json).
+                </p>
+
+                <div class="cmd-steps-list" id="wb-cmd-steps">
+                  <div class="cmd-step">
+                    <div class="cmd-step-label">Step 1 &mdash; Install Paddlr from marketplace in Claude Code</div>
+                    <div class="code-block">
+                      <div class="code-header">
+                        <span class="code-lang">claude-code</span>
+                        <button class="copy-btn" type="button" data-copy>Copy</button>
+                      </div>
+                      <pre><code>/plugin install paddlr --marketplace thanhdt942/paddlr</code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right column: After Installation (Verification, Minimal Usage, Docs link) -->
+              <div>
+                <div class="workbench-col-title">After Installation</div>
+                <div class="workbench-after-card">
+                  <div class="workbench-after-item">
+                    <h4>1. Verify Plugin Conformance</h4>
+                    <p id="wb-verify-note">Validate the plugin manifest from a local clone or confirm SessionStart bootstrap on session launch:</p>
+                    <div class="code-block">
+                      <div class="code-header">
+                        <span class="code-lang" id="wb-verify-lang">bash</span>
+                        <button class="copy-btn" type="button" data-copy>Copy</button>
+                      </div>
+                      <pre><code id="wb-verify-cmd">claude plugin validate .</code></pre>
+                    </div>
+                  </div>
+
+                  <div class="workbench-after-item">
+                    <h4>2. Minimal Usage Example</h4>
+                    <p id="wb-usage-note">Invoke any Paddlr slash command inside your session:</p>
+                    <div class="code-block">
+                      <div class="code-header">
+                        <span class="code-lang">chat prompt</span>
+                        <button class="copy-btn" type="button" data-copy>Copy</button>
+                      </div>
+                      <pre><code id="wb-usage-cmd">/pdl:feature-development Add webhook signature verification</code></pre>
+                    </div>
+                  </div>
+
+                  <a class="workbench-doc-link" id="wb-doc-link" href="#doc-installation">
+                    <span>Read full installation &amp; configuration docs</span>
+                    <span aria-hidden="true">&rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         5. Core Features (Varied Showcase + Asymmetric Supporting Blocks)
+         =================================================================== -->
+    <section class="section section--tinted" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-eyebrow">Core Features</span>
+          <h2 class="section-title">Everything required for disciplined AI engineering.</h2>
+          <p class="section-lead">
+            Every capability in Paddlr is implemented as verifiable files, skills, hooks, and scripts in the repository.
+          </p>
+        </div>
+
+        <!-- Prominent Feature Showcase -->
+        <article class="feature-showcase">
+          <div>
+            <span class="showcase-badge">Primary Capability &middot; Skills &amp; Project Memory</span>
+            <h3>8 Composable Agent Skills with Git-Tracked Memory</h3>
             <p>
-              Ships native plugin manifests and loaders for Google Antigravity, Claude Code, OpenCode (v1 and v2), and OpenAI Codex from a single repository.
+              Paddlr orchestrates end-to-end engineering through eight modular skills under <code>skills/*/SKILL.md</code> and persists every specification, contract-first plan, and architectural decision in <code>docs/paddlr/</code>.
             </p>
-            <div class="feature-example">plugin.json &middot; .claude-plugin/ &middot; index.js &middot; .codex-plugin/</div>
+            <ul class="showcase-points">
+              <li><strong>Always-new plan per request:</strong> Creates a dedicated file in <code>docs/paddlr/plans/YYYY-MM-DD-&lt;feature&gt;.md</code> without overwriting history.</li>
+              <li><strong>Immutable ADRs:</strong> Architectural decisions live in <code>docs/paddlr/decisions/XXXX-&lt;slug&gt;.md</code> and are indexed in <code>DECISIONS.md</code>.</li>
+              <li><strong>Progressive disclosure:</strong> Skills load detailed <code>references/</code> only at the phase where they are needed.</li>
+            </ul>
+          </div>
+
+          <div class="terminal" aria-label="Persistent project memory and skills layout">
+            <div class="terminal-bar">
+              <div class="terminal-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="terminal-title">docs/paddlr/ &amp; skills/</span>
+            </div>
+            <div class="terminal-body">
+<pre><code><span class="t-accent">docs/paddlr/</span>
+├── <span class="t-cmd">specs/</span>       <span class="t-comment"># Reviewable feature specifications</span>
+├── <span class="t-cmd">plans/</span>       <span class="t-comment"># Bite-sized contract-first plans</span>
+├── <span class="t-cmd">decisions/</span>   <span class="t-comment"># Granular immutable ADRs</span>
+├── <span class="t-ok">DECISIONS.md</span> <span class="t-comment"># Lightweight ADR master index</span>
+├── <span class="t-ok">PROGRESS.md</span>  <span class="t-comment"># Completed slices &amp; verified state</span>
+└── <span class="t-ok">PLAN.md</span>      <span class="t-comment"># Long-term engineering roadmap</span>
+
+<span class="t-accent">skills/</span>          <span class="t-comment"># 8 Agent Skills open-standard packages</span>
+├── feature-development/   ├── sre-debugging/
+├── writing-specs/         ├── code-review/
+├── writing-plans/         ├── release-management/
+└── test-driven-development/ └── skill-creator/</code></pre>
+            </div>
+          </div>
+        </article>
+
+        <!-- Split Supporting Row (2 Blocks with Code Examples) -->
+        <div class="features-split-row">
+          <article class="feature-block">
+            <span class="feature-tag">Lifecycle Hook &middot; hooks/session-start.py</span>
+            <h3>Automatic SessionStart Bootstrap</h3>
+            <p>
+              Automatically injects Paddlr's core operating principles, authority path (<code>rules/AGENTS.md</code>), and skill catalog when a session starts or compacts context&mdash;supporting both Google Antigravity and Claude Code JSON contracts.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">bash</span>
+                <button class="copy-btn" type="button" data-copy>Copy</button>
+              </div>
+              <pre><code>python hooks/session-start.py --antigravity</code></pre>
+            </div>
           </article>
 
-          <article class="feature-item">
-            <span class="feature-tag">02 / Composable Skills</span>
-            <h3>8 Specialized Agent Skills</h3>
+          <article class="feature-block">
+            <span class="feature-tag">Safety Guardrail &middot; index.js &amp; rules/AGENTS.md</span>
+            <h3>Destructive Git &amp; Execution Guardrails</h3>
             <p>
-              Covers the full software lifecycle: feature orchestration, specification authoring, contract-first planning, TDD, SRE debugging, read-only code review, release management, and skill creation.
+              Binds strict operational rules forbidding unapproved commits or destructive Git operations, enforced at runtime in OpenCode via the <code>tool.execute.before</code> hook.
             </p>
-            <div class="feature-example">skills/*/SKILL.md (validated by validate_skills.py)</div>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">blocked commands (tool.execute.before)</span>
+              </div>
+              <pre><code>git reset --hard   # Blocked without explicit user confirmation
+git clean -fd      # Blocked by [Paddlr Guardrail]
+git push --force   # Blocked by rules/AGENTS.md</code></pre>
+            </div>
+          </article>
+        </div>
+
+        <!-- Trio Supporting Row (3 Focused Blocks) -->
+        <div class="features-trio-row">
+          <article class="feature-block">
+            <span class="feature-tag">scripts/scan_repo.py</span>
+            <h3>Secret-Safe Repository Scanner</h3>
+            <p>
+              Detects technology stacks, test runners, and directory structure up to a configurable depth while flagging <code>.env*</code>, keys, and credentials by filename only&mdash;never reading or exposing their contents.
+            </p>
+            <div class="feature-meta-foot">python scripts/scan_repo.py . --json</div>
           </article>
 
-          <article class="feature-item">
-            <span class="feature-tag">03 / Persistent Memory</span>
-            <h3>Git-Tracked Project Memory</h3>
+          <article class="feature-block">
+            <span class="feature-tag">rules/AGENTS.md &sect;2</span>
+            <h3>Risk-Proportional Overhead</h3>
             <p>
-              Stores feature specifications, dedicated per-request implementation plans, and immutable ADRs directly in <code>docs/paddlr/</code> instead of ephemeral chat history.
+              Scales process rigor to task complexity: Level 1 small fixes skip ceremony, Level 2 features create a spec and plan, and Level 3 architectural changes require an ADR and approval gate.
             </p>
-            <div class="feature-example">docs/paddlr/{specs,plans,decisions}/</div>
+            <div class="feature-meta-foot">Level 1 &middot; Level 2 &middot; Level 3 Triage</div>
           </article>
 
-          <article class="feature-item">
-            <span class="feature-tag">04 / Proportional Process</span>
-            <h3>Risk-Proportional Workflows</h3>
+          <article class="feature-block">
+            <span class="feature-tag">scripts/validate_skills.py</span>
+            <h3>Verified Standard Conformance</h3>
             <p>
-              Matches engineering overhead to task risk: lightweight execution for small fixes (Level 1), specs and plans for features (Level 2), and ADR approval gates for architectural changes (Level 3).
+              Includes automated validators and a 52-test suite checking skill YAML frontmatter, progressive disclosure constraints, internal Markdown links, and all four agent plugin manifests.
             </p>
-            <div class="feature-example">rules/AGENTS.md &sect;2 Standard Engineering Loop</div>
-          </article>
-
-          <article class="feature-item">
-            <span class="feature-tag">05 / Guardrails</span>
-            <h3>Lifecycle Hooks &amp; Safety Checks</h3>
-            <p>
-              Injects engineering rules at session start and blocks unconfirmed destructive Git commands (<code>git reset --hard</code>, <code>git clean -fd</code>, <code>git push --force</code>) in OpenCode.
-            </p>
-            <div class="feature-example">hooks/session-start.py &middot; tool.execute.before</div>
-          </article>
-
-          <article class="feature-item">
-            <span class="feature-tag">06 / Deterministic Tooling</span>
-            <h3>Safe Repository Scanner &amp; Checks</h3>
-            <p>
-              Includes a dependency-free Python scanner (<code>scan_repo.py</code>) that detects stacks and commands while protecting sensitive files like <code>.env</code> and private keys from being read.
-            </p>
-            <div class="feature-example">scripts/scan_repo.py &middot; pdl_scan</div>
+            <div class="feature-meta-foot">52 automated tests &middot; 8/8 valid skills</div>
           </article>
         </div>
       </div>
     </section>
 
     <!-- ===================================================================
-         How It Works
+         6. How It Works
          =================================================================== -->
-    <section class="section section--tinted" id="how-it-works">
+    <section class="section" id="how-it-works">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Workflow</span>
-          <h2 class="section-title">How Paddlr works from intake to verification.</h2>
+          <span class="section-eyebrow">How It Works</span>
+          <h2 class="section-title">Five steps from requirement to verified code.</h2>
           <p class="section-lead">
-            When a session begins, Paddlr loads <code>rules/AGENTS.md</code> and guides your agent through a five-stage engineering loop coordinated by modular skills.
+            Paddlr guides your coding agent through a predictable engineering loop where each stage produces concrete, inspectable evidence.
           </p>
         </div>
 
-        <div class="workflow-steps" role="list">
+        <div class="workflow-sequence" role="list">
           <article class="workflow-step" role="listitem">
-            <div class="step-num">01 / Understand</div>
-            <h3>Inspect &amp; Discover</h3>
-            <p>Inspect Git state, repository structure, conventions, and test commands before editing any file.</p>
-            <div class="step-artifact">scripts/scan_repo.py</div>
+            <span class="step-num">STEP 01</span>
+            <h3>Understand</h3>
+            <p>Inspect Git status, repository layout, tech stack, and test runners before touching any application file.</p>
+            <div class="step-code">python scripts/scan_repo.py .</div>
           </article>
 
           <article class="workflow-step" role="listitem">
-            <div class="step-num">02 / Analyze &amp; Plan</div>
-            <h3>Spec &amp; Decompose</h3>
-            <p>Clarify ambiguities, author a reviewable spec, and break work into contract-first slices.</p>
-            <div class="step-artifact">writing-specs &rarr; writing-plans</div>
+            <span class="step-num">STEP 02</span>
+            <h3>Analyze &amp; Plan</h3>
+            <p>Clarify requirements, draft a specification, and decompose work into contract-first tasks.</p>
+            <div class="step-code">/pdl:writing-specs<br />/pdl:writing-plans</div>
           </article>
 
           <article class="workflow-step" role="listitem">
-            <div class="step-num">03 / Implement</div>
-            <h3>Incremental Slices</h3>
-            <p>Execute one small, verifiable slice at a time using Red-Green-Refactor TDD cycles.</p>
-            <div class="step-artifact">test-driven-development</div>
+            <span class="step-num">STEP 03</span>
+            <h3>Implement</h3>
+            <p>Execute one small slice at a time strictly test-first: write a failing test, make it pass, then refactor.</p>
+            <div class="step-code">/pdl:test-driven-development</div>
           </article>
 
           <article class="workflow-step" role="listitem">
-            <div class="step-num">04 / Verify</div>
-            <h3>Evidence &amp; Review</h3>
-            <p>Run tests and linters, report concrete PASS/FAIL evidence, and run independent code review.</p>
-            <div class="step-artifact">code-review &middot; sre-debugging</div>
+            <span class="step-num">STEP 04</span>
+            <h3>Evidence Verify</h3>
+            <p>Run tests and linters to capture PASS/FAIL evidence, debug failures scientifically, and review diffs.</p>
+            <div class="step-code">/pdl:code-review<br />/pdl:sre-debugging</div>
           </article>
 
           <article class="workflow-step" role="listitem">
-            <div class="step-num">05 / Finalize</div>
-            <h3>Record &amp; Release</h3>
-            <p>Update persistent project context and follow governed semantic release procedures.</p>
-            <div class="step-artifact">docs/paddlr/ &middot; release-management</div>
+            <span class="step-num">STEP 05</span>
+            <h3>Finalize</h3>
+            <p>Record completed slices in project memory and execute governed semantic releases when ready.</p>
+            <div class="step-code">/pdl:release-management</div>
           </article>
-        </div>
-
-        <div class="levels-grid">
-          <div class="level-card">
-            <h4>Level 1 &mdash; Small Change</h4>
-            <p>Typo fixes, minor refactors, localized bugs. Lightweight execution with no formal spec or plan overhead.</p>
-          </div>
-          <div class="level-card">
-            <h4>Level 2 &mdash; Feature Development</h4>
-            <p>Multi-component features. Persists a spec in <code>docs/paddlr/specs/</code> and a fresh plan in <code>docs/paddlr/plans/</code>.</p>
-          </div>
-          <div class="level-card">
-            <h4>Level 3 &mdash; Architectural Change</h4>
-            <p>High-impact trade-offs or breaking changes. Adds an immutable ADR in <code>docs/paddlr/decisions/</code> with explicit approval.</p>
-          </div>
         </div>
       </div>
     </section>
 
     <!-- ===================================================================
-         Quick Start
+         7. Quick Start
          =================================================================== -->
-    <section class="section" id="quick-start">
+    <section class="section section--tinted" id="quick-start">
       <div class="container">
         <div class="section-header">
           <span class="section-eyebrow">Quick Start</span>
-          <h2 class="section-title">Up and running in under a minute.</h2>
+          <h2 class="section-title">Start using Paddlr in four steps.</h2>
           <p class="section-lead">
-            Install Paddlr directly from GitHub in your preferred AI coding agent&mdash;no separate runtime or manual copy-pasting required.
+            Follow this walkthrough to install Paddlr, confirm session activation, and run your first structured workflow. Need agent-specific flags? <a href="#agents">Jump to the Agent Installation Hub &uarr;</a>
           </p>
         </div>
 
         <div class="quickstart-grid">
-          <!-- Step 1: Prerequisites -->
-          <div class="qs-step">
-            <div class="qs-step-header">
+          <article class="qs-card">
+            <div class="qs-card-header">
               <span class="qs-num">1</span>
-              <h3>Prerequisites</h3>
-            </div>
-            <p>Ensure your environment has:</p>
-            <ul class="prereq-list">
-              <li>Git</li>
-              <li>Python 3.10+ (for lifecycle hooks &amp; repository scripts)</li>
-              <li>One supported agent: Google Antigravity, Claude Code, OpenCode, or OpenAI Codex</li>
-            </ul>
-          </div>
-
-          <!-- Step 2: Install -->
-          <div class="qs-step">
-            <div class="qs-step-header">
-              <span class="qs-num">2</span>
-              <h3>Install for Your Agent</h3>
-            </div>
-
-            <div class="tabs-list" role="tablist" aria-label="Supported AI coding agents">
-              <button class="tab-btn" role="tab" id="tab-agy" aria-selected="true" aria-controls="panel-agy" type="button">Google Antigravity</button>
-              <button class="tab-btn" role="tab" id="tab-claude" aria-selected="false" aria-controls="panel-claude" type="button">Claude Code</button>
-              <button class="tab-btn" role="tab" id="tab-opencode" aria-selected="false" aria-controls="panel-opencode" type="button">OpenCode</button>
-              <button class="tab-btn" role="tab" id="tab-codex" aria-selected="false" aria-controls="panel-codex" type="button">OpenAI Codex</button>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" id="panel-agy" aria-labelledby="tab-agy">
-              <p>Install directly via the <code>agy</code> CLI in one command:</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="code-lang">bash</span>
-                  <button class="copy-btn" type="button" data-copy>Copy</button>
-                </div>
-                <pre><code>agy plugin install https://github.com/thanhdt942/paddlr</code></pre>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" id="panel-claude" aria-labelledby="tab-claude" hidden>
-              <p>Install inside your Claude Code session via the marketplace or directly from GitHub:</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="code-lang">claude-code</span>
-                  <button class="copy-btn" type="button" data-copy>Copy</button>
-                </div>
-                <pre><code>/plugin install paddlr --marketplace thanhdt942/paddlr</code></pre>
-              </div>
-              <p>Or install directly from the Git repository:</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="code-lang">claude-code</span>
-                  <button class="copy-btn" type="button" data-copy>Copy</button>
-                </div>
-                <pre><code>/plugin install thanhdt942/paddlr</code></pre>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" id="panel-opencode" aria-labelledby="tab-opencode" hidden>
-              <p>Install via the OpenCode CLI (supports both OpenCode v1 and v2):</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="code-lang">bash</span>
-                  <button class="copy-btn" type="button" data-copy>Copy</button>
-                </div>
-                <pre><code>opencode plugin add paddlr@git+https://github.com/thanhdt942/paddlr.git</code></pre>
-              </div>
-              <p>Or declare it in your project's <code>opencode.json</code> (OpenCode v2):</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="code-lang">json</span>
-                  <button class="copy-btn" type="button" data-copy>Copy</button>
-                </div>
-                <pre><code>{
-  "$schema": "https://opencode.ai/config.json",
-  "plugins": [
-    "paddlr@git+https://github.com/thanhdt942/paddlr.git"
-  ]
-}</code></pre>
-              </div>
-            </div>
-
-            <div class="tab-panel" role="tabpanel" id="panel-codex" aria-labelledby="tab-codex" hidden>
-              <p>Add the Paddlr marketplace and install the plugin:</p>
-              <div class="code-block">
-                <div class="code-header">
-                  <span class="code-lang">bash</span>
-                  <button class="copy-btn" type="button" data-copy>Copy</button>
-                </div>
-                <pre><code>codex plugin marketplace add https://github.com/thanhdt942/paddlr
-codex plugin add paddlr</code></pre>
-              </div>
-            </div>
-          </div>
-
-          <!-- Step 3: First Usage & Expected Output -->
-          <div class="qs-step">
-            <div class="qs-step-header">
-              <span class="qs-num">3</span>
-              <h3>First Usage &amp; Expected Output</h3>
+              <h3>Prerequisites &amp; Installation</h3>
             </div>
             <p>
-              Start a new agent session in your repository. The SessionStart hook (<code>hooks/session-start.py</code>) automatically injects the Paddlr engineering discipline context. Then invoke any slash command in chat:
+              Ensure <strong>Git</strong>, <strong>Python 3.10+</strong>, and one supported coding agent are installed. Install Paddlr using your agent's native command (or <a href="#agents">select your agent above</a>):
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">bash (Google Antigravity example)</span>
+                <button class="copy-btn" type="button" data-copy>Copy</button>
+              </div>
+              <pre><code>agy plugin install https://github.com/thanhdt942/paddlr</code></pre>
+            </div>
+          </article>
+
+          <article class="qs-card">
+            <div class="qs-card-header">
+              <span class="qs-num">2</span>
+              <h3>Initial Setup &amp; Session Bootstrap</h3>
+            </div>
+            <p>
+              Open a new session in your target repository. Paddlr's <code>SessionStart</code> hook loads <code>rules/AGENTS.md</code> automatically. You can also scan your repository directly:
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span class="code-lang">bash</span>
+                <button class="copy-btn" type="button" data-copy>Copy</button>
+              </div>
+              <pre><code>python scripts/scan_repo.py . --depth 3</code></pre>
+            </div>
+          </article>
+
+          <article class="qs-card">
+            <div class="qs-card-header">
+              <span class="qs-num">3</span>
+              <h3>First Usage</h3>
+            </div>
+            <p>
+              Trigger the end-to-end feature orchestrator or a specific skill via slash command in your agent chat:
             </p>
             <div class="code-block">
               <div class="code-header">
                 <span class="code-lang">chat prompt</span>
                 <button class="copy-btn" type="button" data-copy>Copy</button>
               </div>
-              <pre><code>/pdl:feature-development Add rate limiting to the authentication endpoint</code></pre>
+              <pre><code>/pdl:feature-development Add rate limiting to the login endpoint</code></pre>
             </div>
-            <p>On OpenCode, you can also verify the loaded plugin directly from the CLI:</p>
-            <div class="code-block">
-              <div class="code-header">
-                <span class="code-lang">bash</span>
-                <button class="copy-btn" type="button" data-copy>Copy</button>
-              </div>
-              <pre><code>opencode run "Show me the Paddlr engineering discipline bootstrap context"</code></pre>
+          </article>
+
+          <article class="qs-card">
+            <div class="qs-card-header">
+              <span class="qs-num">4</span>
+              <h3>Expected Result</h3>
             </div>
-            <p>Expected bootstrap confirmation in your session:</p>
+            <p>
+              Your agent inspects the repo, clarifies ambiguities, writes a spec and plan to <code>docs/paddlr/</code>, implements via TDD, and reports verification evidence:
+            </p>
             <div class="code-block">
               <div class="code-header">
                 <span class="code-lang">output</span>
                 <button class="copy-btn" type="button" data-copy>Copy</button>
               </div>
               <pre><code>=== Paddlr Engineering Discipline Active ===
-You are operating with the Paddlr software engineering framework.
-Tagline: Simple on the Surface. Sophisticated Underneath.
-Philosophy: Handle the complexity. Simplify the experience.
-Authority / Source of Truth: rules/AGENTS.md</code></pre>
+Spec: docs/paddlr/specs/2026-11-19-login-rate-limit.md
+Plan: docs/paddlr/plans/2026-11-19-login-rate-limit.md
+Verification: PASS (unit &amp; integration tests executed)</code></pre>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- ===================================================================
-         Documentation / Usage Guide
+         8. Documentation & FAQ
          =================================================================== -->
-    <section class="section section--tinted" id="docs">
+    <section class="section" id="docs">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Documentation</span>
-          <h2 class="section-title">Usage Guide &amp; Reference</h2>
+          <span class="section-eyebrow">Documentation &amp; Reference</span>
+          <h2 class="section-title">Complete User Guide</h2>
           <p class="section-lead">
-            Everything you need to configure project memory, invoke slash commands, understand skills, and run verification scripts.
+            Reference documentation for Paddlr's installation options, configuration files, slash commands, skills, and troubleshooting.
           </p>
         </div>
 
         <div class="docs-layout">
-          <aside class="docs-sidebar" aria-label="Documentation sections">
-            <div class="docs-sidebar-title">On this page</div>
+          <aside class="docs-sidebar" aria-label="Documentation topics">
+            <div class="docs-sidebar-title">Contents</div>
             <ul class="docs-nav">
-              <li><a href="#doc-memory">Project Memory &amp; Rules</a></li>
+              <li><a href="#doc-installation">Installation</a></li>
+              <li><a href="#doc-configuration">Configuration &amp; Memory</a></li>
+              <li><a href="#doc-usage">Usage &amp; Workflow Levels</a></li>
               <li><a href="#doc-commands">Slash Commands</a></li>
-              <li><a href="#doc-skills">Agent Skills</a></li>
-              <li><a href="#doc-opencode">OpenCode Tools &amp; Hooks</a></li>
-              <li><a href="#doc-scripts">Scripts &amp; Verification</a></li>
+              <li><a href="#doc-skills">Skills &amp; Workflows</a></li>
               <li><a href="#doc-customization">Customization</a></li>
               <li><a href="#doc-troubleshooting">Troubleshooting</a></li>
+              <li><a href="#faq">FAQ</a></li>
             </ul>
           </aside>
 
           <div class="docs-content">
-            <!-- 1. Project Memory & Rules -->
-            <article class="doc-section" id="doc-memory">
-              <h3>Project Memory &amp; Configuration</h3>
+            <!-- Installation -->
+            <article class="doc-section" id="doc-installation">
+              <h3>Installation</h3>
               <p>
-                Paddlr persists engineering knowledge canonically inside <code>docs/paddlr/</code> in your repository so specifications, plans, and architectural decisions stay versioned alongside code instead of disappearing in chat logs.
+                Paddlr ships native manifests at the repository root for all four supported coding agents. Use the <a href="#agents">Agent Installation Hub</a> above to copy interactive commands, or reference the manifest mapping below:
+              </p>
+              <ul>
+                <li><strong>Claude Code:</strong> <code>.claude-plugin/plugin.json</code>, <code>.claude-plugin/marketplace.json</code>, and <code>hooks/hooks.json</code>.</li>
+                <li><strong>Google Antigravity (<code>agy</code>):</strong> <code>plugin.json</code> and <code>hooks.json</code>.</li>
+                <li><strong>OpenCode (v1 &amp; v2):</strong> <code>package.json</code>, <code>index.js</code>, <code>index.d.ts</code>, and <code>.opencode/INSTALL.md</code>.</li>
+                <li><strong>OpenAI Codex (<code>codex</code>):</strong> <code>.codex-plugin/plugin.json</code> and <code>.agents/plugins/marketplace.json</code>.</li>
+              </ul>
+            </article>
+
+            <!-- Configuration & Project Memory -->
+            <article class="doc-section" id="doc-configuration">
+              <h3>Configuration &amp; Project Memory</h3>
+              <p>
+                Paddlr uses <code>rules/AGENTS.md</code> as its binding operational rulebook (and <code>rules/CLAUDE.md</code> as the Claude Code router that imports <code>@AGENTS.md</code>). Project artifacts are stored canonically under <code>docs/paddlr/</code>:
               </p>
               <div class="code-block">
                 <div class="code-header">
-                  <span class="code-lang">directory layout</span>
+                  <span class="code-lang">text</span>
                   <button class="copy-btn" type="button" data-copy>Copy</button>
                 </div>
                 <pre><code>docs/paddlr/
-├── specs/          # Reviewable feature specifications (YYYY-MM-DD-&lt;feature&gt;.md)
-├── plans/          # Dedicated contract-first implementation plans per request
-├── decisions/      # Granular, immutable Architecture Decision Records (XXXX-&lt;slug&gt;.md)
-├── DECISIONS.md    # Lightweight ADR master index
-├── PROGRESS.md     # Current operational status and completed slices
+├── specs/          # Feature specifications (YYYY-MM-DD-&lt;feature&gt;.md)
+├── plans/          # Dedicated implementation plan per request (YYYY-MM-DD-&lt;feature&gt;.md)
+├── decisions/      # Individual immutable ADRs (XXXX-&lt;slug&gt;.md)
+├── DECISIONS.md    # ADR index
+├── PROGRESS.md     # Current operational status &amp; completed slices
 └── PLAN.md         # Long-term engineering roadmap</code></pre>
               </div>
-              <p>
-                Core operating rules live in <code>rules/AGENTS.md</code> (the authoritative source of truth distributed with the plugin) and <code>rules/CLAUDE.md</code> (the instruction router for Claude Code that imports <code>@AGENTS.md</code>).
-              </p>
               <div class="callout">
-                <strong>Always-new plan rule:</strong> Every Level 2 feature and Level 3 architectural change creates a fresh plan file in <code>docs/paddlr/plans/YYYY-MM-DD-&lt;feature&gt;.md</code>. Past plans are never overwritten or appended to.
+                <strong>Legacy path fallback:</strong> OpenCode's <code>pdl_status</code> tool inspects <code>docs/paddlr/</code> first and automatically falls back to legacy <code>docs/hsiw/</code>, <code>.pdl/</code>, or <code>.hsiw/</code> directories if present.
               </div>
             </article>
 
-            <!-- 2. Slash Commands -->
+            <!-- Usage & Workflow Levels -->
+            <article class="doc-section" id="doc-usage">
+              <h3>Usage &amp; Workflow Levels</h3>
+              <p>
+                Paddlr classifies every engineering task into one of three risk levels before writing code, ensuring verification evidence is always reported using standard statuses (<code>PASS</code>, <code>FAIL</code>, <code>BLOCKED</code>, <code>NOT RUN</code>, <code>NOT APPLICABLE</code>):
+              </p>
+              <ul>
+                <li><strong>Level 1 (Small Change):</strong> Typo fixes, minor refactoring, localized bugs. No formal spec or plan required.</li>
+                <li><strong>Level 2 (Feature Development):</strong> Multi-component features. Requires a specification in <code>docs/paddlr/specs/</code> and a fresh implementation plan in <code>docs/paddlr/plans/</code>.</li>
+                <li><strong>Level 3 (Architectural Change):</strong> High-impact design trade-offs or breaking changes. Requires an ADR in <code>docs/paddlr/decisions/</code> and explicit user approval before implementation.</li>
+              </ul>
+            </article>
+
+            <!-- Slash Commands -->
             <article class="doc-section" id="doc-commands">
               <h3>Slash Commands Reference</h3>
               <p>
-                Paddlr provides eight slash commands defined in <code>commands/</code>. Each command routes cleanly to its companion Agent Skill.
+                All eight slash commands are defined in <code>commands/*.md</code> and invoke their corresponding skill in <code>skills/</code>:
               </p>
               <div class="table-wrap">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>Slash Command</th>
-                      <th>Argument Hint</th>
-                      <th>Purpose</th>
+                      <th>Command</th>
+                      <th>Arguments</th>
+                      <th>Description</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
                       <td><code>/pdl:feature-development</code></td>
                       <td><code>[feature idea, requirement, or user story]</code></td>
-                      <td>Orchestrate end-to-end feature delivery across discovery, spec, plan, TDD, and review</td>
+                      <td>Orchestrate end-to-end feature delivery from intake to verified completion</td>
                     </tr>
                     <tr>
                       <td><code>/pdl:writing-specs</code></td>
                       <td><code>[feature idea or requirements]</code></td>
-                      <td>Clarify requirements and author a reviewable specification in <code>docs/paddlr/specs/</code></td>
+                      <td>Turn requirements into a clear, reviewable specification in <code>docs/paddlr/specs/</code></td>
                     </tr>
                     <tr>
                       <td><code>/pdl:writing-plans</code></td>
                       <td><code>[spec path or feature description]</code></td>
-                      <td>Decompose a spec into bite-sized, contract-first tasks in <code>docs/paddlr/plans/</code></td>
+                      <td>Create a bite-sized, contract-first implementation plan in <code>docs/paddlr/plans/</code></td>
                     </tr>
                     <tr>
                       <td><code>/pdl:test-driven-development</code></td>
                       <td><code>[task or behavior to implement]</code></td>
-                      <td>Implement features or bugfixes strictly test-first (<code>RED &rarr; GREEN &rarr; REFACTOR</code>)</td>
+                      <td>Implement code strictly test-first (<code>RED &rarr; GREEN &rarr; REFACTOR</code>)</td>
                     </tr>
                     <tr>
                       <td><code>/pdl:sre-debugging</code></td>
                       <td><code>[error message, failing test, or symptom]</code></td>
-                      <td>Run evidence-based root-cause analysis before proposing or applying fixes</td>
+                      <td>Evidence-based root cause analysis and scientific troubleshooting before fixing</td>
                     </tr>
                     <tr>
                       <td><code>/pdl:code-review</code></td>
@@ -635,131 +826,50 @@ Authority / Source of Truth: rules/AGENTS.md</code></pre>
                     </tr>
                     <tr>
                       <td><code>/pdl:release-management</code></td>
-                      <td><code>[release type, version bump, or stage]</code></td>
-                      <td>Manage semantic releases and persist project release conventions in <code>RELEASE.md</code></td>
+                      <td><code>[release type, version bump, or release stage]</code></td>
+                      <td>Manage software release lifecycle and persist conventions in <code>RELEASE.md</code></td>
                     </tr>
                     <tr>
                       <td><code>/pdl:skill-creator</code></td>
-                      <td><code>[skill idea, workflow, or skill to audit]</code></td>
-                      <td>Design, draft, verify, and package new reusable AI Agent Skills</td>
+                      <td><code>[skill idea, repeated workflow, or skill to audit]</code></td>
+                      <td>Design, draft, verify, and package reusable AI agent skills</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </article>
 
-            <!-- 3. Agent Skills -->
+            <!-- Skills & Workflows -->
             <article class="doc-section" id="doc-skills">
-              <h3>Agent Skills Architecture</h3>
+              <h3>Skills, OpenCode Tools &amp; Verification Scripts</h3>
               <p>
-                Each skill resides in <code>skills/&lt;skill-name&gt;/SKILL.md</code> with YAML frontmatter (<code>name</code>, <code>description</code>) and optional <code>references/</code> files loaded progressively only when needed.
-              </p>
-              <ul>
-                <li><strong><code>feature-development</code></strong> &mdash; Six-phase orchestrator (Intake, Workflow Triage, Spec/Plan, Implementation, Verification/Review, Completion Gate) that delegates to companion skills without duplicating their internals.</li>
-                <li><strong><code>writing-specs</code></strong> &mdash; Clarifies scope, edge cases, acceptance criteria, and ADR gates (<code>references/adr-guide.md</code>) before implementation planning.</li>
-                <li><strong><code>writing-plans</code></strong> &mdash; Produces ordered, contract-first task checklists (<code>Consumes</code> / <code>Produces</code>) with explicit verification steps.</li>
-                <li><strong><code>test-driven-development</code></strong> &mdash; Enforces writing a failing test first, implementing minimal code to pass, and refactoring cleanly.</li>
-                <li><strong><code>sre-debugging</code></strong> &mdash; Combines Google SRE Effective Troubleshooting and Zeller's Scientific Debugging to isolate root causes before editing code.</li>
-                <li><strong><code>code-review</code></strong> &mdash; Independent verification of correctness, spec alignment, security, and maintainability prior to merging.</li>
-                <li><strong><code>release-management</code></strong> &mdash; Governs versioning, changelogs, release validation gates, and post-release verification.</li>
-                <li><strong><code>skill-creator</code></strong> &mdash; Guides authoring and auditing new platform-agnostic skills using progressive disclosure.</li>
-              </ul>
-            </article>
-
-            <!-- 4. OpenCode Tools & Lifecycle Hooks -->
-            <article class="doc-section" id="doc-opencode">
-              <h3>OpenCode Tools &amp; Lifecycle Hooks</h3>
-              <p>
-                When installed in OpenCode (<code>index.js</code>), Paddlr registers three tools and three lifecycle hooks natively. Legacy <code>hsiw_*</code> tool aliases remain supported for backward compatibility.
-              </p>
-              <div class="table-wrap">
-                <table class="data-table">
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Type</th>
-                      <th>Behavior</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>pdl_bootstrap</code></td>
-                      <td>Tool</td>
-                      <td>Returns the full Paddlr engineering discipline context and skill catalog</td>
-                    </tr>
-                    <tr>
-                      <td><code>pdl_status</code></td>
-                      <td>Tool</td>
-                      <td>Inspects <code>docs/paddlr/</code> memory files (<code>PROGRESS.md</code>, <code>PLAN.md</code>, <code>DECISIONS.md</code>, <code>PROJECT.md</code>)</td>
-                    </tr>
-                    <tr>
-                      <td><code>pdl_scan</code></td>
-                      <td>Tool</td>
-                      <td>Invokes <code>scripts/scan_repo.py --json</code> to inspect repository structure and tech stacks</td>
-                    </tr>
-                    <tr>
-                      <td><code>session.created</code></td>
-                      <td>Hook</td>
-                      <td>Logs activation confirming Paddlr discipline is active for the session</td>
-                    </tr>
-                    <tr>
-                      <td><code>experimental.chat.system.transform</code></td>
-                      <td>Hook</td>
-                      <td>Injects <code>BOOTSTRAP_CONTEXT</code> into the agent's system prompt</td>
-                    </tr>
-                    <tr>
-                      <td><code>tool.execute.before</code></td>
-                      <td>Safety Hook</td>
-                      <td>Blocks unconfirmed destructive Git commands (<code>git reset --hard</code>, <code>git clean -fd</code>, <code>git push --force</code>)</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <h4>SessionStart Hook (Antigravity &amp; Claude Code)</h4>
-              <p>
-                <code>hooks/session-start.py</code> automatically detects the calling environment and emits either the Google Antigravity <code>injectSteps</code> payload or the Claude Code / Cursor / Gemini CLI <code>hookSpecificOutput</code> payload.
-              </p>
-            </article>
-
-            <!-- 5. Utility Scripts & Verification -->
-            <article class="doc-section" id="doc-scripts">
-              <h3>Utility Scripts &amp; Verification</h3>
-              <p>
-                Paddlr ships dependency-free Python scripts used both during repository discovery and in CI quality gates (<span class="status-pill">Python 3.10+</span>):
+                In addition to the 8 skills in <code>skills/</code>, Paddlr exposes native tools in OpenCode (<code>pdl_bootstrap</code>, <code>pdl_status</code>, <code>pdl_scan</code>, plus legacy <code>hsiw_*</code> aliases) and standalone Python scripts in <code>scripts/</code>:
               </p>
               <div class="code-block">
                 <div class="code-header">
                   <span class="code-lang">bash</span>
                   <button class="copy-btn" type="button" data-copy>Copy</button>
                 </div>
-                <pre><code># Scan any repository safely (flags .env/keys without reading contents)
-python scripts/scan_repo.py . --depth 3
-
-# Output machine-readable JSON scan report
-python scripts/scan_repo.py . --json
-
-# Validate all skills against the Agent Skills open standard
+                <pre><code># Validate all 8 skills against the Agent Skills open standard
 python scripts/validate_skills.py --verbose
 
-# Run the full automated unit &amp; plugin conformance test suite
+# Run the complete unit &amp; multi-agent plugin test suite
 python -m unittest discover -s tests -v
 
-# Verify internal Markdown links resolve without broken references
+# Check all internal Markdown links across the repository
 python scripts/check_markdown_links.py</code></pre>
               </div>
             </article>
 
-            <!-- 6. Customization -->
+            <!-- Customization -->
             <article class="doc-section" id="doc-customization">
-              <h3>Customization &amp; Authoring Skills</h3>
+              <h3>Customization</h3>
               <p>
-                You can extend Paddlr for your team's domain workflows without forking the framework:
+                Use <code>/pdl:skill-creator</code> to author new custom skills for your team following progressive disclosure (<code>SKILL.md</code> under 500 lines with on-demand <code>references/</code>), then validate them with <code>python scripts/validate_skills.py</code>.
               </p>
-              <ul>
-                <li><strong>Author new skills:</strong> Run <code>/pdl:skill-creator</code> to draft a standard <code>SKILL.md</code> with progressive disclosure and verify it with <code>python scripts/validate_skills.py</code>.</li>
-                <li><strong>Local OpenCode plugin linking:</strong> For offline or custom local development, clone the repository and export <code>index.js</code> from <code>.opencode/plugins/paddlr.js</code>:</li>
-              </ul>
+              <p>
+                For local OpenCode development or offline workspaces, link Paddlr directly via <code>.opencode/plugins/paddlr.js</code>:
+              </p>
               <div class="code-block">
                 <div class="code-header">
                   <span class="code-lang">javascript (.opencode/plugins/paddlr.js)</span>
@@ -769,122 +879,102 @@ python scripts/check_markdown_links.py</code></pre>
               </div>
             </article>
 
-            <!-- 7. Troubleshooting -->
+            <!-- Troubleshooting -->
             <article class="doc-section" id="doc-troubleshooting">
               <h3>Troubleshooting</h3>
               <ul>
-                <li>
-                  <strong>OpenCode v1 vs. v2 configuration key:</strong> OpenCode v2 uses <code>"plugins": [...]</code> (plural) in <code>opencode.json</code>, whereas OpenCode v1 uses <code>"plugin": [...]</code> (singular). Paddlr's <code>index.js</code> supports both runtime loaders automatically.
-                </li>
-                <li>
-                  <strong>SessionStart hook does not run:</strong> Confirm Python 3.10+ is available in your <code>PATH</code>. On Windows, <code>hooks/run-hook.cmd</code> wraps Python execution for cross-platform compatibility.
-                </li>
-                <li>
-                  <strong>Destructive Git command blocked:</strong> In OpenCode, <code>tool.execute.before</code> intentionally blocks <code>git reset --hard</code>, <code>git clean -fd</code>, and <code>git push --force</code> unless explicitly run by the user outside the agent guardrail.
-                </li>
-                <li>
-                  <strong><code>pdl_status</code> reports repository not initialized:</strong> Create <code>docs/paddlr/</code> (or run <code>/pdl:writing-specs</code> / <code>/pdl:feature-development</code>) to initialize persistent project memory files.
-                </li>
+                <li><strong>OpenCode v1 vs. v2 config key:</strong> Use <code>"plugins": [...]</code> in <code>opencode.json</code> for OpenCode v2 (<code>@opencode/plugin</code>) and <code>"plugin": [...]</code> for OpenCode v1 (<code>@opencode-ai/plugin</code>).</li>
+                <li><strong>SessionStart hook not firing:</strong> Ensure <code>python3</code> / <code>python</code> (3.10+) is on your <code>PATH</code>. On Windows, <code>hooks/run-hook.cmd</code> handles cross-platform invocation.</li>
+                <li><strong>Git command blocked in OpenCode:</strong> The <code>tool.execute.before</code> hook intentionally blocks unconfirmed <code>git reset --hard</code>, <code>git clean -fd</code>, and <code>git push --force</code> commands per <code>rules/AGENTS.md</code>.</li>
+                <li><strong><code>pdl_status</code> reports uninitialized repository:</strong> Run a Level 2 workflow (such as <code>/pdl:writing-specs</code>) or create <code>docs/paddlr/</code> to initialize project memory.</li>
               </ul>
             </article>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ===================================================================
-         FAQ
-         =================================================================== -->
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-eyebrow">FAQ</span>
-          <h2 class="section-title">Frequently asked questions.</h2>
-        </div>
+        <!-- FAQ Sub-section -->
+        <div class="faq-block" id="faq">
+          <div class="section-header">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-title">Frequently Asked Questions</h2>
+          </div>
 
-        <div class="faq-list">
-          <details class="faq-item" open>
-            <summary>Does Paddlr replace my AI coding agent or IDE?</summary>
-            <div class="faq-answer">
-              <p>No. Paddlr is not an AI coding agent or IDE. It is an agent-agnostic plugin and skill framework that runs inside the agent you already use&mdash;Google Antigravity, Claude Code, OpenCode, or OpenAI Codex.</p>
-            </div>
-          </details>
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary>Does Paddlr lock me into a single AI coding agent?</summary>
+              <div class="faq-answer">
+                <p>No. Paddlr is agent-agnostic. The exact same skills, rules, and <code>docs/paddlr/</code> project memory work across Claude Code, Google Antigravity, OpenCode, and OpenAI Codex. See the <a href="#agents">Agent Compatibility Hub</a> for installation steps.</p>
+              </div>
+            </details>
 
-          <details class="faq-item">
-            <summary>Do I have to write a full specification and plan for a small bug fix?</summary>
-            <div class="faq-answer">
-              <p>No. Paddlr uses proportional overhead defined in <code>rules/AGENTS.md</code>. Small, localized fixes (Level 1) skip formal specs and plans; Level 2 features persist a spec and plan in <code>docs/paddlr/</code>; Level 3 architectural changes add an ADR and explicit approval gate.</p>
-            </div>
-          </details>
+            <details class="faq-item">
+              <summary>Do small bug fixes require writing a specification and implementation plan?</summary>
+              <div class="faq-answer">
+                <p>No. Paddlr enforces proportional overhead (<a href="#doc-usage">Usage &amp; Workflow Levels</a>). Level 1 small changes skip formal specs and plans; only Level 2 features and Level 3 architectural changes create spec and plan files in <code>docs/paddlr/</code>.</p>
+              </div>
+            </details>
 
-          <details class="faq-item">
-            <summary>Does <code>scripts/scan_repo.py</code> read my <code>.env</code> files or secrets?</summary>
-            <div class="faq-answer">
-              <p>No. <code>scan_repo.py</code> explicitly matches sensitive filenames (<code>.env*</code>, <code>*credential*</code>, <code>*secret*</code>, <code>*token*</code>, <code>*.pem</code>, <code>*.key</code>, SSH keys) and flags them by filename only without ever reading or printing their contents.</p>
-            </div>
-          </details>
+            <details class="faq-item">
+              <summary>Does <code>scan_repo.py</code> or <code>pdl_scan</code> expose secrets in <code>.env</code> files?</summary>
+              <div class="faq-answer">
+                <p>Never. <code>scripts/scan_repo.py</code> matches sensitive filename patterns (<code>.env*</code>, <code>*secret*</code>, <code>*token*</code>, <code>*credential*</code>, <code>*.pem</code>, <code>*.key</code>, SSH keys) and flags them by filename only without reading their contents.</p>
+              </div>
+            </details>
 
-          <details class="faq-item">
-            <summary>How does Paddlr keep plans from getting lost between sessions?</summary>
-            <div class="faq-answer">
-              <p>Instead of leaving plans inside ephemeral chat threads, Paddlr stores specifications in <code>docs/paddlr/specs/</code>, a dedicated implementation plan per request in <code>docs/paddlr/plans/</code>, and immutable ADRs in <code>docs/paddlr/decisions/</code>&mdash;all plain Markdown tracked in Git.</p>
-            </div>
-          </details>
-
-          <details class="faq-item">
-            <summary>How can I contribute or add a new skill to Paddlr?</summary>
-            <div class="faq-answer">
-              <p>Work on the <code>dev</code> branch (never edit the <code>release</code> branch directly), follow Conventional Commits, and verify your changes with <code>python scripts/validate_skills.py</code>, <code>python -m unittest discover -s tests</code>, and <code>python scripts/check_markdown_links.py</code> before opening a pull request.</p>
-            </div>
-          </details>
+            <details class="faq-item">
+              <summary>Why does Paddlr create a new plan file for every request instead of editing one plan?</summary>
+              <div class="faq-answer">
+                <p>Overwriting a single scratchpad erases engineering history. Storing each feature plan in <code>docs/paddlr/plans/YYYY-MM-DD-&lt;feature&gt;.md</code> preserves a clean, auditable contract of what was planned and verified (<a href="#doc-configuration">Configuration &amp; Project Memory</a>).</p>
+              </div>
+            </details>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <!-- =====================================================================
-       Footer
+       9. Minimal Footer
        ===================================================================== -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div>
           <a class="brand" href="#top">
-            <img class="brand-logo" src="./assets/images/logo.svg" alt="" width="28" height="28" />
+            <img class="brand-logo" src="./assets/images/logo.svg" alt="" width="24" height="24" />
             <span>Paddlr</span>
           </a>
           <p class="footer-tagline">
             Simple on the Surface. Sophisticated Underneath.<br />
-            An agent-agnostic software engineering framework for AI coding agents.
+            Agent-agnostic software engineering framework.
           </p>
         </div>
 
         <div>
           <div class="footer-heading">Documentation</div>
           <ul class="footer-links">
-            <li><a href="#introduction">Philosophy</a></li>
-            <li><a href="#features">Features</a></li>
+            <li><a href="#why-paddlr">Why Paddlr</a></li>
+            <li><a href="#agents">Agent Installation Hub</a></li>
+            <li><a href="#features">Core Features</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#quick-start">Quick Start</a></li>
-            <li><a href="#docs">Usage Guide</a></li>
-            <li><a href="#faq">FAQ</a></li>
+            <li><a href="#docs">User Guide &amp; FAQ</a></li>
           </ul>
         </div>
 
         <div>
-          <div class="footer-heading">Repository</div>
+          <div class="footer-heading">Project</div>
           <ul class="footer-links">
-            <li><a href="https://github.com/thanhdt942/paddlr" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+            <li><a href="https://github.com/thanhdt942/paddlr" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
             <li><a href="https://github.com/thanhdt942/paddlr/blob/dev/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a></li>
             <li><a href="https://github.com/thanhdt942/paddlr/blob/dev/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Changelog</a></li>
             <li><a href="https://github.com/thanhdt942/paddlr/blob/dev/LICENSE" target="_blank" rel="noopener noreferrer">Apache-2.0 License</a></li>
-            <li><a href="https://github.com/thanhdt942/paddlr/issues" target="_blank" rel="noopener noreferrer">Issues</a></li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <span>Licensed under the <a href="https://github.com/thanhdt942/paddlr/blob/dev/LICENSE" target="_blank" rel="noopener noreferrer">Apache License 2.0</a>.</span>
+        <span>Released under the <a href="https://github.com/thanhdt942/paddlr/blob/dev/LICENSE" target="_blank" rel="noopener noreferrer">Apache License 2.0</a>.</span>
         <span>&copy; 2026 Paddlr Contributors.</span>
       </div>
     </div>
