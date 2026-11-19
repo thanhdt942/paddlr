@@ -1,569 +1,304 @@
-(function () {
-  "use strict";
+/*
+ * Paddlr landing page.
+ * Agent install data lives in AGENTS; rendering and interaction below it.
+ * To add an agent, append an entry to AGENTS. No markup changes needed.
+ */
 
-  /* =========================================================================
-     1. Maintainable Agent Compatibility & Installation Catalog
-        Single source of truth for agent metadata, installation methods,
-        step-by-step commands, verification procedures, and usage examples.
-     ========================================================================= */
-  var AGENTS_CATALOG = {
-    claude: {
-      id: "claude",
-      name: "Claude Code",
-      status: "Supported",
-      manifest: ".claude-plugin/plugin.json",
-      description:
-        "Native Claude Code plugin shipping 8 skills, 8 /pdl:* slash commands, SessionStart hook (hooks/hooks.json), and rules/CLAUDE.md instruction router.",
-      prerequisites: ["Claude Code CLI", "Git", "Python 3.10+ (SessionStart hook)"],
-      methods: [
-        {
-          label: "Marketplace (Recommended)",
-          note: "Run inside an interactive Claude Code session to install Paddlr from the repository marketplace catalog (.claude-plugin/marketplace.json).",
-          steps: [
-            {
-              title: "Step 1 — Install Paddlr from marketplace in Claude Code",
-              lang: "claude-code",
-              command: "/plugin install paddlr --marketplace thanhdt942/paddlr"
-            }
-          ]
-        },
-        {
-          label: "Direct Git Repository",
-          note: "Install Paddlr directly from the GitHub repository inside your Claude Code session.",
-          steps: [
-            {
-              title: "Step 1 — Install directly from GitHub repository",
-              lang: "claude-code",
-              command: "/plugin install thanhdt942/paddlr"
-            }
-          ]
-        }
-      ],
-      verification: {
-        note: "Validate the plugin manifest from a local clone or confirm SessionStart bootstrap on session launch:",
-        lang: "bash",
-        command: "claude plugin validate ."
+const REPO = "https://github.com/thanhdt942/paddlr";
+
+/**
+ * status: "supported" | "experimental" | "planned"
+ * methods[].steps[]: one entry per command that must be run separately.
+ * steps[].where: label shown above the block (e.g. "Terminal").
+ */
+const AGENTS = [
+  {
+    id: "claude-code",
+    name: "Claude Code",
+    status: "supported",
+    prerequisites: ["Claude Code with plugin support (the /plugin command)."],
+    methods: [
+      {
+        label: "One step",
+        note: "Run inside a Claude Code session. Adds the Paddlr marketplace and installs the plugin.",
+        steps: [{ where: "Claude Code", cmd: "/plugin install paddlr --marketplace thanhdt942/paddlr" }],
       },
-      usage: {
-        note: "Invoke any Paddlr slash command inside your Claude Code session:",
-        command: "/pdl:feature-development Add webhook signature verification"
+      {
+        label: "Two steps",
+        note: "For Claude Code versions without the --marketplace flag.",
+        steps: [
+          { where: "Claude Code", cmd: "/plugin marketplace add thanhdt942/paddlr" },
+          { where: "Claude Code", cmd: "/plugin install paddlr@paddlr" },
+        ],
       },
-      docAnchor: "#doc-installation"
+    ],
+    verify: { text: "paddlr@paddlr should show as enabled.", where: "Terminal", cmd: "claude plugin list" },
+    docs: { label: "Installation guide", href: `${REPO}#claude-code` },
+  },
+  {
+    id: "codex",
+    name: "Codex",
+    status: "supported",
+    prerequisites: ["OpenAI Codex CLI with plugin support (codex plugin)."],
+    methods: [
+      {
+        label: "Codex CLI",
+        note: "Add the Paddlr marketplace, then install the plugin from it.",
+        steps: [
+          { where: "Terminal", cmd: "codex plugin marketplace add thanhdt942/paddlr" },
+          { where: "Terminal", cmd: "codex plugin add paddlr@paddlr" },
+        ],
+      },
+    ],
+    verify: { text: "paddlr@paddlr should show as installed, enabled.", where: "Terminal", cmd: "codex plugin list" },
+    docs: null,
+  },
+  {
+    id: "opencode",
+    name: "OpenCode",
+    status: "supported",
+    prerequisites: ["OpenCode CLI.", "Git, to fetch the plugin from GitHub."],
+    methods: [
+      {
+        label: "OpenCode CLI",
+        note: "Run in your project. Adds Paddlr to .opencode/opencode.json. Add -g to install globally.",
+        steps: [{ where: "Terminal", cmd: "opencode plugin paddlr@git+https://github.com/thanhdt942/paddlr.git" }],
+      },
+      {
+        label: "Config file",
+        note: "Or add Paddlr to the plugin list in your opencode.json.",
+        steps: [
+          {
+            where: "opencode.json",
+            cmd: '{\n  "$schema": "https://opencode.ai/config.json",\n  "plugin": ["paddlr@git+https://github.com/thanhdt942/paddlr.git"]\n}',
+          },
+        ],
+      },
+    ],
+    verify: {
+      text: "The agent should call the pdl_bootstrap tool and print Paddlr's operating principles.",
+      where: "Terminal",
+      cmd: 'opencode run "Show me the Paddlr engineering discipline bootstrap context"',
     },
-
-    antigravity: {
-      id: "antigravity",
-      name: "Google Antigravity",
-      status: "Supported",
-      manifest: "plugin.json & hooks.json",
-      description:
-        "First-class Google Antigravity plugin with root plugin.json manifest, suggested prompts, rules/AGENTS.md, and automatic SessionStart context injection.",
-      prerequisites: ["Google Antigravity (agy CLI)", "Git", "Python 3.10+ (SessionStart hook)"],
-      methods: [
-        {
-          label: "agy CLI",
-          note: "Install Paddlr directly from GitHub in a single command using the Antigravity CLI.",
-          steps: [
-            {
-              title: "Step 1 — Install plugin via agy CLI",
-              lang: "bash",
-              command: "agy plugin install https://github.com/thanhdt942/paddlr"
-            }
-          ]
-        }
-      ],
-      verification: {
-        note: "Validate the Antigravity plugin manifest and confirm zero error findings:",
-        lang: "bash",
-        command: "agy plugin validate . --json"
+    docs: { label: "OpenCode details and exposed tools", href: `${REPO}/blob/HEAD/.opencode/INSTALL.md` },
+  },
+  {
+    id: "antigravity",
+    name: "Antigravity",
+    fullName: "Google Antigravity",
+    status: "supported",
+    prerequisites: ["Google Antigravity CLI (agy)."],
+    methods: [
+      {
+        label: "agy CLI",
+        note: "Installs the skills, rules, and session-start hook.",
+        steps: [{ where: "Terminal", cmd: "agy plugin install https://github.com/thanhdt942/paddlr" }],
       },
-      usage: {
-        note: "Start a new conversation and trigger a Paddlr workflow in chat:",
-        command: "/pdl:writing-specs Design an idempotent payment retry service"
-      },
-      docAnchor: "#doc-installation"
-    },
+    ],
+    verify: { text: "paddlr should be listed as enabled.", where: "Terminal", cmd: "agy plugin list" },
+    docs: { label: "Installation guide", href: `${REPO}#google-antigravity-agy` },
+  },
+];
 
-    opencode: {
-      id: "opencode",
-      name: "OpenCode",
-      status: "Supported",
-      manifest: "package.json & index.js",
-      description:
-        "Conforms to OpenCode v1 (@opencode-ai/plugin) and v2 (@opencode/plugin), exposing pdl_bootstrap, pdl_status, pdl_scan tools and destructive Git guardrails.",
-      prerequisites: ["OpenCode CLI", "Node.js 18+", "Python 3.10+ (for pdl_scan)"],
-      methods: [
-        {
-          label: "OpenCode CLI (Recommended)",
-          note: "Install and register Paddlr globally using the OpenCode CLI.",
-          steps: [
-            {
-              title: "Step 1 — Add Paddlr plugin from GitHub",
-              lang: "bash",
-              command: "opencode plugin add paddlr@git+https://github.com/thanhdt942/paddlr.git"
-            }
-          ]
-        },
-        {
-          label: "opencode.json (v2)",
-          note: "Add Paddlr to the plural \"plugins\" array in your project or global opencode.json file.",
-          steps: [
-            {
-              title: "Step 1 — Configure opencode.json for OpenCode v2",
-              lang: "json",
-              command:
-                '{\n  "$schema": "https://opencode.ai/config.json",\n  "plugins": [\n    "paddlr@git+https://github.com/thanhdt942/paddlr.git"\n  ]\n}'
-            }
-          ]
-        },
-        {
-          label: "opencode.json (v1)",
-          note: "For OpenCode v1 runtimes, declare Paddlr in the singular \"plugin\" array in opencode.json.",
-          steps: [
-            {
-              title: "Step 1 — Configure opencode.json for OpenCode v1",
-              lang: "json",
-              command:
-                '{\n  "$schema": "https://opencode.ai/config.json",\n  "plugin": [\n    "paddlr@git+https://github.com/thanhdt942/paddlr.git"\n  ]\n}'
-            }
-          ]
-        },
-        {
-          label: "Local Plugin Directory",
-          note: "For offline workspaces, clone Paddlr and re-export index.js from .opencode/plugins/paddlr.js.",
-          steps: [
-            {
-              title: "Step 1 — Clone the Paddlr repository",
-              lang: "bash",
-              command: "git clone https://github.com/thanhdt942/paddlr.git"
-            },
-            {
-              title: "Step 2 — Export Paddlr from .opencode/plugins/paddlr.js",
-              lang: "javascript",
-              command: 'export { default } from "./path/to/paddlr/index.js";'
-            }
-          ]
-        }
-      ],
-      verification: {
-        note: "Verify that OpenCode loads Paddlr and invokes pdl_bootstrap:",
-        lang: "bash",
-        command: 'opencode run "Show me the Paddlr engineering discipline bootstrap context"'
-      },
-      usage: {
-        note: "Ask OpenCode to inspect project memory or run a skill workflow:",
-        command: "/pdl:test-driven-development Implement token bucket rate limiter"
-      },
-      docAnchor: "#doc-customization"
-    },
+const STATUS_LABELS = {
+  supported: "Supported",
+  experimental: "Experimental",
+  planned: "Planned",
+};
 
-    codex: {
-      id: "codex",
-      name: "OpenAI Codex",
-      status: "Supported",
-      manifest: ".codex-plugin/plugin.json",
-      description:
-        "Native OpenAI Codex plugin and marketplace catalog (.agents/plugins/marketplace.json) equipping Codex with all 8 Paddlr engineering skills.",
-      prerequisites: ["OpenAI Codex CLI (codex)", "Git", "Python 3.10+"],
-      methods: [
-        {
-          label: "Codex CLI Marketplace",
-          note: "Register the Paddlr marketplace first, then install the paddlr plugin in two separate commands.",
-          steps: [
-            {
-              title: "Step 1 — Add the Paddlr marketplace catalog",
-              lang: "bash",
-              command: "codex plugin marketplace add https://github.com/thanhdt942/paddlr"
-            },
-            {
-              title: "Step 2 — Install the Paddlr plugin",
-              lang: "bash",
-              command: "codex plugin add paddlr"
-            }
-          ]
-        }
-      ],
-      verification: {
-        note: "Confirm Paddlr is discovered in your Codex marketplace catalog:",
-        lang: "bash",
-        command: "codex plugin list --marketplace paddlr --available"
-      },
-      usage: {
-        note: "Run a Paddlr engineering skill inside your Codex session:",
-        command: "/pdl:sre-debugging Investigate intermittent timeout in worker queue"
-      },
-      docAnchor: "#doc-installation"
-    }
-  };
+/* ---------- Rendering ---------- */
 
-  /* =========================================================================
-     2. Theme Toggle (Light / Dark)
-     ========================================================================= */
-  var themeToggle = document.getElementById("theme-toggle");
+function el(tag, attrs = {}, children = []) {
+  const node = document.createElement(tag);
+  for (const [key, value] of Object.entries(attrs)) {
+    if (value === null || value === undefined || value === false) continue;
+    if (key === "text") node.textContent = value;
+    else node.setAttribute(key, value === true ? "" : value);
+  }
+  for (const child of [].concat(children)) {
+    if (child) node.append(child);
+  }
+  return node;
+}
 
-  function getCurrentTheme() {
-    return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+function codeBlock(where, cmd) {
+  return el("div", { class: "code", "data-code": true }, [
+    el("div", { class: "code-head" }, [
+      el("span", { text: where }),
+      el("button", { class: "copy", type: "button", text: "Copy" }),
+    ]),
+    el("pre", {}, el("code", { text: cmd })),
+  ]);
+}
+
+function renderPanel(agent) {
+  const nodes = [];
+  const title = agent.fullName || agent.name;
+
+  nodes.push(
+    el("div", { class: "panel-head" }, [
+      el("h3", { text: title }),
+      el("span", { class: `status status--${agent.status}`, text: STATUS_LABELS[agent.status] }),
+    ])
+  );
+
+  if (agent.status === "planned") {
+    nodes.push(el("p", { class: "muted", text: `${title} support is planned and not installable yet.` }));
+    return nodes;
   }
 
-  function applyTheme(theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    if (themeToggle) {
-      var nextTheme = theme === "dark" ? "light" : "dark";
-      themeToggle.setAttribute("aria-label", "Switch to " + nextTheme + " theme");
-      themeToggle.setAttribute("title", "Switch to " + nextTheme + " theme");
-    }
+  if (agent.prerequisites && agent.prerequisites.length) {
+    nodes.push(
+      el("div", { class: "block" }, [
+        el("h4", { text: "Prerequisites" }),
+        el("ul", {}, agent.prerequisites.map((p) => el("li", { text: p }))),
+      ])
+    );
   }
 
-  applyTheme(getCurrentTheme());
-
-  if (themeToggle) {
-    themeToggle.addEventListener("click", function () {
-      var next = getCurrentTheme() === "dark" ? "light" : "dark";
-      applyTheme(next);
-      try {
-        localStorage.setItem("paddlr-theme", next);
-      } catch (e) {}
-    });
-  }
-
-  /* =========================================================================
-     3. Mobile Navigation Drawer
-     ========================================================================= */
-  var mobileToggle = document.getElementById("mobile-menu-toggle");
-  var mobileNav = document.getElementById("mobile-nav");
-
-  function setMobileMenu(open) {
-    if (!mobileToggle || !mobileNav) return;
-    mobileToggle.setAttribute("aria-expanded", String(open));
-    mobileToggle.setAttribute("aria-label", open ? "Close navigation menu" : "Open navigation menu");
-    mobileNav.classList.toggle("is-open", open);
-  }
-
-  if (mobileToggle && mobileNav) {
-    mobileToggle.addEventListener("click", function () {
-      setMobileMenu(!mobileNav.classList.contains("is-open"));
-    });
-
-    mobileNav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        setMobileMenu(false);
-      });
-    });
-
-    document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && mobileNav.classList.contains("is-open")) {
-        setMobileMenu(false);
-        mobileToggle.focus();
-      }
-    });
-  }
-
-  /* =========================================================================
-     4. Interactive Agent Compatibility & Installation Hub
-     ========================================================================= */
-  var selectedAgentId = "claude";
-  var selectedMethodIndex = 0;
-
-  var agentHub = document.getElementById("agent-hub");
-  var agentDirectory = document.getElementById("agent-directory");
-  var workbench = document.getElementById("agent-workbench");
-  var agentCards = Array.prototype.slice.call(document.querySelectorAll(".agent-card[data-agent]"));
-
-  var wbName = document.getElementById("wb-agent-name");
-  var wbStatus = document.getElementById("wb-agent-status");
-  var wbManifest = document.getElementById("wb-agent-manifest");
-  var wbDesc = document.getElementById("wb-agent-desc");
-  var wbMethodSwitcher = document.getElementById("wb-method-switcher");
-  var wbPrereqs = document.getElementById("wb-prereqs");
-  var wbMethodNote = document.getElementById("wb-method-note");
-  var wbCmdSteps = document.getElementById("wb-cmd-steps");
-  var wbVerifyNote = document.getElementById("wb-verify-note");
-  var wbVerifyLang = document.getElementById("wb-verify-lang");
-  var wbVerifyCmd = document.getElementById("wb-verify-cmd");
-  var wbUsageNote = document.getElementById("wb-usage-note");
-  var wbUsageCmd = document.getElementById("wb-usage-cmd");
-  var wbDocLink = document.getElementById("wb-doc-link");
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
-  /**
-   * Position the installation workbench:
-   * - On mobile (<= 768px): place directly beneath the selected agent card inside #agent-directory
-   * - On desktop (> 768px): place directly beneath #agent-directory inside #agent-hub
-   */
-  function positionWorkbenchForViewport() {
-    if (!agentHub || !agentDirectory || !workbench) return;
-    var activeCard = document.querySelector('.agent-card[data-agent="' + selectedAgentId + '"]');
-    if (window.innerWidth <= 768 && activeCard && activeCard.parentNode === agentDirectory) {
-      activeCard.insertAdjacentElement("afterend", workbench);
-    } else if (workbench.parentNode !== agentHub) {
-      agentHub.appendChild(workbench);
-    }
-  }
-
-  function renderWorkbench() {
-    var agent = AGENTS_CATALOG[selectedAgentId];
-    if (!agent || !workbench) return;
-
-    var methods = agent.methods || [];
-    if (selectedMethodIndex >= methods.length) {
-      selectedMethodIndex = 0;
-    }
-    var activeMethod = methods[selectedMethodIndex];
-
-    // 1. Update card selection states
-    agentCards.forEach(function (card) {
-      var isSelected = card.getAttribute("data-agent") === selectedAgentId;
-      card.classList.toggle("is-selected", isSelected);
-      card.setAttribute("aria-selected", String(isSelected));
-      card.setAttribute("tabindex", isSelected ? "0" : "-1");
-    });
-
-    // 2. Update header info
-    if (wbName) wbName.textContent = agent.name;
-    if (wbStatus) {
-      wbStatus.innerHTML = '<span class="status-badge-dot" aria-hidden="true"></span>' + escapeHtml(agent.status);
-    }
-    if (wbManifest) wbManifest.textContent = agent.manifest;
-    if (wbDesc) wbDesc.textContent = agent.description;
-
-    // 3. Render secondary method switcher if agent has >1 method
-    if (wbMethodSwitcher) {
-      if (methods.length > 1) {
-        wbMethodSwitcher.hidden = false;
-        var html = '<span class="method-label">Method:</span>';
-        methods.forEach(function (m, idx) {
-          var activeClass = idx === selectedMethodIndex ? " is-active" : "";
-          html +=
-            '<button class="method-btn' +
-            activeClass +
-            '" type="button" role="tab" aria-selected="' +
-            String(idx === selectedMethodIndex) +
-            '" data-method-index="' +
-            idx +
-            '">' +
-            escapeHtml(m.label) +
-            "</button>";
-        });
-        wbMethodSwitcher.innerHTML = html;
-      } else {
-        wbMethodSwitcher.hidden = true;
-        wbMethodSwitcher.innerHTML = "";
-      }
-    }
-
-    // 4. Render prerequisites
-    if (wbPrereqs) {
-      wbPrereqs.innerHTML = agent.prerequisites
-        .map(function (item) {
-          return "<li>" + escapeHtml(item) + "</li>";
-        })
-        .join("");
-    }
-
-    // 5. Render method note & step-by-step command blocks (each command separate!)
-    if (wbMethodNote && activeMethod) {
-      wbMethodNote.textContent = activeMethod.note;
-    }
-
-    if (wbCmdSteps && activeMethod) {
-      wbCmdSteps.innerHTML = activeMethod.steps
-        .map(function (step) {
-          return (
-            '<div class="cmd-step">' +
-            '<div class="cmd-step-label">' +
-            escapeHtml(step.title) +
-            "</div>" +
-            '<div class="code-block">' +
-            '<div class="code-header">' +
-            '<span class="code-lang">' +
-            escapeHtml(step.lang) +
-            "</span>" +
-            '<button class="copy-btn" type="button" data-copy>Copy</button>' +
-            "</div>" +
-            "<pre><code>" +
-            escapeHtml(step.command) +
-            "</code></pre>" +
-            "</div>" +
-            "</div>"
-          );
-        })
-        .join("");
-    }
-
-    // 6. Render verification, usage example, and doc link
-    if (wbVerifyNote) wbVerifyNote.textContent = agent.verification.note;
-    if (wbVerifyLang) wbVerifyLang.textContent = agent.verification.lang;
-    if (wbVerifyCmd) wbVerifyCmd.textContent = agent.verification.command;
-    if (wbUsageNote) wbUsageNote.textContent = agent.usage.note;
-    if (wbUsageCmd) wbUsageCmd.textContent = agent.usage.command;
-    if (wbDocLink) wbDocLink.setAttribute("href", agent.docAnchor || "#docs");
-
-    positionWorkbenchForViewport();
-  }
-
-  function selectAgent(agentId) {
-    if (!AGENTS_CATALOG[agentId]) return;
-    selectedAgentId = agentId;
-    selectedMethodIndex = 0;
-    renderWorkbench();
-  }
-
-  // Card click & keyboard navigation
-  agentCards.forEach(function (card, index) {
-    card.addEventListener("click", function () {
-      selectAgent(card.getAttribute("data-agent"));
-    });
-
-    card.addEventListener("keydown", function (event) {
-      var targetIdx = null;
-      if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-        targetIdx = (index + 1) % agentCards.length;
-      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        targetIdx = (index - 1 + agentCards.length) % agentCards.length;
-      } else if (event.key === "Home") {
-        targetIdx = 0;
-      } else if (event.key === "End") {
-        targetIdx = agentCards.length - 1;
-      }
-
-      if (targetIdx !== null) {
-        event.preventDefault();
-        var nextCard = agentCards[targetIdx];
-        selectAgent(nextCard.getAttribute("data-agent"));
-        nextCard.focus();
-      }
-    });
+  agent.methods.forEach((method, i) => {
+    const heading = agent.methods.length > 1 ? `Option ${i + 1}: ${method.label}` : "Install";
+    const steps = method.steps.map((step, n) =>
+      el("li", {}, [
+        method.steps.length > 1 ? el("span", { class: "step-label", text: `Step ${n + 1}` }) : null,
+        codeBlock(step.where, step.cmd),
+      ])
+    );
+    nodes.push(
+      el("div", { class: "block" }, [
+        el("h4", { text: heading }),
+        method.note ? el("p", { class: "muted", text: method.note }) : null,
+        el("ol", { class: "steps" }, steps),
+      ])
+    );
   });
 
-  // Secondary installation method click delegation (preserves selected agent)
-  if (wbMethodSwitcher) {
-    wbMethodSwitcher.addEventListener("click", function (event) {
-      var btn = event.target.closest("[data-method-index]");
-      if (!btn) return;
-      var idx = parseInt(btn.getAttribute("data-method-index"), 10);
-      if (!isNaN(idx)) {
-        selectedMethodIndex = idx;
-        renderWorkbench();
-      }
-    });
+  if (agent.verify) {
+    nodes.push(
+      el("div", { class: "block" }, [
+        el("h4", { text: "Verify" }),
+        codeBlock(agent.verify.where, agent.verify.cmd),
+        el("p", { class: "muted", text: agent.verify.text }),
+      ])
+    );
   }
 
-  // Hero quick-select agent links (data-select-agent)
-  document.querySelectorAll("[data-select-agent]").forEach(function (link) {
-    link.addEventListener("click", function () {
-      var targetAgent = link.getAttribute("data-select-agent");
-      if (targetAgent) {
-        selectAgent(targetAgent);
-      }
-    });
-  });
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 768 && mobileNav && mobileNav.classList.contains("is-open")) {
-      setMobileMenu(false);
-    }
-    positionWorkbenchForViewport();
-  });
-
-  // Initialize workbench state
-  renderWorkbench();
-
-  /* =========================================================================
-     5. Delegated Copy-to-Clipboard for All Static & Dynamic Code Blocks
-     ========================================================================= */
-  function copyTextToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text);
-    }
-    return new Promise(function (resolve, reject) {
-      var textarea = document.createElement("textarea");
-      textarea.value = text;
-      textarea.setAttribute("readonly", "");
-      textarea.style.position = "fixed";
-      textarea.style.opacity = "0";
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        document.execCommand("copy");
-        resolve();
-      } catch (err) {
-        reject(err);
-      } finally {
-        document.body.removeChild(textarea);
-      }
-    });
+  if (agent.docs) {
+    nodes.push(el("p", { class: "block" }, el("a", { href: agent.docs.href, text: `${agent.docs.label} →` })));
   }
 
-  document.addEventListener("click", function (event) {
-    var button = event.target.closest("[data-copy]");
+  return nodes;
+}
+
+function initInstaller(root) {
+  const tablist = root.querySelector("[data-tablist]");
+  const panel = root.querySelector("[data-panel]");
+  const tabs = AGENTS.map((agent) =>
+    el("button", {
+      class: "tab",
+      type: "button",
+      role: "tab",
+      id: `tab-${agent.id}`,
+      "aria-controls": "install-panel",
+      "data-agent": agent.id,
+      text: agent.name,
+    })
+  );
+  tablist.replaceChildren(...tabs);
+  panel.id = "install-panel";
+
+  function select(index, { focus = false, updateHash = true } = {}) {
+    tabs.forEach((tab, i) => {
+      const active = i === index;
+      tab.setAttribute("aria-selected", String(active));
+      tab.tabIndex = active ? 0 : -1;
+    });
+    panel.setAttribute("aria-labelledby", tabs[index].id);
+    panel.replaceChildren(...renderPanel(AGENTS[index]));
+    if (focus) tabs[index].focus();
+    if (updateHash) history.replaceState(null, "", `#${AGENTS[index].id}`);
+  }
+
+  tablist.addEventListener("click", (event) => {
+    const tab = event.target.closest("[role=tab]");
+    if (tab) select(tabs.indexOf(tab));
+  });
+
+  tablist.addEventListener("keydown", (event) => {
+    const current = tabs.indexOf(document.activeElement);
+    if (current < 0) return;
+    const last = tabs.length - 1;
+    const next = {
+      ArrowRight: current === last ? 0 : current + 1,
+      ArrowLeft: current === 0 ? last : current - 1,
+      Home: 0,
+      End: last,
+    }[event.key];
+    if (next === undefined) return;
+    event.preventDefault();
+    select(next, { focus: true });
+  });
+
+  // Deep link: #codex, #opencode, ... selects that agent and scrolls to the installer.
+  function selectFromHash() {
+    const index = AGENTS.findIndex((a) => `#${a.id}` === location.hash);
+    if (index < 0) return false;
+    select(index, { updateHash: false });
+    root.closest("section").scrollIntoView();
+    return true;
+  }
+  if (!selectFromHash()) select(0, { updateHash: false });
+  window.addEventListener("hashchange", selectFromHash);
+}
+
+/* ---------- Copy to clipboard ---------- */
+
+async function writeClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  const area = el("textarea", { readonly: true, "aria-hidden": "true" });
+  area.value = text;
+  area.style.position = "fixed";
+  area.style.opacity = "0";
+  document.body.append(area);
+  area.select();
+  const ok = document.execCommand("copy");
+  area.remove();
+  if (!ok) throw new Error("Copy command failed");
+}
+
+function initCopy() {
+  const live = document.querySelector("[data-live]");
+  document.addEventListener("click", async (event) => {
+    const button = event.target.closest(".copy");
     if (!button) return;
-
-    var block = button.closest(".code-block");
-    var codeEl = block ? block.querySelector("pre code") : null;
-    if (!codeEl) return;
-
-    var text = codeEl.textContent.trim();
-    copyTextToClipboard(text)
-      .then(function () {
-        button.textContent = "Copied!";
-        button.classList.add("is-copied");
-        setTimeout(function () {
-          button.textContent = "Copy";
-          button.classList.remove("is-copied");
-        }, 1800);
-      })
-      .catch(function () {
-        button.textContent = "Failed";
-        setTimeout(function () {
-          button.textContent = "Copy";
-        }, 1800);
-      });
-  });
-
-  /* =========================================================================
-     6. Scroll-Spy Active Navigation Highlighting (Primary Nav & Docs Nav)
-     ========================================================================= */
-  if ("IntersectionObserver" in window) {
-    var topNavLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a[href^="#"]'));
-    var docNavLinks = Array.prototype.slice.call(document.querySelectorAll('.docs-nav a[href^="#"]'));
-
-    function observeTargets(links, rootMargin) {
-      var targets = links
-        .map(function (link) {
-          var href = link.getAttribute("href");
-          return href ? document.querySelector(href) : null;
-        })
-        .filter(Boolean);
-
-      if (targets.length === 0) return;
-
-      var obs = new IntersectionObserver(
-        function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              var activeHref = "#" + entry.target.id;
-              links.forEach(function (link) {
-                link.classList.toggle("is-active", link.getAttribute("href") === activeHref);
-              });
-            }
-          });
-        },
-        { rootMargin: rootMargin, threshold: 0 }
-      );
-
-      targets.forEach(function (el) {
-        obs.observe(el);
-      });
+    const code = button.closest("[data-code]").querySelector("code");
+    try {
+      await writeClipboard(code.textContent);
+      button.textContent = "Copied";
+      button.classList.add("is-done");
+      if (live) live.textContent = "Copied to clipboard";
+    } catch {
+      button.textContent = "Press Ctrl+C";
+      const range = document.createRange();
+      range.selectNodeContents(code);
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      if (live) live.textContent = "Copy failed. Text selected, press Ctrl+C.";
     }
+    clearTimeout(button._timer);
+    button._timer = setTimeout(() => {
+      button.textContent = "Copy";
+      button.classList.remove("is-done");
+    }, 1800);
+  });
+}
 
-    observeTargets(topNavLinks, "-25% 0px -65% 0px");
-    observeTargets(docNavLinks, "-20% 0px -65% 0px");
-  }
-})();
+document.addEventListener("DOMContentLoaded", () => {
+  const installer = document.querySelector("[data-installer]");
+  if (installer) initInstaller(installer);
+  initCopy();
+});
