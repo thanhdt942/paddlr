@@ -1,0 +1,5 @@
+# Normalize text files in the repository; keep the bash launcher LF-only so ./pdl runs on Linux/macOS
+* text=auto
+pdl text eol=lf
+hsiw text eol=lf
+*.sh text eol=lf

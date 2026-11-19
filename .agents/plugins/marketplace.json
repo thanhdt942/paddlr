@@ -1,0 +1,27 @@
+{
+  "name": "paddlr",
+  "interface": {
+    "displayName": "Paddlr"
+  },
+  "metadata": {
+    "description": "Agent-agnostic software engineering framework providing reusable Agent Skills, structured workflows, and persistent project memory.",
+    "version": "1.0.0"
+  },
+  "owner": {
+    "name": "thanhdt942",
+    "url": "https://github.com/thanhdt942"
+  },
+  "plugins": [
+    {
+      "name": "paddlr",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE"
+      },
+      "category": "Development"
+    }
+  ]
+}

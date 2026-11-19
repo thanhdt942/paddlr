@@ -1,0 +1,49 @@
+name: Release Please
+
+# Automated Semantic Versioning and Release Management
+# 1. Runs on push to dev
+# 2. Analyzes Conventional Commits since last release tag
+# 3. Opens/updates a Release PR bumping version & CHANGELOG.md
+# 4. On Release PR merge, creates GitHub Release and updates tag.
+on:
+  push:
+    branches:
+      - dev
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
+    steps:
+      - name: Run Release Please
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          target-branch: dev
+          config-file: .release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  validate-and-test:
+    needs: release-please
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out dev
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate Skills
+        run: python scripts/validate_skills.py --verbose
+
+      - name: Run Test Suite
+        run: python -m unittest discover -s tests -v

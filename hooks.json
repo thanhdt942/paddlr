@@ -1,0 +1,9 @@
+{
+  "paddlr-session-start": {
+    "SessionStart": [
+      {
+        "command": "python ./hooks/session-start.py"
+      }
+    ]
+  }
+}

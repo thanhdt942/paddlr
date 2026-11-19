@@ -1,0 +1,11 @@
+{
+  "name": "fixture-js-service",
+  "version": "1.0.0",
+  "description": "Sample JavaScript project for HSIW validation",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node index.js"
+  },
+  "dependencies": {}
+}

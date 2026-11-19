@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version without "v" (e.g. 2.1.0); must match plugin.json'
+        required: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.version }}
+    steps:
+      - name: Check out dev
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check version and tag
+        run: |
+          MANIFEST_VERSION=$(python -c "import json; print(json.load(open('plugin.json'))['version'])")
+          if [ "$VERSION" != "$MANIFEST_VERSION" ]; then
+            echo "::error::Version $VERSION does not match plugin.json ($MANIFEST_VERSION)"
+            exit 1
+          fi
+          if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null; then
+            echo "::error::Tag v$VERSION already exists"
+            exit 1
+          fi
+
+      - name: Validate Skills
+        run: python scripts/validate_skills.py --verbose
+
+      - name: Run Test Suite
+        run: python -m unittest discover -s tests -v
+
+      - name: Create Git Tag and Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v$VERSION" -m "Release v$VERSION"
+          git push origin "v$VERSION"
+          gh release create "v$VERSION" --title "HolyShitItWorks v$VERSION" --generate-notes

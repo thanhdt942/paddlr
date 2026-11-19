@@ -1,0 +1,12 @@
+{
+  "name": "paddlr",
+  "version": "1.0.0",
+  "description": "Paddlr — Agent-Agnostic Software Engineering Framework for Claude Code",
+  "author": {
+    "name": "thanhdt942"
+  },
+  "homepage": "https://github.com/thanhdt942/paddlr",
+  "repository": "https://github.com/thanhdt942/paddlr",
+  "license": "Apache-2.0",
+  "hooks": "./hooks/hooks.json"
+}
