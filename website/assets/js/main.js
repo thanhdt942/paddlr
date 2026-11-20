@@ -297,7 +297,51 @@ function initCopy() {
   });
 }
 
+/* ---------- Theme ---------- */
+
+function initTheme() {
+  const toggle = document.querySelector("[data-theme-toggle]");
+  if (!toggle) return;
+
+  const root = document.documentElement;
+  const meta = document.querySelector('meta[name="theme-color"]');
+  const live = document.querySelector("[data-live]");
+  const mq = window.matchMedia("(prefers-color-scheme: dark)");
+
+  function apply(theme, announce = false) {
+    const dark = theme === "dark";
+    root.setAttribute("data-theme", theme);
+    toggle.setAttribute("aria-pressed", String(dark));
+    toggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    if (meta) meta.setAttribute("content", dark ? "#0f1115" : "#ffffff");
+    if (announce && live) live.textContent = dark ? "Dark mode enabled" : "Light mode enabled";
+  }
+
+  const current = root.getAttribute("data-theme") || (mq.matches ? "dark" : "light");
+  apply(current);
+
+  toggle.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    apply(next, true);
+    try {
+      localStorage.setItem("paddlr-theme", next);
+    } catch {
+      // Storage may be unavailable in private browsing.
+    }
+  });
+
+  mq.addEventListener("change", (event) => {
+    try {
+      if (localStorage.getItem("paddlr-theme")) return;
+    } catch {
+      // Ignore storage read errors.
+    }
+    apply(event.matches ? "dark" : "light");
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
   const installer = document.querySelector("[data-installer]");
   if (installer) initInstaller(installer);
   initCopy();
