@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Agent-agnostic software engineering framework providing reusable Agent Skills, structured workflows, and persistent project memory.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "owner": {
     "name": "thanhdt942",

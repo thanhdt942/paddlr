@@ -4,6 +4,16 @@ All notable changes to the Paddlr project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/thanhdt942/paddlr/compare/v1.0.0...v1.1.0) (2026-11-20)
+
+
+### Features
+
+* **website:** add dark mode support with system preference and toggle ([d731df3](https://github.com/thanhdt942/paddlr/commit/d731df346265ed8378b6b439f2f1e4f68545dc5e))
+* **website:** add Paddlr landing page, documentation, and GitHub Pages workflow ([2abbfb1](https://github.com/thanhdt942/paddlr/commit/2abbfb1c0b6694257a6e76ab24550d1b24fa1d32))
+* **website:** implement interactive Agent Installation Hub and 9-section layout spec ([0c1ed8c](https://github.com/thanhdt942/paddlr/commit/0c1ed8ca0387ac120a3de2b551fb056468430b4f))
+* **website:** redesign landing page as minimal single-column site ([d5ba3c1](https://github.com/thanhdt942/paddlr/commit/d5ba3c1c98d0a20ebb0bf38f0dac2fbec5115ac0))
+
 ## [1.0.0] - 2026-11-19
 
 ### Added
