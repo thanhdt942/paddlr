@@ -6,4 +6,7 @@ disable-model-invocation: true
 
 # Why
 
-Answer from the record, not the code: read the commits and PR discussions that introduced the target and each later change, and other sources if the trail is thin. Cite what the authors wrote, mark your own inferences as inferences, and say what the record does not answer.
+Answer from the historical record, not just the code:
+1. **Architectural Decisions:** Inspect `docs/paddlr/decisions/` and `docs/paddlr/DECISIONS.md` for recorded ADRs, trade-offs, and superseded decisions.
+2. **Git & PR Trail:** Read the commits (`git log -S`, `git log -L`, `git blame`) and PR discussions that introduced the target and subsequent modifications.
+3. **Cited Findings:** Cite what authors and engineers explicitly recorded. Mark your own inferences clearly as inferences, and declare what the record does not answer.

@@ -6,16 +6,22 @@ disable-model-invocation: true
 
 # How
 
-Explore the codebase to answer "how does X work?" questions.
+Explore the codebase to answer "how does X work?" questions. Single-Agent execution baseline.
 
 If the scope is ambiguous, state your interpretation and explore. The user can redirect.
 
-## 1. Explain
+## 1. Explore & Analyze
 
-Spawn one Task subagent with `subagent_type: generalPurpose` and `readonly: true` that explores and explains in one pass. Give it the user's question and this brief:
-
-> You are writing an architectural explanation for a senior engineer. Explore the codebase and write an explanation that a senior engineer unfamiliar with this area could read and walk away with a solid mental model. They should understand the architecture well enough to start working in it confidently. You have read-only access to the codebase.
+In the main agent context, use read-only search and file tools (`search.find`, `fs.read`) to trace:
+- **Entry Points & Interfaces:** Public functions, API endpoints, or CLI commands.
+- **Runtime Flow:** Execution path from intake to persistence or output.
+- **Ownership & Layering:** Which packages, modules, or services own each piece of state.
 
 ## 2. Present
 
-Present the subagent's output. Light edits for clarity or context from the conversation are fine. Do not substantially rewrite it.
+Deliver an architectural explanation structured for an engineer to start working confidently:
+- Plain definition of the subsystem.
+- High-level architecture and mental model.
+- Step-by-step runtime flow.
+- Key invariants and edge cases.
+- Where things live (exact paths and symbols).

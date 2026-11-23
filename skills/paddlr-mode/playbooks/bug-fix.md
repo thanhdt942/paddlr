@@ -1,15 +1,18 @@
 ### Bug fix
 
-**You own this task. Plan, review, verify.** Delegate investigation and the fix to subagents, stay in the lead. Pick each subagent's reasoning level for the job, per the Subagents section.
+**You own this task. Plan, diagnose, verify.** Single-Agent execution baseline. Stay in the lead.
 
-Be scientific. Every shipped line traces to runtime evidence. Belt-and-suspenders that "might help" is a hypothesis, not a fix. It does not ship. When evidence refutes a hypothesis, revert what it motivated. The smallest change the evidence justifies ships, nothing more.
+Be scientific. Every shipped line traces to runtime evidence (**principle-prove-it-works**). Belt-and-suspenders that "might help" is a hypothesis, not a fix; it does not ship. When evidence refutes a hypothesis, revert what it motivated. The smallest change the evidence justifies ships, nothing more (**principle-laziness-protocol**).
 
-1. Reproduce it yourself on the matching surface via the control skill (Non-negotiables), even when a debug or instrumentation protocol says to ask the user to reproduce. Ask the user only with a stated, specific reason the control surface cannot reach the target, and only after driving it as far as it goes. If it won't reproduce directly, synthesize the trigger, tighten conditions, or instrument until it fires.
-2. Binary-search the cause. Form the candidate hypotheses, then rule them out until one survives. Seed them with a trace of the affected subsystem and the **why** skill for regression history. Each pass, take the split that cuts the most remaining problem space, get runtime evidence, eliminate. When program state is unclear, add instrumentation or logging and read it as the code runs. Don't guess. Drive a long or stubborn hunt with Cursor's `/loop` command. Confirm the surviving *mechanism* with runtime evidence before step 3's `architect` or an `interrogate` fan-out.
-3. Plan the fix. If it crosses a function boundary, `architect` first. Delegate implementation to a subagent using your configured bug-fix model (default `claude-opus-5-5-xhigh-fast`) with a specific scope.
-4. Verify on the same surface. The original repro now passes. "Inconclusive" or wrong-surface is not a pass. Flag it. Unit tests show branch behavior, not bug absence.
-5. Stage the commits so the failing repro lands before the fix in git history. See the **tdd** skill for the failing-test-first cadence when the bug has a cheap local test path. Skip it when the test would be expensive, integration-heavy, or unclear.
-   This is the canonical **sequence-verifiable-units** principle skill, the failing test first and the fix on top.
-6. Run **Opening a PR**.
+1. **Reproduce on the Matching Surface:** Reproduce the defect yourself with standard project test runners or command execution (`shell.exec`). Do not guess or rely on user reports alone. If it will not reproduce directly, synthesize the trigger, tighten preconditions, or add diagnostic logging until it reproduces consistently.
+2. **Scientific Root Cause Investigation:** Invoke the **sre-debugging** skill. Formulate explicit, testable hypotheses. Binary-search the cause by ruling out candidates with runtime instrumentation and logging. Seed hypotheses by tracing the affected subsystem and querying regression history via the **why** skill. Confirm the surviving mechanism with runtime evidence before planning the fix (**principle-fix-root-causes**).
+3. **Plan the Fix:** If the fix crosses module boundaries or reshapes state, invoke the **architect** skill first to ensure proper domain modeling. Keep the plan recorded in `docs/paddlr/plans/YYYY-MM-DD-<slug>.md` if non-trivial.
+4. **Test-Driven Fix Execution:** Invoke the **test-driven-development** skill:
+   - Write the smallest reproduction test that fails against the current head.
+   - Stage and commit the failing repro test *before* applying the code fix (**principle-sequence-verifiable-units**).
+   - Implement the minimal fix that turns the test green.
+   - Refactor if necessary, keeping all tests passing.
+5. **Verify on the Real Surface:** Prove that the original repro now passes and no regressions exist. "Inconclusive" or wrong-surface is not a pass (**principle-prove-it-works**). Unit tests prove branch behavior, not bug absence.
+6. **Open PR:** Invoke **Opening a PR** (`playbooks/opening-a-pr.md`).
 
-**Reply:** what was broken, root cause, fix, how you verified. Paste failing-then-passing repro output verbatim.
+**Reply:** what was broken, confirmed root cause, minimal fix, verification evidence, and verbatim failing-then-passing test output.

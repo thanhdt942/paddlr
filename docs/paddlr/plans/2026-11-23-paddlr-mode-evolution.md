@@ -414,8 +414,8 @@ All 24 principles remain at the repository root level (`skills/principle-*/SKILL
 
 An exhaustive repository audit across `skills/` verified exactly **25 occurrences** of the 7 missing external references across 12 files. Rather than claiming a capability is replaced merely because a related tool exists, each reference is categorized by its actual architectural status (Intentionally Removed, No Longer Needed, or Replaced):
 
-- **Phase 3 Scope (14 occurrences across 7 files):** `paddlr-mode/SKILL.md` (7), `investigation.md` (1), `opening-a-pr.md` (1), `pause-safely.md` (1), `recall/SKILL.md` (1), `teach/SKILL.md` (1), `blast-radius/SKILL.md` (1).
-- **Later Phases Scope (11 occurrences across 5 files):** Phase 4 (`figure-it-out/SKILL.md` [1], `hillclimb.md` [1]), Phase 5 (`autonomous-run.md` [1]), Phase 6 (`autopilot-full.md` [7], `shipping.md` [2]).
+- **Phase 3 Scope (13 occurrences across 7 files):** `paddlr-mode/SKILL.md` (7), `investigation.md` (1), `opening-a-pr.md` (1), `pause-safely.md` (1), `recall/SKILL.md` (1), `teach/SKILL.md` (1), `blast-radius/SKILL.md` (1).
+- **Later Phases Scope (12 occurrences across 5 files):** Phase 4 (`figure-it-out/SKILL.md` [1], `hillclimb.md` [1]), Phase 5 (`autonomous-run.md` [1]), Phase 6 (`autopilot-full.md` [7], `shipping.md` [2]).
 
 | Missing Reference | Repository Occurrences (Exact File & Line) | Architectural Status | Migration Action & Rationale |
 |---|---|---|---|
@@ -539,37 +539,37 @@ Phase 6: Multi-Agent Cloud Swarms & Unattended Loops [Deferred]
   - **Playbooks Orchestrate; Skills Provide Capabilities:** Playbooks inside `skills/paddlr-mode/playbooks/` orchestrate workflows; independent companion skills (`feature-development`, `sre-debugging`, `test-driven-development`, `writing-plans`, `writing-specs`, `skill-creator`, `code-review`) provide specialized capabilities without duplicating instructions inside playbooks.
   - **Deferred Runtime Capabilities:** `agent.delegate` and `scheduler.loop` are kept out of the required Core v1 runtime capability set. A Single-Agent runtime does not need to implement these capabilities.
   - **Worker Kickoff Harmonization Without Delegation:** `skills/paddlr-mode/worker.md` will be harmonized with Paddlr conventions (Paddlr style, Conventional Commits, standard PR format, evidence logging, Autonomy Policy guardrails), but **must not enable delegation** (no launching subagents or recursive worker kickoff).
-  - **Audited External Reference Retirement:** Each missing external skill reference is audited against Table 4 before removal (categorized as Replaced, No Longer Needed, or Intentionally Removed). Zero stub skills will be created. Exactly 14 in-scope occurrences across 7 files are retired in Phase 3 (with the remaining 11 occurrences in 5 files retired in later phases).
+  - **Audited External Reference Retirement:** Each missing external skill reference is audited against Table 4 before removal (categorized as Replaced, No Longer Needed, or Intentionally Removed). Zero stub skills will be created. Exactly 13 in-scope occurrences across 7 files are retired in Phase 3 (with the remaining 12 occurrences in 5 files retired in later phases).
   - **No Unrelated Architecture:** Zero cloud swarms, zero unattended background loops, zero external daemons, and zero speculative capabilities.
   - Playbooks in scope: `feature.md`, `bug-fix.md`, `refactoring.md`, `investigation.md`, `prototype.md`, `pause-safely.md`, `session-pickup.md`, `opening-a-pr.md`, `authoring-a-skill.md`, `multi-phase-plan.md`.
   - Auxiliary skills in scope: `recall` (adapted to Git and `docs/paddlr/plans/`), `how` (single-agent exploration fallback), `teach` (remove `unslop`), `architect` (ground in `docs/paddlr/specs/` and `plans/`), `why` (query Git & `docs/paddlr/decisions/`).
   - Worker kickoff in scope: `skills/paddlr-mode/worker.md` (harmonized without delegation).
 - **Tasks:**
-  - [ ] **Task 3.1: Harmonize `feature.md` with `feature-development`**
+  - [x] **Task 3.1: Harmonize `feature.md` with `feature-development`**
     - **Consumes:** `skills/paddlr-mode/playbooks/feature.md`, `skills/feature-development/SKILL.md`
     - **Produces:** Refactored `feature.md`
     - Playbook orchestrates workflow; invokes `feature-development`, `writing-specs`, and `writing-plans` for domain logic; retains the 4-point throughput checkpoint and domain-first data modeling; records canonical state in `docs/paddlr/plans/`.
-  - [ ] **Task 3.2: Harmonize `bug-fix.md` with `sre-debugging` and `test-driven-development`**
+  - [x] **Task 3.2: Harmonize `bug-fix.md` with `sre-debugging` and `test-driven-development`**
     - **Consumes:** `skills/paddlr-mode/playbooks/bug-fix.md`, `skills/sre-debugging/SKILL.md`, `skills/test-driven-development/SKILL.md`
     - **Produces:** Refactored `bug-fix.md`
     - Invoke `sre-debugging` for root cause analysis; enforce commit of failing test before fix via `test-driven-development`; remove model slugs.
-  - [ ] **Task 3.3: Adapt `refactoring.md` to TDD Refactor Phase**
+  - [x] **Task 3.3: Adapt `refactoring.md` to TDD Refactor Phase**
     - **Consumes:** `skills/paddlr-mode/playbooks/refactoring.md`, `skills/test-driven-development/SKILL.md`
     - **Produces:** Refactored `refactoring.md`
     - Retain characterization test pinning and reader load reduction; integrate with `test-driven-development` REFACTOR phase.
-  - [ ] **Task 3.4: Adapt State & Session Playbooks (`pause-safely.md`, `session-pickup.md`, `recall`)**
+  - [x] **Task 3.4: Adapt State & Session Playbooks (`pause-safely.md`, `session-pickup.md`, `recall`)**
     - **Consumes:** `skills/paddlr-mode/playbooks/pause-safely.md`, `session-pickup.md`, `skills/recall/SKILL.md`
     - **Produces:** Refactored playbooks and skill
     - Persist resume state to `docs/paddlr/plans/` (not `/tmp/`); enforce durable recoverable work invariant (wip commit is supported but not mandatory); adapt `session-pickup` and `recall` to inspect `docs/paddlr/` and Git history instead of IDE transcripts; execute baseline re-verification.
-  - [ ] **Task 3.5: Adapt PR, Packaging & Worker Guidelines (`opening-a-pr.md`, `authoring-a-skill.md`, `worker.md`)**
+  - [x] **Task 3.5: Adapt PR, Packaging & Worker Guidelines (`opening-a-pr.md`, `authoring-a-skill.md`, `worker.md`)**
     - **Consumes:** `opening-a-pr.md`, `authoring-a-skill.md`, `skills/paddlr-mode/worker.md`
     - **Produces:** Refactored playbooks and worker kickoff
     - Replace `/deslop` with standard lint/review passes; invoke `skill-creator` for skill authoring; standardize `worker.md` to Paddlr terminology, Conventional Commits, and Autonomy Policy while strictly disabling worker delegation.
-  - [ ] **Task 3.6: Retire Missing External References across Playbooks & Skills**
-    - **Consumes:** The 14 in-scope occurrences from D-05 Table 4 (across `blast-radius`, `investigation`, `teach`, `paddlr-mode/SKILL.md`, `opening-a-pr`, `pause-safely`, `recall`)
+  - [x] **Task 3.6: Retire Missing External References across Playbooks & Skills**
+    - **Consumes:** The 13 in-scope occurrences from D-05 Table 4 (across `blast-radius`, `investigation`, `teach`, `paddlr-mode/SKILL.md`, `opening-a-pr`, `pause-safely`, `recall`)
     - **Produces:** Cleaned playbooks and skills
     - Update the 7 Phase 3 files to replace `unslop`, `technical-writing`, `no-comments`, `show-me-your-work`, `ketchup`, and `control-*` with native Paddlr standards and canonical plan tracking, creating zero stub skills.
-- **Deliverables:** 10 refactored playbooks, 1 refactored skill (`recall`), updated `worker.md`, retired external references across 7 files in Phase 3 scope (14 occurrences).
+- **Deliverables:** 10 refactored playbooks, 1 refactored skill (`recall`), updated `worker.md`, retired external references across 7 files in Phase 3 scope (13 occurrences).
 - **Acceptance Criteria:** All adapted playbooks and skills execute cleanly under a single-agent baseline without referencing Cursor-specific plugins, `/tmp/` paths, hardcoded model slugs, or missing external skills.
 - **Verification Command:**
   ```powershell

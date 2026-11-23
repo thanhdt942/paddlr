@@ -1,21 +1,24 @@
 ### Feature
 
-**You own the design. Plan, review, verify.** Delegate implementation. Stay in the lead.
+**You own the design. Plan, execute, review, verify.** Single-Agent execution baseline. Stay in the lead.
 
-1. Trace the affected subsystem.
-2. `architect` for the shape.
-3. Write the throughput checkpoint as four todo items. A dimension that genuinely does not apply (single file, no fan-out) keeps its item with `n/a: <reason>` rather than being dropped:
-   - **Blocking first steps.** Gates run before fan-out.
-   - **Independent workstreams.** Disjoint files, services, or layers parallelize. Shared writes serialize.
-   - **Shared mutable state.** Default to splitting the target (the **separate-before-serializing-shared-state** principle skill). Serialize only for real invariants.
-   - **Smallest safe decomposition.** If one worker is best, name why.
-4. Delegate code-writing to a subagent using your configured feature model (default `claude-opus-5-5-xhigh-fast`) with a specific scope (file paths, named data shape and its organizing structure per **principle-model-the-domain**, a state machine over scattered booleans, a table/registry over branching, a typed model over repeated shape assumptions, chosen before the delegate writes logic, and success criteria). Pick each subagent's reasoning level for the job, per the Subagents section. When the implementation admits multiple valid shapes (error handling, abstraction layer, test structure), delegate via the **arena** skill instead so the runners surface the alternatives and the cross-judge guards the pick. Mandatory: no skip-with-reason escape, and Laziness Protocol does not override it (the gain is review separation, not lines saved). A subagent forbidden to spawn satisfies this by owning the diff directly with the same review separation. No "standing by" reply that waits on a nested agent. Surgical edits, re-ground against the source for upstream-derived files. Port shared-primitive improvements to all consumers and verify each. Commit liberally.
-5. Verify on the matching surface. "Inconclusive" or wrong-surface is not a pass. Flag it.
-6. Rebase into small, ordered commits. Stack follow-ups.
-   Use the **sequence-verifiable-units** principle skill, building, verifying, and committing each small unit before the next.
-7. If the design is contested, `interrogate` before shipping.
-8. Run **Opening a PR**.
+1. **Intake & Subsystem Trace:** Trace the affected subsystem and establish the task intent, done predicate, and constraints per the Intent Contract.
+2. **Domain Architecture:** Name the data shape first. If the change crosses module boundaries or introduces new abstractions, invoke the **architect** skill to model types, state machines, and boundaries before writing logic.
+3. **Throughput Checkpoint:** Formulate the checkpoint as four explicit dimensions in the canonical plan (`docs/paddlr/plans/YYYY-MM-DD-<slug>.md`):
+   - **Blocking first steps.** Prerequisite schemas, foundational types, or test harnesses required before implementation.
+   - **Independent workstreams.** Disjoint files, modules, or layers that can be developed in separate verifiable slices.
+   - **Shared mutable state.** Default to splitting the target (**principle-separate-before-serializing-shared-state**). Serialize only for real system invariants.
+   - **Smallest safe decomposition.** Break work into bite-sized, verifiable units (**principle-sequence-verifiable-units**).
+4. **Lifecycle Coordination:** Invoke the **feature-development** skill for the end-to-end 5-phase delivery flow:
+   - *Phase 1 (Intake):* Intent restatement and assumption extraction.
+   - *Phase 2 (Spec):* Feature specification in `docs/paddlr/specs/YYYY-MM-DD-<slug>.md`.
+   - *Phase 3 (Plan):* Contract-first plan in `docs/paddlr/plans/YYYY-MM-DD-<slug>.md`.
+   - *Phase 4 (Implement):* Test-driven development (**test-driven-development**), maintaining type system discipline (**principle-type-system-discipline**).
+   - *Phase 5 (Verify & Review):* Verification on real surface (**principle-prove-it-works**) and diff audit (**code-review**).
+5. **Implementation Execution:** Execute slices sequentially within the main agent thread. Model the domain using typed models and state machines rather than scattered booleans (**principle-model-the-domain**). Surgical edits; commit liberally using Conventional Commits.
+6. **Verification on Real Surface:** Verify against the real artifact, not proxies or compilation alone (**principle-prove-it-works**). Capture verbatim passing output.
+7. **Sequence Verifiable Units:** Rebase into small, ordered commits. Build, verify, and commit each small unit before the next (**principle-sequence-verifiable-units**).
+8. **Contested Design Resolution:** If architectural alternatives remain contested, prototype side-by-side per `playbooks/prototype.md` (**principle-exhaust-the-design-space**) or resolve via red-teaming.
+9. **Open PR:** Invoke **Opening a PR** (`playbooks/opening-a-pr.md`).
 
-Code-coupled work (one feature, one migration) goes to a single owner with the checkpoint inline. That owner fans out internally after the blocking phase. Parent-level fan-out is for slices that produce independent artifacts (audits, cross-subsystem investigations, competing experiments). Rewrite the checkpoint at phase boundaries. Spawn a fresh owner rather than chaining interrupts.
-
-**Reply:** what you built, what you chose and why, the throughput checkpoint, open decisions. Tables for design alternatives.
+**Reply:** what you built, architectural choices and rationale, the throughput checkpoint, verification evidence, and the canonical plan path.

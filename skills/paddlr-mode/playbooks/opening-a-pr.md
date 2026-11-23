@@ -1,9 +1,16 @@
 ### Opening a PR
 
-Invoked at the end of every other playbook.
+Invoked at the conclusion of every code-modifying playbook.
 
-Work from a git worktree off trunk, and keep unrelated work out of it. Rebase into small, landable commits. Run `/deslop` from `cursor-team-kit` over the diff before commit.
-
-Title: `type(scope): subject`, naming a real symbol when one carries the change. Body: a one-minute briefing under 40 lines with these `##` headings in order, dropping empty ones: `## Why`, `## What changed`, `## Scope`, `## Tradeoffs` (only rejected alternatives a reviewer would otherwise ask about), `## Blast Radius`, `## Verification`.
-
-Stack follow-ups by base branch. Open PRs ready, through the run's PR tool with `draft: false`. Without one, use `gh pr create` without `--draft`, or `origin pr create --status open` when Origin's CLI resolves the repository. Opening a PR does not start a babysit.
+1. **Clean Worktree & Rebase:** Work from a clean branch based on current `origin/dev`. Rebase into small, landable commits using Conventional Commits (`type(scope): subject`).
+2. **Quality Pass:** Run standard project linters, formatters, and the **code-review** skill over the diff before opening the PR.
+3. **PR Format:**
+   - **Title:** `type(scope): subject`, naming a real symbol or module that carries the change.
+   - **Body:** Under 40 lines with these `##` headings in order, dropping empty ones:
+     - `## Why`: Underlying problem and business/technical motivation.
+     - `## What changed`: Concise bulleted summary of structural and functional modifications.
+     - `## Scope`: Explicit boundaries of what was touched versus what was left out.
+     - `## Tradeoffs`: Key alternatives evaluated and rejected.
+     - `## Blast Radius`: Runtime risks, dependency impact, and failure modes.
+     - `## Verification`: Verbatim command outputs, test results, and passing metrics.
+4. **Open Ready for Review:** Open PRs ready for review (never draft) via GitHub CLI (`gh pr create`), git push, or the repository host forge. Opening a PR does not conclude the task until verified by CI.

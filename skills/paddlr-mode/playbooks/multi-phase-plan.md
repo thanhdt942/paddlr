@@ -1,11 +1,12 @@
 ### Multi-phase or multi-PR plan
 
-**You own the plan, not the code. The plan is a checklist an owner runs box by box and the operator audits from the evidence.** The plan is the deliverable. Do not implement.
+**You own the plan, not the code. The plan is a verifiable checklist an engineer executes slice by slice and audits from concrete evidence.** The plan is the deliverable; do not implement during planning.
 
-1. When the change is one or two files with an obvious approach, skip the plan. Say so and stop.
-2. Settle open questions by prototype before you write, per `playbooks/prototype.md`. Ask the operator only about a product or preference call that no run can settle.
-3. Write the plan file. Open with what changes, the PR ids in landing order, and the dependency graph, which says which PRs are independent and branch from trunk, which wait for which, and the files each may touch. Then one section per PR. One PR is one change with its own evidence (the **sequence-verifiable-units** principle skill). Each section has checkboxes for what it depends on, the files it edits, the one change it builds, the result you see, and its verification.
-4. Tests alone are not sufficient verification. A PR is verified only when its unit, live, and perf boxes are all checked. Each live box drives the real surface with a concrete scenario and a pass predicate. The perf box names the metric, the probe, the trunk baseline measured first, and the number that fails. A PR that changes an interaction waits for the operator's review before merge.
-5. Hand back the plan path and stop. Execution starts on the operator's explicit go.
+1. **Lightweight Trivial Tasks Exemption:** When the change is localized to one or two files with an obvious, low-risk approach, skip formal plan authoring. State intent and proceed directly.
+2. **Prototype Open Forks:** Settle open technical questions by prototyping beforehand per `playbooks/prototype.md`. Clarify with the user only on product direction or subjective preference calls.
+3. **Invoke Writing Plans:** Invoke the **writing-plans** skill to structure the plan into `docs/paddlr/plans/YYYY-MM-DD-<slug>.md`. Include YAML frontmatter conforming to the Task State Schema (`task-state-schema.md`).
+4. **Structured Slicing:** Structure the plan into bite-sized, contract-first tasks (`Consumes` / `Produces`) with checkbox steps (`- [ ]`). Define a dependency graph showing independent vs. serialized slices (**principle-sequence-verifiable-units**).
+5. **Concrete Verification Criteria:** Each phase must define falsifiable exit conditions and verification commands (unit, integration, and performance benchmarks where applicable).
+6. **Hand Over Plan Path:** Persist the plan file, verify internal markdown links, and return the canonical plan path to the user. Execution begins only upon explicit authorization.
 
-**Reply:** the plan path, the PR ids with their dependencies and the review-gated set, and what stays unproven.
+**Reply:** the plan path, ordered phases/tasks with their dependencies, and any unproven assumptions requiring confirmation.

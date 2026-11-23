@@ -1,10 +1,17 @@
 ### Pause safely
 
-**You own a clean stop. Leave a checkpoint a cold-start agent can resume from.** This is explicit only. On "keep going", "going to bed, keep going", or "don't stop", do not pause.
+**You own a clean stop. Leave a durable checkpoint a cold-start agent can resume from.**
 
-1. Stop at a safe boundary. Finish the current atomic step or back out of it. Start nothing new, and cancel any nested subagents.
-2. Take no irreversible action to pause. No PR and no push unless you already had one out.
-3. Make the work durable. Commit uncommitted edits as one clear `wip:` commit on the current branch so nothing is lost. If the tree is broken, say so in the commit body in one line.
-4. Write the resume note off-context. Capture intent, what you were doing, progress and what's verified, current state, next steps, key files, and gotchas. For the compaction trigger write it to a file like `/tmp/<slug>-resume.md`. If a show-me-your-work trail exists, point at it instead of duplicating it.
+This action is explicit only. On instructions like "keep going", "run until done", or "don't stop", do not pause.
 
-**Reply:** where you are in the loop, what's on disk versus still in your head (paths, no diff dumps), the commits you made and whether the tree is clean, and the first action on resume. This is a pause, not a final report.
+1. **Stop at a Safe Boundary:** Finish the current atomic step or revert cleanly. Start nothing new.
+2. **Reversible Actions Only:** Take no irreversible action to pause. No deployment and no push unless a PR was already out.
+3. **Durable Recoverable Work Invariant:** Ensure working state is safely preserved. Committing uncommitted edits as a `wip:` commit on the current branch is one supported mechanism so nothing is lost; working tree state can also be preserved in place if uncommitted. If the tree is broken, state so explicitly.
+4. **Persist Resume State to Canonical Plan:** Update the canonical Task State in `docs/paddlr/plans/YYYY-MM-DD-<slug>.md`:
+   - Set status to `paused`.
+   - Record the last verified step and current checkpoint.
+   - Record exact next action on resume.
+   - List touched key files and active branch.
+   - Note any known gotchas or incomplete thoughts.
+
+**Reply:** where you paused in the loop, what is on disk versus active context (paths, no raw diff dumps), the commits made, whether the tree is clean, and the exact first action to take upon resuming.
