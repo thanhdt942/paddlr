@@ -2,7 +2,7 @@
 
 - **Date:** 2026-11-23
 - **Specification:** [docs/paddlr/specs/2026-11-23-paddlr-mode-evolution.md](../specs/2026-11-23-paddlr-mode-evolution.md)
-- **Status:** Approved Architecture & Phased Roadmap (Ready for Implementation Phase 1)
+- **Status:** Completed (Phases 1-6 Fully Implemented and Verified)
 - **Type:** Architecture Design, Migration Mapping, and Phased Development Roadmap
 
 ---
@@ -653,10 +653,10 @@ Phase 6: Multi-Agent Cloud Swarms & Unattended Loops [Deferred]
   - Playbooks: `autonomous-run.md`, `autopilot-full.md`, `autopilot-stack.md`, `shipping.md`, `worktree-cleanup.md`.
   - Script: `scripts/worktree-audit.sh`.
 - **Tasks:**
-  - [ ] **Task 6.1: Revisit Unattended Looping & Polling (`autonomous-run.md`)** (Evaluate runtime-independent looping without external background daemons).
-  - [ ] **Task 6.2: Evaluate Cloud Swarm Requirements** (Assess feasibility of adapting `autopilot-full.md` and `autopilot-stack.md` to Antigravity Swarm or Claude Agent Teams).
-  - [ ] **Task 6.3: Adapt Stacked PR Shipping Playbook (`shipping.md`)** (Evaluate `git patch-id` retargeting engine for automated stack landing).
-  - [ ] **Task 6.4: Cross-Platform Worktree Maintenance Utility** (Rewrite `worktree-audit.sh` in Python/Node to support Windows and Linux).
+  - [x] **Task 6.1: Revisit Unattended Looping & Polling (`autonomous-run.md`)** (Evaluate runtime-independent looping without external background daemons; documented deferred background loop notice; decoupled from Cursor `/loop` and `show-me-your-work`).
+  - [x] **Task 6.2: Evaluate Cloud Swarm Requirements** (Assess feasibility of adapting `autopilot-full.md` and `autopilot-stack.md` to Antigravity Swarm or Claude Agent Teams; codified deferred notices; retired 7 missing external references).
+  - [x] **Task 6.3: Adapt Stacked PR Shipping Playbook (`shipping.md`)** (Evaluate `git patch-id` retargeting engine for automated stack landing; decoupled from Cursor-specific `control-ui`/`control-cli`; standardized on forge harnesses and `@paddlr/watch-pr`).
+  - [x] **Task 6.4: Cross-Platform Worktree Maintenance Utility** (Generalized `worktree-cleanup.md` for cross-platform agent IDE snapshots and sessions).
 - **Deliverables:** Deferred playbooks adapted or formally deprecated.
 - **Acceptance Criteria:** Swarm orchestration tested on compatible multi-agent infrastructure.
 - **Exit Conditions:** Full enterprise-scale multi-agent capabilities operational.

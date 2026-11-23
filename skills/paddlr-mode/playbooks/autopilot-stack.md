@@ -1,5 +1,7 @@
 ### Autopilot-stack
 
+> **Deferred Capability Notice:** Autopilot-stack depends on multi-agent cloud swarm infrastructure and stacked PR automation, which are deferred beyond Core v1.
+
 Run the Autopilot-full playbook, but do not merge.
 
 1. **In place of step 5, stop at verified.** Stop when each PR is verified and green at its current head, then hand the PRs to the operator. After the handoff, nobody pushes without the operator's go. Every loop tick prompt names this file, so each tick sees the no-merge rule.
