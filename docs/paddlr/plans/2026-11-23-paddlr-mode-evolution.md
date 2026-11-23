@@ -589,23 +589,23 @@ Phase 6: Multi-Agent Cloud Swarms & Unattended Loops [Deferred]
   - Playbooks: `perf-issue.md`, `runtime-forensics.md`, `trace-forensics.md`, `visual-parity.md`, `hillclimb.md`, `eval.md`, `babysit.md`.
   - Auxiliary skills: `benchmark-checklist`, `blast-radius`, `create-verification-skill`, `maintain-verification-skill`, `reflect`, `arena`, `interrogate`, `swarm`.
 - **Tasks:**
-  - [ ] **Task 4.1: Adapt Performance Playbooks (`perf-issue.md`, `runtime-forensics.md`, `trace-forensics.md`)**
+  - [x] **Task 4.1: Adapt Performance Playbooks (`perf-issue.md`, `runtime-forensics.md`, `trace-forensics.md`)**
     - **Consumes:** `perf-issue.md`, `runtime-forensics.md`, `trace-forensics.md`
     - **Produces:** Refactored performance playbooks
     - Retain the 7 performance mantras and SQLite trace analysis; integrate with `sre-debugging` performance methods; decouple model slugs.
-  - [ ] **Task 4.2: Adapt `visual-parity.md`**
+  - [x] **Task 4.2: Adapt `visual-parity.md`**
     - **Consumes:** `skills/paddlr-mode/playbooks/visual-parity.md`
     - **Produces:** Refactored `visual-parity.md`
     - Decouple from Cursor `/loop` and `control-ui`; allow integration with standard headless browser harnesses (Playwright, pixelmatch).
-  - [ ] **Task 4.3: Adapt Local Subagent Delegation Skills (`arena`, `interrogate`, `swarm`)**
+  - [x] **Task 4.3: Adapt Local Subagent Delegation Skills (`arena`, `interrogate`, `swarm`)**
     - **Consumes:** `arena`, `interrogate`, `swarm`
     - **Produces:** Runtime-agnostic candidate evaluation skills
     - Abstract model pools to runtime adapter; enforce Main Agent canonical state ownership; implement sequential integration of concurrent worker patches; add single-agent sequential fallbacks.
-  - [ ] **Task 4.4: Adapt Optimization & Evaluation Playbooks (`hillclimb.md`, `eval.md`)**
+  - [x] **Task 4.4: Adapt Optimization & Evaluation Playbooks (`hillclimb.md`, `eval.md`)**
     - **Consumes:** `hillclimb.md`, `eval.md`
     - **Produces:** Refactored playbooks
     - Retain on-disk `decision.tsv` state; decouple from Cursor transcript paths and model slugs; run bounded manual iterations.
-  - [ ] **Task 4.5: Adapt Verification Harness Skills (`create-verification-skill`, `maintain-verification-skill`, `reflect`)**
+  - [x] **Task 4.5: Adapt Verification Harness Skills (`create-verification-skill`, `maintain-verification-skill`, `reflect`)**
     - **Consumes:** `create-verification-skill`, `maintain-verification-skill`, `reflect`
     - **Produces:** General-purpose verification harness skills
     - Generalize target skill directory from `.cursor/skills/` to runtime-configurable project paths.

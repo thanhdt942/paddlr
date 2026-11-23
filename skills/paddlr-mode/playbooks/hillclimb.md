@@ -1,21 +1,21 @@
 ### Hillclimb
 
-**You own the metric and the experiment's integrity. Supervise and review. Delegate the attempts.** For sustained, iterative improvement of one measurable thing against a target. A one-off fix is Bug fix or Perf issue. This is the loop.
+**You own the metric and the experiment's integrity. Supervise, iterate, and verify.** For sustained, iterative improvement of one measurable metric against an empirical target. A one-off fix is Bug fix or Perf issue; Hillclimb is the optimization loop.
 
-Core discipline: one change, one measurement, keep or revert. Never stack untested changes, and never claim a win from code inspection (the **prove-it-works** principle skill).
+Core discipline: one change, one measurement, keep or revert. Never stack untested changes, and never claim a win from code inspection alone (**principle-prove-it-works**).
 
-1. Ground the workload and architecture before choosing the metric. Trace the target, name the realistic workload dimensions that can move the result (data size, history, state, concurrency), and select a case that reproduces the user's complaint. If no case reproduces it, fix the repro instead of hillclimbing. Then fix one metric, the direction that counts as better, and a checkable stop predicate that pairs a target with a floor on attempts so a lucky early win can't end the run (the example "at least 50% better than baseline and at least 10 iterations" is this shape). Use the user's numbers when given, otherwise agree them.
-2. Build the measurement harness, prove its sensitivity, then freeze it (the **build-the-lever** principle skill). Run contrasting realistic workloads and confirm the target case reproduces the symptom while easier cases separate as expected. If the harness cannot distinguish them, revise the workload or metric. Vet the harness with the **benchmark-checklist** skill before you freeze it, and make it print its error count and a count of the work done. Once frozen, one repeatable command emits the metric, sampled enough to clear the noise (median of N, not a single run). Record the baseline metric and a green run of the regression gate (the tests that must keep passing) before any change.
-3. Open the decision log via the **show-me-your-work** skill. A `decision.tsv`, one row per attempt: id, hypothesis, change, before, after, delta, tests, verdict (kept or reverted), note. Read it before each attempt. Keep it out of the tree (gitignored).
-4. Ground each hypothesis in the architecture model from step 1, so it names a specific mechanism ("defer X off the boot path because it blocks first paint"), not "try memoizing something". For a perf metric, order hypotheses by the performance mantras in step 2 of the Perf issue playbook (`playbooks/perf-issue.md`). Borrow only their order, not that step's stop rule.
-5. Loop, one hypothesis per iteration:
-   - Hand the change to a subagent using your configured hillclimb model (default `claude-opus-5-5-xhigh-fast`) with a tight scope. Pick each subagent's reasoning level for the job, per the Subagents section. Supervise and review the diff rather than typing it (the **guard-the-context-window** principle skill). When several independent hypotheses are live, fan them to parallel subagents, each in its own worktree (the **separate-before-serializing-shared-state** principle skill).
-   - Measure before and after with the frozen harness, and run the regression gate.
-   - Accept only when the metric moves past noise and the gate stays green. Otherwise revert the change in full. A tweak that "might help" is not kept.
-   - One commit per accepted fix, staging only the files you changed (`git add <files>`, never `-A`). Log the row either way, kept or reverted.
-   Each iteration ends in a check before the next begins (the **sequence-verifiable-units** principle skill). If the run is unattended, borrow only the wake mechanism from the Autonomous run playbook (`playbooks/autonomous-run.md`), not its stop rule.
-6. Push past the first plateau. On a stall, several rejects in a row, pivot category, combine near-misses, re-read the source, or try something more radical before concluding the hill is climbed. Correctness and simplicity outrank the number. Revert a win that breaks behavior, and keep a simplification that holds the number (the **laziness-protocol** principle skill).
-7. Stop when the predicate is met, or when the remaining ideas are marginal and not worth their cost. Don't relax the predicate to meet it, and don't quit while cheap untried hypotheses remain. If you are stuck, surface it instead of spinning.
-8. Run **Opening a PR** with the accepted commits stacked in the order they landed.
+1. **Ground Workload & Metric:** Trace the target code and identify realistic workload dimensions (data size, history, state, concurrency). Select a case that reproduces the bottleneck. Fix one concrete metric, the direction that counts as better, and a falsifiable stop predicate pairing a target with a floor on attempts (e.g. "at least 30% faster than baseline and at least 5 iterations").
+2. **Build Frozen Harness:** Build the measurement harness, prove its sensitivity against realistic workloads, then freeze it (**principle-build-the-lever**). Vet the harness with the **benchmark-checklist** skill. The frozen harness must emit the metric sampled enough to clear the noise floor (median of N runs) alongside error and throughput counts. Record baseline metrics and ensure regression tests pass before changing code.
+3. **Open Trial Scratchpad:** Record raw iterations in an ephemeral `decision.tsv` scratchpad (gitignored), with columns: `id`, `hypothesis`, `change`, `before`, `after`, `delta`, `tests`, `verdict` (`kept` or `reverted`), `note`. The overall initiative status is tracked in the canonical task plan (`docs/paddlr/plans/YYYY-MM-DD-<slug>.md`).
+4. **Formulate Architectural Hypotheses:** Ground each hypothesis in a concrete mechanism ("defer JSON parsing off the critical request path"), ordered by the 7 performance mantras.
+5. **Iterate (One Hypothesis per Attempt):**
+   - Execute the code change directly in-thread (or via a bounded delegation brief in an isolated worktree if subagent dispatch is enabled).
+   - Measure before and after with the frozen harness, and run regression tests.
+   - Accept only when the metric moves past the noise floor and all tests stay green. Otherwise revert the change in full (**principle-laziness-protocol**).
+   - Record the row in `decision.tsv`. One commit per accepted fix, staging only touched files (`git add <files>`).
+   - Each attempt concludes in a check before the next starts (**principle-sequence-verifiable-units**).
+6. **Push Past Plateaus:** On consecutive rejections, pivot category, combine near-misses, or re-read source before concluding the hill is climbed. Correctness outranks speed: revert a win that breaks behavior; keep a simplification that holds the number.
+7. **Stop Condition:** Stop when the stop predicate is satisfied or remaining ideas are marginal.
+8. **Open PR:** Invoke **Opening a PR** (`playbooks/opening-a-pr.md`) with accepted commits stacked in order.
 
-**Reply:** the metric and target, baseline to final with the percent delta, iterations run (kept vs reverted), each accepted fix on one line, the `decision.tsv` path, and the best idea you would try next if pushed further.
+**Reply:** the metric and target, baseline to final with percent delta, iterations run (kept vs reverted), each accepted fix, path to `decision.tsv`, and recommended follow-ups.

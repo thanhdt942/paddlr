@@ -1,11 +1,11 @@
 ### Visual parity
 
-**You own pixel-exact equivalence. The baseline is the spec. You do not touch it.** Equivalence is verified by image diff, not by eye.
+**You own pixel-exact equivalence. The baseline is the spec; you do not touch it.** Equivalence is verified by automated image diff, not by eye (**principle-prove-it-works**).
 
-1. Establish the baseline first, before any migration: a visual regression harness that screenshots the current component across its states, plus the target when matching two implementations. No baseline, no parity claim. A blocking prerequisite, not a follow-up.
-2. Anti-shortcut clauses, stated and held: no harness modifications, no baseline tampering, no component restructuring to make a diff pass. If the baseline looks wrong, stop and ask, don't edit it.
-3. Migrate one component at a time. Parallelize across worktrees, one owner per component (the **separate-before-serializing-shared-state** principle skill). Shared primitives migrate first as a blocking phase.
-4. Verify each component against its baseline via image diff on the matching surface via the control skill. A nonzero diff is a fail. Investigate the pixel delta. `/loop` per component until the diff is zero.
-5. Run **Opening a PR** per component or per safe batch.
+1. **Establish Baseline First:** Prior to making changes, establish a visual regression harness using standard headless browser tools (Playwright, Puppeteer, pixelmatch). Capture screenshots across all component states. No baseline means no parity claim; this is a blocking prerequisite.
+2. **Anti-Shortcut Clauses:** Do not modify the harness, tamper with baselines, or distort component structure to make a diff artificially pass. If a baseline appears genuinely flawed, pause and clarify; never edit it silently.
+3. **Migrate Incrementally:** Migrate one component or view at a time. Shared primitives migrate first as a blocking prerequisite.
+4. **Automated Visual Verification:** Verify each component against its baseline via headless image diffing. A non-zero diff is an immediate failure. Investigate pixel deltas, adjust styles or layout, and re-run until diff is zero.
+5. **Open PR:** Invoke **Opening a PR** (`playbooks/opening-a-pr.md`) per component or per verified batch.
 
-**Reply:** components migrated, the diff result for each, the baseline harness location, what's left.
+**Reply:** components migrated, diff results for each, baseline harness location, and remaining components.
