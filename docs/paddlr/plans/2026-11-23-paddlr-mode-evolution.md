@@ -627,11 +627,11 @@ Phase 6: Multi-Agent Cloud Swarms & Unattended Loops [Deferred]
   - Playbook: `figure-it-out.md`, `babysit.md`.
   - Tooling: `scripts/watch-pr/`, `scripts/bootstrap.ts`.
 - **Tasks:**
-  - [ ] **Task 5.1: Adapt `figure-it-out.md` for Dynamic Task Orchestration**
+  - [x] **Task 5.1: Adapt `figure-it-out.md` for Dynamic Task Orchestration**
     - **Consumes:** `figure-it-out.md`
     - **Produces:** Refactored dynamic playbook
     - Ground hypothesis testing and state tracking in `docs/paddlr/plans/`; remove `todolist` and `show-me-your-work` references.
-  - [ ] **Task 5.2: Adapt `babysit.md` and Tooling (`scripts/watch-pr/`, `scripts/bootstrap.ts`)**
+  - [x] **Task 5.2: Adapt `babysit.md` and Tooling (`scripts/watch-pr/`, `scripts/bootstrap.ts`)**
     - **Consumes:** `babysit.md`, `scripts/watch-pr/`, `scripts/bootstrap.ts`
     - **Produces:** Rebranded, robust PR watcher CLI and playbook
     - Rebrand package to `@paddlr/watch-pr`; make `gh` standard forge client; ensure Bun and Node compatibility.
