@@ -170,6 +170,14 @@ python -m unittest discover -s tests -v
 
 ---
 
-## 8. License
+## 8. Acknowledgements
+
+Paddlr is inspired by and builds upon the pioneering work of **[Lauren Tan](https://github.com/poteto)** ([@poteto](https://github.com/poteto)) and her project **pstack** (available in [cursor/plugins](https://github.com/cursor/plugins)). Several engineering skills, workflows, and core principles in Paddlr reference, adapt, and reuse concepts originating from pstack.
+
+Special thanks and sincere gratitude to Lauren for her foundational contributions to rigorous, disciplined AI agent engineering practices.
+
+---
+
+## 9. License
 
 Distributed under the Apache 2.0 License. See [LICENSE](LICENSE) for details.
