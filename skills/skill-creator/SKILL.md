@@ -1,6 +1,7 @@
 ---
 name: skill-creator
 description: Design, draft, verify, and package reusable AI agent skills following progressive disclosure and platform-agnostic standards. Use when creating a new skill from scratch, turning a repeated workflow or specification into a skill, or auditing and refactoring an existing skill. Do not use for one-off prompts, single-project rules better suited to project config files, or mechanical checks better handled by linters/scripts.
+disable-model-invocation: true
 ---
 
 # Skill Creator

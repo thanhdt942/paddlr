@@ -1,6 +1,7 @@
 ---
 name: release-management
 description: Manage the end-to-end software release lifecycle and persist project release conventions in `RELEASE.md`. Use when setting up release configuration, planning, preparing, validating, executing, verifying, or reporting software releases across any Git platform, package registry, or deployment target.
+disable-model-invocation: true
 ---
 
 # Release Management
