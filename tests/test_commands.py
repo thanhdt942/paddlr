@@ -16,8 +16,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 COMMANDS_DIR = REPO_ROOT / "commands"
 
 EXPECTED_COMMANDS = [
+    "adr",
     "feature-development",
+    "paddlr-help",
     "release-management",
+    "setup-paddlr",
     "skill-creator",
     "writing-specs",
     "writing-plans",

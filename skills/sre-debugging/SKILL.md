@@ -1,6 +1,7 @@
 ---
 name: sre-debugging
 description: Evidence-based software debugging and troubleshooting using Google SRE Effective Troubleshooting and Andreas Zeller's Scientific Debugging. Use when encountering any bug, test failure, production incident, unexpected runtime behavior, regression, crash, or performance issue, BEFORE proposing or implementing fixes.
+disable-model-invocation: true
 ---
 
 # sre-debugging

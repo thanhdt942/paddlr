@@ -1,6 +1,7 @@
 ---
 name: code-review
 description: Use when completing a task, finishing a feature, or before merging to verify code quality and spec alignment via an independent review
+disable-model-invocation: true
 ---
 
 # Code Review

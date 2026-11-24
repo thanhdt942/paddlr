@@ -1,6 +1,7 @@
 ---
 name: test-driven-development
 description: Use when implementing any feature, bugfix, or behavior change — before writing production code
+disable-model-invocation: true
 ---
 
 # Test-Driven Development (TDD)

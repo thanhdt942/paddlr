@@ -1,6 +1,7 @@
 ---
 name: writing-specs
 description: Use when turning a product idea, problem, feature request, or rough requirements into a clear, reviewable specification, before implementation planning
+disable-model-invocation: true
 ---
 
 # Writing Specifications

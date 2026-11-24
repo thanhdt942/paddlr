@@ -1,6 +1,7 @@
 ---
 name: feature-development
 description: Orchestrate end-to-end software feature development from requirement intake to verified completion. Coordinates existing engineering skills (writing-specs, writing-plans, test-driven-development, code-review, sre-debugging) without duplicating their internals. Use when the user asks to build a new feature, implement a user story, add new functionality, extend an existing module, or run a structured feature development workflow.
+disable-model-invocation: true
 ---
 
 # Feature Development

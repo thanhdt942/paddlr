@@ -45,11 +45,15 @@ Available Skills:
 - skills/feature-development: Orchestrate end-to-end feature delivery coordinating all companion skills
 - skills/writing-specs: Clarify requirements and draft reviewable feature specifications in docs/paddlr/specs/
 - skills/writing-plans: Decompose approved specifications into verifiable, contract-first implementation plans in docs/paddlr/plans/
+- skills/writing-decisions: Record and supersede immutable ADRs in docs/paddlr/decisions/ and DECISIONS.md (/adr)
+- skills/sync-docs: Pre-PR check verifying specs, ADRs, and PROJECT.md stay aligned with code diffs
 - skills/test-driven-development: Implement code strictly test-first (RED -> GREEN -> REFACTOR)
 - skills/sre-debugging: Systematic root cause analysis and scientific troubleshooting for bugs and failures
 - skills/code-review: Independent, read-only code review before merging or completing tasks
 - skills/release-management: Manage software release lifecycle and persist release conventions in RELEASE.md
 - skills/skill-creator: Design, draft, verify, and package reusable AI agent skills
+- skills/setup-paddlr: Initialize docs/paddlr/ or .paddlr.json and optional model profiles
+- skills/paddlr-help: Read-only advisor routing questions to skills, playbooks, principles, and prompts (/paddlr-help)
 
 CRITICAL: Before writing or modifying application code, check which Paddlr skill applies to your task.
 ==========================================================="""

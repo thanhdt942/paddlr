@@ -137,12 +137,14 @@ Once installed, describe your task in natural language and your coding agent wil
 | `code-review` | `skills/code-review` | Read-only code review against specifications |
 | `release-management` | `skills/release-management` | Semantic versioning and release lifecycle in `RELEASE.md` |
 | `skill-creator` | `skills/skill-creator` | Design, test, and package reusable AI agent skills |
+| `setup-paddlr` | `skills/setup-paddlr` | Initialize `docs/paddlr/` or `.paddlr.json` and optional model profiles |
+| `paddlr-help` | `skills/paddlr-help` | Read-only advisor routing questions to skills, playbooks, principles, and prompts |
 
 ---
 
 ## 6. Project Architecture & Memory
 
-Paddlr persists engineering memory canonically under `docs/paddlr/`:
+Paddlr persists engineering memory canonically under `docs/paddlr/` (customizable via an optional `.paddlr.json` at your repository root — see the [User Guide](docs/guide/README.md)):
 
 ```text
 docs/paddlr/
