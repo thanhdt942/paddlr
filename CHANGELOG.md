@@ -4,6 +4,27 @@ All notable changes to the Paddlr project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-11-24
+
+### Added
+- **Project Memory Path Overrides (`.paddlr.json`):** Optional root configuration file and pure-stdlib resolver (`scripts/paddlr_config.py`) allowing target repositories to map `root`, `specs`, `plans`, `decisions`, `decisionsIndex`, and `project` without colliding with existing docs.
+- **Two-Tier Checklist Synchronization (`ui.todo`):** Added `ui.todo` optional semantic primitive to `runtime-adapters.md` and `core-contracts.md`, mapping active steps to Cursor/Claude Code (`TodoWrite`), Antigravity (`update_steps`), Codex CLI (`update_plan`), OpenCode (`todowrite`), and a chat progress fallback.
+- **ADR & Doc-Sync Closure:**
+  - `skills/writing-decisions` + `/adr` command (`commands/adr.md`) for authoring and superseding immutable ADRs in `decisions/` and `DECISIONS.md`.
+  - `skills/sync-docs` wired as a mandatory pre-PR gate in `playbooks/opening-a-pr.md`.
+- **Two New SDD Principles (26 Principles Total):** `skills/principle-spec-before-code` and `skills/principle-record-decisions-immutably` (both lazy-loaded).
+- **Agent-Agnostic Craft & Onboarding Skills:**
+  - `skills/no-comments` (+ `comment-sicko.md`), `skills/unslop`, `skills/correct`.
+  - `skills/setup-paddlr` (+ `commands/setup-paddlr.md`) for repository onboarding, `.paddlr.json` detection, optional model profile steering, and verification skill offer.
+  - `skills/paddlr-help` (+ `commands/paddlr-help.md`) as a strictly read-only advisor routing questions to skills, playbooks, principles, and copy-paste prompts.
+- **User-Facing Handbook (`docs/guide/`):** Six-chapter onboarding and reference guide linked from `README.md`.
+
+### Changed
+- **Reversibility-First Autonomy Policy:** Unified Level 1 (direct), Level 2 reversible branch work (write Spec + Plan and proceed without pre-code blocking), Level 3 architectural/breaking (mandatory pre-code approval on Spec + ADR + Plan), and Hard Stops across `rules/AGENTS.md`, `core-contracts.md`, `paddlr-mode`, and `tests/test_workflow_scenarios.py`.
+- **Streamlined Always-On Rules:** Trimmed `rules/AGENTS.md` (90 -> 24 lines) and `rules/CLAUDE.md` (21 -> 9 lines) to remove legacy v1.0 contradictions and reduce baseline token overhead.
+- **Lazy-Loading Discipline:** Set `disable-model-invocation: true` across all skills except `setup-paddlr` (enforced by unit test).
+- **`paddlr-mode` & `why` Alignment:** Replaced legacy `poteto-agent` reference with `paddlr-worker`, aligned Level 1 plan exemption, added Playbook vs. Skill boundary matrix, and updated `why` to inspect `specs/` and `.paddlr.json`.
+
 ## [1.1.0] - 2026-11-23
 
 ### Added

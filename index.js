@@ -204,7 +204,7 @@ export async function setup(ctx = {}) {
 const pluginDef = {
   id: "paddlr",
   name: "Paddlr",
-  version: "1.1.0",
+  version: "1.2.0",
   description: "Agent-agnostic software engineering framework. Simple on the surface, sophisticated underneath.",
   setup,
   effect: setup,
