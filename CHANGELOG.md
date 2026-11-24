@@ -4,6 +4,13 @@ All notable changes to the Paddlr project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0](https://github.com/thanhdt942/paddlr/compare/v1.2.1...v1.3.0) (2026-11-24)
+
+
+### Features
+
+* **autonomy:** pause only on irreversible actions by default and load .paddlr.json autonomy settings ([1e2ddfb](https://github.com/thanhdt942/paddlr/commit/1e2ddfb854aaa42cedf91de629b6e844c3f88fdb))
+
 ## [1.2.1] - 2026-11-24
 
 ### Removed
