@@ -206,17 +206,19 @@ Core v1 establishes a strict Single-Agent baseline. `agent.delegate` and `schedu
 
 ## Contract 6: Autonomy Policy (AR-09)
 
-Applies **Reversibility-First Autonomy**, separating decision-making autonomy from operational authorization:
+Applies **Reversibility-First Autonomy**, pausing **only for irreversible actions** (unless the user explicitly asks to review a plan first):
 
 - **Level 1 (Small Bug / Localized Refactor — Execute Directly):**
   - No Spec or Plan required. Execute the matching playbook directly, verify on the real surface, and report evidence.
 - **Level 2 (Standard Feature, Reversible on Branch/Worktree — Proceed Without Blocking):**
   - Author Spec + Plan in project memory (`docs/paddlr/` or `.paddlr.json` overrides) and proceed directly through implementation, real-surface verification, and PR creation so the human reviews the complete result.
-  - Pause only when product/UX ambiguity cannot be settled by code or prototyping, or when the user explicitly requests plan review first.
-- **Level 3 (Architectural, Hard to Reverse, Schema/Public API Breaking, or Multi-PR — Mandatory Pre-Code Approval):**
-  - Prototype or red-team unknowns if present, author Spec + ADR + Plan, and **pause for explicit human approval** before modifying production code.
-- **Hard Stops (Always Pause — Never Execute Autonomously):**
-  - Force-pushing to shared Git branches (`git push --force`).
+- **Level 3 (Architectural, Schema/Public API Breaking, or Multi-PR, Reversible on Branch/Worktree — Proceed with ADR Without Blocking):**
+  - Prototype or red-team unknowns if present, author Spec + ADR + Plan, and proceed on a reversible branch/worktree without blocking — present the complete diff, ADR, and verification evidence for review. Pause only if an operation is irreversible or the user explicitly asks for pre-code plan review.
+- **Configurable Pauses (`.paddlr.json` `autonomy`, resolved by `scripts/paddlr_config.py`):**
+  - `pauseOnAmbiguity` (boolean, default `false`): when `false`, proceed with the safest convention-aligned default, record assumptions in Spec/Plan, and list them in the final summary/PR. When `true`, pause with concise clarifying questions if product/UX/acceptance criteria are ambiguous and cannot be settled by reading code or prototyping.
+  - `pauseBeforeCode` (`"never"` | `"level3"` | `"always"`, default `"never"`): optionally require pre-code Spec/Plan approval for Level 3 or all Level 2–3 work.
+- **Hard Stops (Always Pause — Irreversible Actions, Never Execute Autonomously):**
+  - Force-pushing to shared Git branches (`git push --force`) or destructive Git on shared state.
   - Deleting persistent data, production databases, or cloud resources.
   - Triggering production deployments or publishing packages.
   - Sending messages to external systems or external human channels.

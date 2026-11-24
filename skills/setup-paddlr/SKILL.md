@@ -27,9 +27,14 @@ Inspect the repository root before creating any files:
       "plans": "docs/paddlr/plans",
       "decisions": "docs/adr",
       "decisionsIndex": "docs/adr/DECISIONS.md",
-      "project": "docs/paddlr/PROJECT.md"
+      "project": "docs/paddlr/PROJECT.md",
+      "autonomy": {
+        "pauseOnAmbiguity": false,
+        "pauseBeforeCode": "never"
+      }
     }
     ```
+  - Optionally confirm whether the user wants the default autonomy settings (`pauseOnAmbiguity: false`, `pauseBeforeCode: "never"`) or a different preference (`pauseOnAmbiguity: true` to ask on ambiguous requirements, or `pauseBeforeCode: "level3"` / `"always"`).
   - Write `.paddlr.json` only after the user confirms the proposed mapping (or accept the default `docs/paddlr/` layout if they prefer isolation).
 - **Initialize missing directories and index files idempotently:**
   - Ensure `specs/`, `plans/`, and `decisions/` directories exist at the resolved paths (default `docs/paddlr/`).

@@ -30,6 +30,7 @@ class WorkflowClassificationEngine:
         has_external_integration: bool = False,
         is_ambiguous: bool = False,
         multiple_approaches_exist: bool = False,
+        is_irreversible: bool = False,
     ) -> dict:
         """Evaluate task risk and return workflow level, required steps, and gates."""
         # Baseline classification
@@ -40,7 +41,7 @@ class WorkflowClassificationEngine:
             requires_spec = True
             requires_design = True
             requires_plan = True
-            requires_approval_before_code = True
+            requires_approval_before_code = is_irreversible
         elif crosses_multiple_modules or has_external_integration:
             level = 2
             workflow = "workflows/feature-development.md"
@@ -48,7 +49,7 @@ class WorkflowClassificationEngine:
             requires_spec = True
             requires_design = True
             requires_plan = True
-            requires_approval_before_code = is_ambiguous
+            requires_approval_before_code = is_irreversible
         elif is_typo_or_doc or files_affected <= 1:
             level = 1
             workflow = "workflows/small-change.md"
@@ -56,7 +57,7 @@ class WorkflowClassificationEngine:
             requires_spec = False
             requires_design = False
             requires_plan = False
-            requires_approval_before_code = False  # Approved on diff review
+            requires_approval_before_code = is_irreversible
         else:
             level = 2
             workflow = "workflows/feature-development.md"
@@ -64,7 +65,7 @@ class WorkflowClassificationEngine:
             requires_spec = True
             requires_design = True
             requires_plan = True
-            requires_approval_before_code = is_ambiguous
+            requires_approval_before_code = is_irreversible
 
         return {
             "title": title,
@@ -79,7 +80,7 @@ class WorkflowClassificationEngine:
         }
 
     @staticmethod
-    def escalate_task(initial_result: dict, discovered_factor: str) -> dict:
+    def escalate_task(initial_result: dict, discovered_factor: str, is_irreversible: bool = False) -> dict:
         """Simulate dynamic escalation when new risk factors are discovered."""
         updated = dict(initial_result)
         if discovered_factor in ("db_migration", "breaking_change", "security_redesign"):
@@ -88,7 +89,7 @@ class WorkflowClassificationEngine:
             updated["requires_formal_spec"] = True
             updated["requires_technical_design"] = True
             updated["requires_implementation_plan"] = True
-            updated["requires_approval_before_code"] = True
+            updated["requires_approval_before_code"] = is_irreversible
             updated["escalated"] = True
             updated["escalation_reason"] = discovered_factor
         return updated
@@ -149,7 +150,7 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
         self.assertFalse(res["requires_approval_before_code"])
 
     def test_scenario_05_database_schema_change(self):
-        """Scenario 5: Database schema change (Level 3 Architectural Change)."""
+        """Scenario 5: Reversible Level 3 database schema change on a branch proceeds with Spec + ADR + Plan."""
         res = WorkflowClassificationEngine.classify_task(
             title="Migrate Users Table to Multi-Tenant Partitioning",
             files_affected=3,
@@ -158,7 +159,7 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
         self.assertEqual(res["level"], 3)
         self.assertEqual(res["workflow"], "workflows/architectural-change.md")
         self.assertTrue(res["requires_brainstorming"])
-        self.assertTrue(res["requires_approval_before_code"])
+        self.assertFalse(res["requires_approval_before_code"])
 
     def test_scenario_06_backward_compatibility_risk(self):
         """Scenario 6: Change with backward-compatibility concerns (Level 3)."""
@@ -170,9 +171,10 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
         self.assertEqual(res["level"], 3)
         self.assertEqual(res["workflow"], "workflows/architectural-change.md")
         self.assertTrue(res["requires_technical_design"])
+        self.assertFalse(res["requires_approval_before_code"])
 
     def test_scenario_07_ambiguous_request_missing_requirements(self):
-        """Scenario 7: Ambiguous request requiring clarification before planning."""
+        """Scenario 7: Ambiguous request records clarification need without blocking reversible work."""
         res = WorkflowClassificationEngine.classify_task(
             title="Make dashboard faster",
             files_affected=3,
@@ -180,8 +182,7 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
             is_ambiguous=True,
         )
         self.assertTrue(res["requires_clarification"])
-        # Must clarify before approving code implementation
-        self.assertTrue(res["requires_approval_before_code"])
+        self.assertFalse(res["requires_approval_before_code"])
 
     def test_scenario_08_multiple_solution_approaches(self):
         """Scenario 8: Task with multiple solution approaches (triggers brainstorming)."""
@@ -219,8 +220,19 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
         escalated = WorkflowClassificationEngine.escalate_task(initial, "db_migration")
         self.assertEqual(escalated["level"], 3)
         self.assertEqual(escalated["workflow"], "workflows/architectural-change.md")
-        self.assertTrue(escalated["requires_approval_before_code"])
+        self.assertFalse(escalated["requires_approval_before_code"])
         self.assertTrue(escalated["escalated"])
+
+    def test_scenario_11_irreversible_hard_stop_requires_approval(self):
+        """Scenario 11: Irreversible action (hard stop) always pauses for explicit approval."""
+        res = WorkflowClassificationEngine.classify_task(
+            title="Drop legacy production table and deploy",
+            files_affected=2,
+            touches_db_schema=True,
+            is_irreversible=True,
+        )
+        self.assertEqual(res["level"], 3)
+        self.assertTrue(res["requires_approval_before_code"])
 
 
 class TestActiveSkillsIntegrity(unittest.TestCase):
