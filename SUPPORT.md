@@ -1,44 +1,32 @@
 # Support Policy & Getting Help
 
-Thank you for using Paddlr! We are dedicated to providing clear, accessible support for developers and teams using Paddlr with AI coding agents.
+## 1. Documentation & Getting Help
 
----
-
-## 1. Getting Help
-
-- **Documentation:** Review our guides:
-  - [README Overview & Commands](README.md)
-  - [Operating Principles & Instructions](rules/AGENTS.md)
-- **GitHub Issues:** If you encounter unexpected behavior, defect, or missing documentation, search existing issues before creating a new one:
+- **User Guide:** [docs/guide/README.md](docs/guide/README.md) (setup, `paddlr-mode`, specs/plans/ADRs, autonomy, principles, `.paddlr.json`).
+- **Overview & Rules:** [README.md](README.md) and [rules/AGENTS.md](rules/AGENTS.md).
+- **In-Chat Routing:** Run `/paddlr-help <your question>` for read-only recommendations and copy-paste prompts.
+- **GitHub Issues:** Search existing issues before opening a new one:
   - [Report a Bug](.github/ISSUE_TEMPLATE/bug_report.yml)
   - [Request a Feature](.github/ISSUE_TEMPLATE/feature_request.yml)
-- **Security Vulnerabilities:** For sensitive security issues, do **not** file a public issue. Follow the instructions in [SECURITY.md](SECURITY.md).
+- **Security:** Do not open public issues for security vulnerabilities; follow [SECURITY.md](SECURITY.md).
 
----
+## 2. Supported Platforms
 
-## 2. Supported Platforms & Environments
-
-Paddlr provides active integration support for the following AI coding platforms:
-
-| Platform | Support Level | Discovery Method | Documentation |
-| :--- | :--- | :--- | :--- |
-| **Google Antigravity** | Supported (Primary) | Plugin / Skills (`plugin.json`) | [README.md](README.md) |
-| **Claude Code** | Supported | Plugin / Skills (`.claude-plugin/`) | [README.md](README.md) |
+| Platform | Support | Discovery Method | Docs |
+|---|---|---|---|
+| **Google Antigravity** | Supported | Plugin (`plugin.json`, `hooks.json`) | [01-setup.md](docs/guide/01-setup.md) |
+| **Claude Code** | Supported | Plugin (`.claude-plugin/plugin.json`) | [01-setup.md](docs/guide/01-setup.md) |
+| **Cursor** | Supported | Rules + Skills (`rules/AGENTS.md`, `skills/`) | [01-setup.md](docs/guide/01-setup.md) |
 | **OpenCode** | Supported | Plugin (`package.json`, `index.js`) | [.opencode/INSTALL.md](.opencode/INSTALL.md) |
-| **OpenAI Codex** | Supported | Plugin / Skills (`.codex-plugin/`) | [README.md](README.md) |
-
----
+| **OpenAI Codex** | Supported | Plugin (`.codex-plugin/plugin.json`) | [01-setup.md](docs/guide/01-setup.md) |
 
 ## 3. Supported Versions
 
-| Version | Status | Security Support | Bugfix Support |
-| :--- | :--- | :--- | :--- |
-| `3.x` | Active / Current | Full | Full |
-| `2.x` | Maintenance | Critical Only | Critical Only |
-| `< 2.0.0` | End of Life | None | None |
-
----
+| Version | Status | Security & Bugfix Support |
+|---|---|---|
+| `1.2.x` | Active (Current) | Full |
+| `1.0.x` – `1.1.x` | End of Life | Upgrade to `1.2.x` |
 
 ## 4. Community Guidelines
 
-All interactions across Paddlr repositories, discussions, and issues are governed by our [Code of Conduct](CODE_OF_CONDUCT.md). Please treat all community members with respect and professionalism.
+All interactions are governed by our [Code of Conduct](CODE_OF_CONDUCT.md).

@@ -1,12 +1,12 @@
 # Paddlr
 
 <p align="center">
-  <img src="assets/logo.svg" alt="Paddlr Logo" width="160" height="160" />
+  <img src="assets/logo.svg" alt="Paddlr Logo" width="140" height="140" />
 </p>
 
 <p align="center">
   <strong>Simple on the Surface. Sophisticated Underneath.</strong><br>
-  <em>An Agent-Agnostic Software Engineering Framework turning proven engineering practices into practical, reusable AI Agent Skills.</em>
+  <em>An agent-agnostic software engineering framework turning spec-driven design, TDD, scientific debugging, and persistent project memory into reusable AI Agent Skills.</em>
 </p>
 
 <p align="center">
@@ -20,57 +20,21 @@
 
 ---
 
-## 1. Brand Story: The Duck Philosophy
+## Philosophy
 
-**Paddlr** is inspired by the serene image of a duck gliding gracefully across the water.
+Like a duck gliding across water, Paddlr keeps the developer experience calm and frictionless on the surface while paddling with engineering discipline underneath:
 
-From above the surface, the duck moves calmly, smoothly, and effortlessly. But beneath the surface, its legs paddle continuously and purposefully to maintain balance, navigate currents, and propel forward.
+- **Spec-Driven Design & Memory:** Durable specs, contract-first plans, and immutable ADRs in `docs/paddlr/` (customizable via `.paddlr.json`).
+- **Reversibility-First Autonomy:** Level 1 runs directly; Level 2 reversible branch work proceeds without pre-code blocking; Level 3 architectural changes and hard stops always pause for approval.
+- **Agent-Agnostic by Design:** Zero vendor lock-in. Runs natively on Google Antigravity, Claude Code, Cursor, OpenAI Codex, and OpenCode.
 
-This is the foundational metaphor for how Paddlr approaches Software Engineering:
-
-- **Above the Surface:** A clean, frictionless developer experience with intuitive workflows and clear guidance.
-- **Below the Surface:** Disciplined engineering practices, structured specifications, contract-first implementation planning, rigorous Test-Driven Development (TDD), scientific debugging, and persistent project memory.
-
-> **"Great engineering doesn't have to feel complicated."**  
-> *Handle the complexity. Simplify the experience.*
-
-Developers should not have to manually coordinate every quality gate or memorize sprawling procedural checklists. Paddlr orchestrates and standardizes professional software engineering through dedicated, reusable **AI Agent Skills**.
+Read the full handbook in the **[User Guide](docs/guide/README.md)**.
 
 ---
 
-## 2. Core Principles
-
-Paddlr is built upon four foundational pillars:
-
-1. **Simplicity by Design:** Every skill has a single, unmistakable purpose, an intuitive interface, and an actionable workflow requiring zero memorization.
-2. **Engineering Discipline:** Simplicity of experience never compromises engineering rigor. Paddlr embeds proven methodologies:
-   - Specification-driven development (`docs/paddlr/specs/`)
-   - Structured contract-first planning (`docs/paddlr/plans/`)
-   - Test-Driven Development (TDD: RED → GREEN → REFACTOR)
-   - Scientific SRE debugging and root cause analysis
-   - Independent, read-only code review
-   - Governed release management
-3. **Practical over Theoretical:** Engineering principles are translated into deterministic, verifiable procedures that generate real, checkable artifacts.
-4. **Agent-Agnostic by Design:** Zero proprietary vendor lock-in. Built natively for Google Antigravity, Claude Code, OpenCode, and OpenAI Codex.
-
----
-
-## 3. Positioning: What Paddlr Is and Is Not
-
-| What Paddlr Is | What Paddlr Is Not |
-|---|---|
-| A collection of reusable AI Agent Skills | Not an AI coding agent itself |
-| A practical Software Engineering Framework | Not an IDE or closed development environment |
-| A system for applying proven engineering practices | Not an arbitrary collection of ad-hoc prompts |
-| An agent-agnostic approach to AI software engineering | Not tied to a single AI vendor or platform |
-
----
-
-## 4. Quick Start & Installation
+## Quick Start & Installation
 
 ### Google Antigravity (`agy`)
-
-Install directly via git in one command:
 
 ```bash
 agy plugin install https://github.com/thanhdt942/paddlr
@@ -78,13 +42,11 @@ agy plugin install https://github.com/thanhdt942/paddlr
 
 ### Claude Code
 
-Install inside your Claude Code session (one step):
-
 ```text
 /plugin install paddlr --marketplace thanhdt942/paddlr
 ```
 
-*Or in two steps (for versions without `--marketplace`):*
+Or in two steps on older versions:
 
 ```text
 /plugin marketplace add thanhdt942/paddlr
@@ -93,93 +55,79 @@ Install inside your Claude Code session (one step):
 
 ### OpenCode
 
-Install via the OpenCode CLI (adds Paddlr to `.opencode/opencode.json`; pass `-g` to install globally):
-
 ```bash
 opencode plugin paddlr@git+https://github.com/thanhdt942/paddlr.git
 ```
 
-Or configure inside your project's `opencode.json`:
-
-```json
-{
-  "$schema": "https://opencode.ai/config.json",
-  "plugin": [
-    "paddlr@git+https://github.com/thanhdt942/paddlr.git"
-  ]
-}
-```
-
-See [.opencode/INSTALL.md](.opencode/INSTALL.md) for local linking and full documentation.
+See [.opencode/INSTALL.md](.opencode/INSTALL.md) for local linking and configuration details.
 
 ### OpenAI Codex (`codex`)
-
-Add the Paddlr marketplace, then install the plugin from it:
 
 ```bash
 codex plugin marketplace add thanhdt942/paddlr
 codex plugin add paddlr@paddlr
 ```
 
----
+### Cursor
 
-## 5. Agent Skills & Slash Commands
+Add Paddlr as a plugin or rules/skills source and load `rules/AGENTS.md` plus `skills/`.
 
-Once installed, describe your task in natural language and your coding agent will load the matching skill. In Claude Code, skills are also exposed as slash commands under the plugin namespace (`/paddlr:<skill>`):
-
-| Skill | Directory | Purpose |
-|---|---|---|
-| `feature-development` | `skills/feature-development` | Orchestrate end-to-end feature delivery across all phases |
-| `writing-specs` | `skills/writing-specs` | Requirements discovery and specification authoring |
-| `writing-plans` | `skills/writing-plans` | Bite-sized implementation plans in `docs/paddlr/plans/` |
-| `test-driven-development` | `skills/test-driven-development` | Iron-law TDD (no code without a failing test first) |
-| `sre-debugging` | `skills/sre-debugging` | Evidence-based root-cause investigation before fixing |
-| `code-review` | `skills/code-review` | Read-only code review against specifications |
-| `release-management` | `skills/release-management` | Semantic versioning and release lifecycle in `RELEASE.md` |
-| `skill-creator` | `skills/skill-creator` | Design, test, and package reusable AI agent skills |
-| `setup-paddlr` | `skills/setup-paddlr` | Initialize `docs/paddlr/` or `.paddlr.json` and optional model profiles |
-| `paddlr-help` | `skills/paddlr-help` | Read-only advisor routing questions to skills, playbooks, principles, and prompts |
+After installing, run `/setup-paddlr` (or ask your agent to *"setup paddlr"*) to initialize `docs/paddlr/` or generate a `.paddlr.json` override. Type `/paddlr-help <question>` for read-only routing without executing tasks.
 
 ---
 
-## 6. Project Architecture & Memory
+## Core Skills
 
-Paddlr persists engineering memory canonically under `docs/paddlr/` (customizable via an optional `.paddlr.json` at your repository root — see the [User Guide](docs/guide/README.md)):
+Paddlr ships **57 Agent Skills** (all lazy-loaded with `disable-model-invocation: true` except `setup-paddlr`), including 22 playbooks under `paddlr-mode` and 26 engineering principles:
+
+| Skill | Purpose |
+|---|---|
+| `paddlr-mode` | Single-door orchestration mode with 22 playbooks and 26 principles |
+| `setup-paddlr` | Initialize `docs/paddlr/` or `.paddlr.json` and optional model profiles |
+| `paddlr-help` | Read-only advisor routing questions to skills, playbooks, principles, and prompts |
+| `feature-development` | 5-phase SDD feature delivery lifecycle |
+| `writing-specs` / `writing-plans` | Feature specifications and bite-sized contract-first plans |
+| `writing-decisions` / `sync-docs` | Immutable ADRs (`/adr`) and mandatory pre-PR doc-drift checks |
+| `test-driven-development` | Strict RED -> GREEN -> REFACTOR execution |
+| `sre-debugging` | Evidence-based root-cause investigation before fixing |
+| `code-review` / `interrogate` | Spec-alignment review and adversarial red-teaming |
+| `no-comments` / `unslop` / `correct` | Comment/workaround audit, prose cleanup, and structural mistake prevention |
+| `why` / `how` / `architect` | Historical rationale, runtime tracing, and boundary/type modeling |
+| `release-management` / `skill-creator` | Governed releases (`RELEASE.md`) and authoring new Agent Skills |
+
+---
+
+## Project Memory Layout
+
+Paddlr stores project memory under `docs/paddlr/` by default (customizable via `.paddlr.json` — see [Customization](docs/guide/06-customization.md)):
 
 ```text
 docs/paddlr/
-├── specs/                 # Reviewable feature specifications
-├── plans/                 # Contract-first implementation plans
-├── decisions/             # Granular Architecture Decision Records (ADRs)
-├── DECISIONS.md           # Lightweight ADR master index
-├── PROGRESS.md            # Current operational status and completed slices
-└── PLAN.md                # Long-term engineering roadmap
+├── specs/          # Reviewable feature specifications
+├── plans/          # Contract-first implementation plans (canonical Task State)
+├── decisions/      # Granular, immutable Architecture Decision Records (ADRs)
+├── DECISIONS.md    # Compact single-line-per-decision ADR index
+└── PROJECT.md      # Living snapshot of architecture, stack, and conventions
 ```
 
 ---
 
-## 7. Verification & Quality Gates
+## Verification
 
-Run what CI runs:
+Run the same checks CI runs:
 
 ```bash
-# Validate all Agent Skills conform to the Agent Skills open standard
 python scripts/validate_skills.py --verbose
-
-# Run the complete automated test suite
 python -m unittest discover -s tests -v
+python scripts/check_markdown_links.py
 ```
 
 ---
 
-## 8. Acknowledgements
+## Acknowledgements
 
-Paddlr is inspired by and builds upon the pioneering work of **[Lauren Tan](https://github.com/poteto)** ([@poteto](https://github.com/poteto)) and her project **pstack** (available in [cursor/plugins](https://github.com/cursor/plugins)). Several engineering skills, workflows, and core principles in Paddlr reference, adapt, and reuse concepts originating from pstack.
+Paddlr is inspired by and builds upon the work of **[Lauren Tan](https://github.com/poteto)** ([@poteto](https://github.com/poteto)) and **pstack** ([cursor/plugins](https://github.com/cursor/plugins)). Several skills, workflows, and engineering principles in Paddlr adapt concepts originating from pstack.
 
-Special thanks and sincere gratitude to Lauren for her foundational contributions to rigorous, disciplined AI agent engineering practices.
+## License
 
----
-
-## 9. License
-
-Distributed under the Apache 2.0 License. See [LICENSE](LICENSE) for details.
+Apache 2.0. See [LICENSE](LICENSE).
