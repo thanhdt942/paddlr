@@ -43,7 +43,7 @@ Execute feature development in six sequential phases. Read the designated refere
    - If the feature has multiple behaviors, edge cases, or unclear acceptance criteria, delegate to `writing-specs`.
    - If the change spans multiple components or requires ordered steps, delegate to `writing-plans`.
    - If the feature involves major architectural choices or technology trade-offs, formulate an ADR in `docs/paddlr/decisions/` and register it in `docs/paddlr/DECISIONS.md` (see `skills/writing-specs/references/adr-guide.md`).
-   - Confirm major assumptions and architectural decisions with the user before writing production code.
+   - Proceed on a reversible branch/worktree without blocking; pause only for irreversible actions (hard stops) or when the user explicitly asks to review the plan first.
 
 4. **Implementation**
    - Follow `references/implementation-guidelines.md` to make small, focused, convention-aligned changes.
@@ -70,13 +70,7 @@ Delegate specialized work instead of re-inventing it inline:
 
 ## Decision Points and Escalation Criteria
 
-Pause and consult the user whenever any of the following occur:
-
-- Requirements or acceptance criteria have multiple plausible interpretations that affect external behavior.
-- Codebase discovery reveals that the initial plan conflicts with existing architecture or constraints.
-- Implementation requires a breaking API, schema, or contract change not mentioned in the request.
-- Scope expands significantly beyond the original feature request.
-- Verification cannot be completed (for example, missing test environment, credentials, or external services).
+Proceed without blocking on reversible branch work (documenting assumptions and architectural choices in the Spec, Plan, or ADR). Pause and consult the user only when an action cannot be rolled back (hard stops: production deploys, package publishing, persistent data deletion, destructive Git on shared branches, or external messages), when verification is blocked by missing credentials or environments, or when the user explicitly requests plan review first.
 
 ## Reference Reading Map
 

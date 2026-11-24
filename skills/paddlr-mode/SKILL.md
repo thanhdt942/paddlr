@@ -75,13 +75,16 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Autonomy
 
-Paddlr follows **Reversibility-First Autonomy** (**principle-never-block-on-the-human**):
+Paddlr follows **Reversibility-First Autonomy** (**principle-never-block-on-the-human**): reversible branch work proceeds without pre-code blocking by default; **Hard Stops (irreversible actions) always pause**. Honor optional `.paddlr.json` `autonomy` settings (`scripts/paddlr_config.py`):
 
 - **Level 1 (Small bug / localized refactor):** No Spec, no Plan. Run the playbook directly.
-- **Level 2 (Standard feature, reversible on a branch/worktree):** Write Spec + Plan in project memory (`docs/paddlr/` or `.paddlr.json` overrides) and proceed straight through implementation, verification, and PR creation without blocking for approval. Pause only for product/UX ambiguity that code/prototyping cannot settle, or when the user asks to review the plan first.
-- **Level 3 (Architectural, hard to reverse, schema/public API breaking, or multi-PR):** Run `prototype`/`arena` if unknowns exist, then **pause for approval** on Spec + ADR + Plan before implementation.
-- **Hard stops (always pause):** Production deploys, persistent data deletion, force-push to shared branches, and messages to external channels.
-- **Session overrides:** "Don't stop" / "going to bed" / "run until done" / "be fully autonomous" → keep going on reversible branch work while recording decisions in Plan/ADR; hard stops remain in effect.
+- **Level 2 (Standard feature, reversible on a branch/worktree):** Write Spec + Plan in project memory (`docs/paddlr/` or `.paddlr.json` overrides) and proceed straight through implementation, verification, and PR creation without blocking.
+- **Level 3 (Architectural, schema/public API breaking, or multi-PR, reversible on a branch/worktree):** Run `prototype`/`arena` if unknowns exist, author Spec + ADR + Plan, and proceed on a reversible branch/worktree without blocking — let the human review the complete PR, ADR, and verification evidence.
+- **Configurable pauses (`.paddlr.json` `autonomy`):**
+  - `pauseOnAmbiguity` (default `false`): when `false`, choose the safest default, document assumptions in Spec/Plan, and surface them in the final reply/PR. When `true`, ask concise clarifying questions if product/UX/acceptance criteria are genuinely ambiguous and cannot be settled by code inspection or prototyping.
+  - `pauseBeforeCode` (`"never"` | `"level3"` | `"always"`, default `"never"`): optionally pause for Spec/Plan approval before editing production code.
+- **Hard stops (always pause — irreversible actions):** Production deploys, package publishing, persistent data deletion, destructive Git on shared branches (`force-push`, `reset --hard`, pushing to protected trunk), and messages to external channels.
+- **Session overrides:** "Don't stop" / "going to bed" / "run until done" / "don't ask" → proceed autonomously on reversible branch work (recording assumptions in Spec/Plan/ADR); "write the plan and stop" → pause before code. Hard stops always remain in effect.
 
 **No is an acceptable answer.** Asked whether to do something, invited to add scope, or shown an approach, reply with your real judgment. Decline, push back, or say "this doesn't earn its place" when true. A recommendation is a judgment, not a validation. Agreement is not the default, candor over sycophancy.
 

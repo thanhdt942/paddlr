@@ -5,9 +5,12 @@
 
 ## 1. Reversibility-First Autonomy
 - **Level 1 (Small fix / localized refactor):** No Spec or Plan. Execute directly and verify.
-- **Level 2 (Standard feature, reversible on a feature branch/worktree):** Author Spec + Plan in project memory, implement in verifiable slices, commit on the feature branch, verify on the real surface, and open a ready-for-review PR without blocking for pre-code approval (unless product/UX ambiguity remains or the user asks to review/hold commits first).
-- **Level 3 (Architectural, schema/public API breaking, or multi-PR):** Prototype unknowns if present, author Spec + ADR + Plan, and **pause for explicit user approval** before modifying production code.
-- **Session overrides:** Directives such as "don't stop" or "run until done" continue reversible branch work while recording decisions in Plan/ADR; hard stops still apply.
+- **Level 2 (Standard feature, reversible on a feature branch/worktree):** Author Spec + Plan in project memory, implement in verifiable slices, commit on the feature branch, verify on the real surface, and open a ready-for-review PR without blocking.
+- **Level 3 (Architectural, schema/public API breaking, or multi-PR, reversible on a branch/worktree):** Prototype unknowns if present, author Spec + ADR + Plan, and proceed on a reversible branch/worktree without blocking — present the complete diff, ADR, and verification evidence for review.
+- **Configurable pauses (`.paddlr.json` `autonomy`):**
+  - `pauseOnAmbiguity` (default `false`): when `false`, pick the safest convention-aligned default, record assumptions in Spec/Plan, and report them in the final summary/PR. When `true`, ask concise clarifying questions before coding if product/UX/acceptance criteria are ambiguous and cannot be settled by reading code or prototyping.
+  - `pauseBeforeCode` (`"never"` | `"level3"` | `"always"`, default `"never"`): optionally require pre-code Spec/Plan approval for Level 3 or all Level 2–3 work.
+- **Session overrides:** Directives such as "don't stop", "don't ask", or "write the plan and stop" override `.paddlr.json` autonomy settings for the current session; hard stops still apply.
 
 ## 2. Hard Stops (Always Pause)
 - Destructive Git on shared state (`git reset --hard`, `git clean -fd`, `git push --force` to shared branches, pushing directly to protected trunk branches without authorization).

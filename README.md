@@ -25,7 +25,7 @@
 Like a duck gliding across water, Paddlr keeps the developer experience calm and frictionless on the surface while paddling with engineering discipline underneath:
 
 - **Spec-Driven Design & Memory:** Durable specs, contract-first plans, and immutable ADRs in `docs/paddlr/` (customizable via `.paddlr.json`).
-- **Reversibility-First Autonomy:** Level 1 runs directly; Level 2 reversible branch work proceeds without pre-code blocking; Level 3 architectural changes and hard stops always pause for approval.
+- **Reversibility-First Autonomy:** Reversible branch work across Levels 1–3 proceeds without pre-code blocking (with Spec, Plan, and ADR recorded in project memory); only irreversible actions (hard stops) always pause.
 - **Agent-Agnostic by Design:** Zero vendor lock-in. Runs natively on Google Antigravity, Claude Code, Cursor, OpenAI Codex, and OpenCode.
 
 Read the full handbook in the **[User Guide](docs/guide/README.md)**.

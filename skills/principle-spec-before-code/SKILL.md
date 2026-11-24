@@ -10,5 +10,5 @@ Ambiguity discovered in code is ten times more expensive than ambiguity resolved
 
 - **Level 1 is exempt:** Typos, localized bug fixes, and single-file mechanical edits skip specs and run directly.
 - **Level 2 proceeds without blocking:** Write a concise spec in `docs/paddlr/specs/YYYY-MM-DD-<slug>.md` (or `.paddlr.json` override) and a contract-first plan, then implement and verify on a reversible branch.
-- **Level 3 pauses for alignment:** High-impact, breaking, or multi-PR changes require human approval on the Spec + ADR + Plan before code changes begin.
+- **Level 3 records an ADR and proceeds on a reversible branch:** High-impact, breaking, or multi-PR changes author Spec + ADR + Plan before code and execute on a reversible branch without blocking; pause only for irreversible actions (hard stops) or explicit user request.
 - **Specs stay truthful:** If implementation uncovers a better shape, update the spec (via **sync-docs**) before opening the PR so code and spec never diverge.
