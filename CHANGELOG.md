@@ -4,6 +4,13 @@ All notable changes to the Paddlr project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0](https://github.com/thanhdt942/paddlr/compare/v1.3.0...v1.4.0) (2026-11-24)
+
+
+### Features
+
+* **website:** add English and Vietnamese i18n support ([9b41d03](https://github.com/thanhdt942/paddlr/commit/9b41d0378b6fd6eacc5c1f40d2dd45bce6021bbf))
+
 ## [1.3.0](https://github.com/thanhdt942/paddlr/compare/v1.2.1...v1.3.0) (2026-11-24)
 
 
