@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Paddlr — Engineering discipline for AI coding agents</title>
-  <meta name="description" content="Paddlr is an open-source set of Agent Skills that adds specs, plans, test-driven development, debugging, code review, and release discipline to Claude Code, Codex, OpenCode, and Google Antigravity." />
+  <title>Paddlr - Engineering discipline for AI coding agents</title>
+  <meta name="description" content="Paddlr is an open-source set of 57 Agent Skills bringing spec-driven design, persistent project memory, test-driven development, scientific debugging, and code review to Claude Code, Codex, OpenCode, Google Antigravity, and Cursor." />
   <meta name="theme-color" content="#ffffff" />
   <link rel="canonical" href="https://thanhdt942.github.io/paddlr/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Paddlr" />
-  <meta property="og:title" content="Paddlr — Simple on the Surface. Sophisticated Underneath." />
-  <meta property="og:description" content="Open-source Agent Skills that bring engineering discipline to the coding agent you already use." />
+  <meta property="og:title" content="Paddlr - Simple on the Surface. Sophisticated Underneath." />
+  <meta property="og:description" content="Open-source set of 57 Agent Skills bringing spec-driven design, persistent project memory, TDD, debugging, and code review to the coding agent you already use." />
   <meta property="og:url" content="https://thanhdt942.github.io/paddlr/" />
   <meta name="twitter:card" content="summary" />
 
@@ -30,21 +30,28 @@
     })();
   </script>
   <link rel="stylesheet" href="./assets/css/styles.css" />
+  <script src="./assets/js/i18n.js" defer></script>
   <script src="./assets/js/main.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
   <header class="site-header">
-    <nav class="container nav" aria-label="Primary">
-      <a class="wordmark" href="./" aria-label="Paddlr home">
+    <nav class="container nav" aria-label="Primary" data-i18n-aria-label="a11y.navPrimary">
+      <a class="wordmark" href="./" aria-label="Paddlr home" data-i18n-aria-label="a11y.home">
         <img src="./assets/images/favicon.svg" alt="" width="22" height="22" />
         <span>Paddlr</span>
       </a>
       <ul class="nav-links">
-        <li><a href="https://github.com/thanhdt942/paddlr#readme">Docs</a></li>
-        <li><a href="https://github.com/thanhdt942/paddlr">GitHub</a></li>
-        <li>
+        <li><a href="#installation" data-i18n="nav.install">Install</a></li>
+        <li><a href="#paddlr-mode" data-i18n="nav.paddlrMode">Paddlr Mode</a></li>
+        <li><a href="https://github.com/thanhdt942/paddlr/blob/HEAD/docs/guide/README.md" data-i18n="nav.docs">Docs</a></li>
+        <li><a href="https://github.com/thanhdt942/paddlr" data-i18n="nav.github">GitHub</a></li>
+        <li class="nav-controls">
+          <div class="lang-switch" role="group" aria-label="Language" data-i18n-aria-label="a11y.langGroup">
+            <button class="lang-btn" type="button" data-lang-btn="en" aria-pressed="true">EN</button>
+            <button class="lang-btn" type="button" data-lang-btn="vi" aria-pressed="false">VI</button>
+          </div>
           <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode" aria-pressed="false">
             <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
@@ -62,115 +69,263 @@
   <main id="main">
     <section class="container hero" aria-labelledby="hero-title">
       <h1 id="hero-title">Paddlr</h1>
-      <p class="tagline">Simple on the Surface. Sophisticated Underneath.</p>
-      <p class="lead">
-        Open-source Agent Skills that bring specs, plans, test-driven development, debugging,
-        code review, and release discipline to the coding agent you already use.
+      <p class="tagline" data-i18n="hero.tagline">Simple on the Surface. Sophisticated Underneath.</p>
+      <p class="lead" data-i18n="hero.lead">
+        Open-source set of 57 Agent Skills bringing spec-driven design, persistent project memory,
+        test-driven development, scientific debugging, and code review to Claude Code, Codex,
+        OpenCode, Google Antigravity, and Cursor.
       </p>
       <div class="actions">
-        <a class="button button--primary" href="#installation">Get started</a>
-        <a class="button" href="https://github.com/thanhdt942/paddlr">View on GitHub</a>
+        <a class="button button--primary" href="#installation" data-i18n="hero.ctaStart">Get started</a>
+        <a class="button" href="#paddlr-mode" data-i18n="hero.ctaMode">Paddlr Mode</a>
+        <a class="button" href="https://github.com/thanhdt942/paddlr" data-i18n="hero.ctaGithub">View on GitHub</a>
       </div>
     </section>
 
     <section class="container section" id="about" aria-labelledby="about-title">
-      <h2 id="about-title">What is Paddlr?</h2>
-      <p>
-        Paddlr is not a coding agent. It is a plugin for the agents you already run — Claude Code,
-        Codex, OpenCode, and Google Antigravity — that teaches them a consistent engineering workflow:
-        understand the repository, plan proportionally to risk, implement in small slices, and
-        verify with real command output before reporting done.
-      </p>
-      <p>
-        Coding agents are fast, but they often edit before reading the codebase, skip tests, claim
-        success without evidence, and forget decisions between sessions. Paddlr turns proven practices
-        into skills the agent follows, and keeps specs, plans, and decisions in
-        <code>docs/paddlr/</code> so context survives the session.
+      <h2 id="about-title" data-i18n="about.title">What is Paddlr?</h2>
+      <p data-i18n-html="about.p1">
+        Paddlr is not a coding agent. It is an open-source plugin of 57 Agent Skills for Claude Code,
+        Codex, OpenCode, Google Antigravity, and Cursor. It keeps your agent reading the codebase
+        first, planning by risk, saving context in <code>docs/paddlr/</code>, and verifying with
+        real command output.
       </p>
 
-      <h3>What you get</h3>
-      <dl class="skills">
-        <div><dt>feature-development</dt><dd>Runs a feature end to end, from intake to verified completion.</dd></div>
-        <div><dt>writing-specs</dt><dd>Turns ideas into reviewable specs in <code>docs/paddlr/specs/</code>.</dd></div>
-        <div><dt>writing-plans</dt><dd>Breaks specs into small, contract-first plans in <code>docs/paddlr/plans/</code>.</dd></div>
-        <div><dt>test-driven-development</dt><dd>No production code without a failing test first.</dd></div>
-        <div><dt>sre-debugging</dt><dd>Evidence and hypotheses before any fix.</dd></div>
-        <div><dt>code-review</dt><dd>Independent, read-only review against the spec.</dd></div>
-        <div><dt>release-management</dt><dd>Versioning and release conventions recorded in <code>RELEASE.md</code>.</dd></div>
-        <div><dt>skill-creator</dt><dd>Design, verify, and package your own agent skills.</dd></div>
-      </dl>
-      <p class="muted">
-        Also included: shared operating rules (<code>AGENTS.md</code>) and a session-start hook that
-        loads them automatically. Useful if you rely on AI agents for real work in real repositories
-        and want output you can review.
+      <div class="pillars">
+        <div class="pillar">
+          <h4 data-i18n="about.pillar1Title">Persistent project memory</h4>
+          <p data-i18n-html="about.pillar1Body">
+            Stores specs, plans, and ADRs in <code>docs/paddlr/</code> so context survives across
+            sessions.
+          </p>
+        </div>
+        <div class="pillar">
+          <h4 data-i18n="about.pillar2Title">Reversibility-first autonomy</h4>
+          <p data-i18n="about.pillar2Body">
+            Small fixes and branch work run directly. High-risk changes always pause for approval.
+          </p>
+        </div>
+        <div class="pillar">
+          <h4 data-i18n="about.pillar3Title">Evidence-based verification</h4>
+          <p data-i18n="about.pillar3Body">
+            Runs real tests, lint, or runtime checks before reporting done.
+          </p>
+        </div>
+      </div>
+
+      <p class="muted" data-i18n-html="about.footnote">
+        Ships with shared operating rules in <code>AGENTS.md</code> and a session-start hook that
+        loads them automatically.
       </p>
     </section>
 
     <section class="container section" id="installation" aria-labelledby="install-title">
-      <h2 id="install-title">Install Paddlr</h2>
-      <p>Choose your coding agent, then run each command in order.</p>
+      <h2 id="install-title" data-i18n="install.title">Install Paddlr</h2>
+      <p data-i18n="install.intro">Choose your coding agent, then run each command in order.</p>
 
       <div class="installer" data-installer>
-        <div class="tabs" role="tablist" aria-label="Coding agent" data-tablist></div>
+        <div class="tabs" role="tablist" aria-label="Coding agent" data-i18n-aria-label="a11y.codingAgent" data-tablist></div>
         <div class="panel" role="tabpanel" tabindex="0" data-panel></div>
       </div>
 
+      <p class="muted install-note" data-i18n-html="install.postNote">
+        After installing, run <code>/setup-paddlr</code> to initialize <code>docs/paddlr/</code> or
+        create a <code>.paddlr.json</code> override. Run <code>/paddlr-help</code> for read-only
+        routing without executing tasks.
+      </p>
+
       <noscript>
-        <p class="panel">
+        <p class="panel" data-i18n-html="install.noscript">
           The agent selector needs JavaScript. See the
-          <a href="https://github.com/thanhdt942/paddlr#4-quick-start--installation">installation guide on GitHub</a>.
+          <a href="https://github.com/thanhdt942/paddlr#quick-start--installation">installation guide on GitHub</a>.
         </p>
       </noscript>
     </section>
 
+    <section class="container section" id="paddlr-mode" aria-labelledby="mode-title">
+      <h2 id="mode-title" data-i18n="mode.title">Paddlr mode</h2>
+      <p data-i18n-html="mode.intro">
+        Invoke <code>/paddlr-mode</code> as a single entry point for disciplined sessions. The skill
+        stays lazy-loaded via <code>disable-model-invocation: true</code>, so it adds zero context
+        overhead until you call it.
+      </p>
+      <p data-i18n-html="mode.bundle">
+        <code>paddlr-mode</code> bundles 22 playbooks (feature, bug fix, refactoring, investigation,
+        opening a PR, and more) alongside 26 engineering principles loaded on demand when a trigger
+        matches.
+      </p>
+
+      <h3 data-i18n="mode.flowTitle">How a session runs</h3>
+      <ol class="flow-steps">
+        <li>
+          <div class="flow-body">
+            <strong data-i18n="mode.step1Title">Restate the goal</strong>
+            <p data-i18n="mode.step1Body">
+              The agent restates your goal and the smallest change that meets it before touching code.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="flow-body">
+            <strong data-i18n="mode.step2Title">Classify risk and pick a playbook</strong>
+            <p data-i18n="mode.step2Body">
+              Assigns Level 1, 2, or 3 based on reversibility and opens the matching playbook.
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="flow-body">
+            <strong data-i18n="mode.step3Title">Track state in plan and native checklist</strong>
+            <p data-i18n-html="mode.step3Body">
+              Mirrors active steps from <code>docs/paddlr/plans/</code> into your host's native
+              checklist via <code>ui.todo</code> (<code>TodoWrite</code>, <code>update_steps</code>,
+              <code>update_plan</code>, <code>todowrite</code>, or chat fallback).
+            </p>
+          </div>
+        </li>
+        <li>
+          <div class="flow-body">
+            <strong data-i18n="mode.step4Title">Build, verify, and open a PR</strong>
+            <p data-i18n-html="mode.step4Body">
+              Implements in verifiable slices, checks the real artifact, runs <code>sync-docs</code>
+              and <code>code-review</code>, and opens a ready-for-review PR.
+            </p>
+          </div>
+        </li>
+      </ol>
+
+      <p class="muted" data-i18n="mode.baseline">
+        Paddlr runs in a single thread using only 5 basic tools (read, write, patch, shell, search).
+        When your host supports subagents, Paddlr can delegate isolated slices while the main agent
+        keeps canonical plan ownership.
+      </p>
+
+      <h3 data-i18n="about.skillsTitle">Core skills</h3>
+      <dl class="skills">
+        <div>
+          <dt>paddlr-mode</dt>
+          <dd data-i18n="about.skill.paddlrMode">Single entry point with 22 playbooks and 26 engineering principles loaded on demand.</dd>
+        </div>
+        <div>
+          <dt>setup-paddlr / paddlr-help</dt>
+          <dd data-i18n-html="about.skill.setupHelp">Initialize <code>docs/paddlr/</code> or <code>.paddlr.json</code>, and route questions read-only without running tasks.</dd>
+        </div>
+        <div>
+          <dt>feature-development</dt>
+          <dd data-i18n="about.skill.featureDev">Runs a 5-phase spec-driven feature lifecycle from intake to verified completion.</dd>
+        </div>
+        <div>
+          <dt>writing-specs / writing-plans</dt>
+          <dd data-i18n-html="about.skill.specsPlans">Turns ideas into reviewable specs in <code>docs/paddlr/specs/</code> and contract-first plans in <code>docs/paddlr/plans/</code>.</dd>
+        </div>
+        <div>
+          <dt>writing-decisions / sync-docs</dt>
+          <dd data-i18n-html="about.skill.decisionsSync">Writes immutable ADRs in <code>decisions/</code> indexed in <code>DECISIONS.md</code>, and checks docs for drift before a PR.</dd>
+        </div>
+        <div>
+          <dt>test-driven-development</dt>
+          <dd data-i18n="about.skill.tdd">Enforces strict RED, GREEN, REFACTOR execution with no production code before a failing test.</dd>
+        </div>
+        <div>
+          <dt>sre-debugging</dt>
+          <dd data-i18n="about.skill.sreDebugging">Reproduces failures, gathers evidence, and tests hypotheses before proposing a fix.</dd>
+        </div>
+        <div>
+          <dt>code-review / interrogate</dt>
+          <dd data-i18n="about.skill.reviewInterrogate">Runs independent read-only spec alignment review and adversarial red-teaming.</dd>
+        </div>
+        <div>
+          <dt>no-comments / unslop / correct</dt>
+          <dd data-i18n="about.skill.hygiene">Audits stale comments and workarounds, cuts AI prose filler, and turns repeated mistakes into structural checks.</dd>
+        </div>
+        <div>
+          <dt>release-management / skill-creator</dt>
+          <dd data-i18n-html="about.skill.releaseCreator">Records release rules in <code>RELEASE.md</code> and authors new validated Agent Skills.</dd>
+        </div>
+      </dl>
+    </section>
+
     <section class="container section" id="usage" aria-labelledby="usage-title">
-      <h2 id="usage-title">Usage</h2>
-      <p>
-        Once installed, just describe the task. Your agent picks the matching skill and leaves
-        reviewable artifacts in your repository.
+      <h2 id="usage-title" data-i18n="usage.title">Usage</h2>
+      <p data-i18n="usage.intro">
+        Once installed, describe the task or invoke a slash command. Your agent selects the matching
+        skill and leaves reviewable artifacts in your repository.
       </p>
 
       <article class="example">
-        <h3>Plan a feature before writing code</h3>
+        <h3 data-i18n="usage.ex1Title">Start a disciplined session with /paddlr-mode</h3>
         <div class="code" data-code>
-          <div class="code-head"><span>Prompt</span><button class="copy" type="button">Copy</button></div>
-          <pre><code>Draft feature specifications and implementation plan with Paddlr: add CSV export to the reports page</code></pre>
+          <div class="code-head">
+            <span data-i18n="usage.promptLabel">Prompt</span>
+            <button class="copy" type="button" data-i18n="copy.idle">Copy</button>
+          </div>
+          <pre><code data-i18n="usage.ex1Prompt">/paddlr-mode Add CSV export to the reports page</code></pre>
         </div>
-        <p>
+        <p data-i18n-html="usage.ex1Desc">
+          <code>/paddlr-mode</code> restates the goal, classifies risk, writes a spec and plan to
+          <code>docs/paddlr/plans/</code>, verifies on the real artifact, and prepares a clean PR.
+        </p>
+      </article>
+
+      <article class="example">
+        <h3 data-i18n="usage.ex2Title">Plan a feature before writing code</h3>
+        <div class="code" data-code>
+          <div class="code-head">
+            <span data-i18n="usage.promptLabel">Prompt</span>
+            <button class="copy" type="button" data-i18n="copy.idle">Copy</button>
+          </div>
+          <pre><code data-i18n="usage.ex2Prompt">Draft feature specifications and implementation plan with Paddlr: add CSV export to the reports page</code></pre>
+        </div>
+        <p data-i18n-html="usage.ex2Desc">
           The agent inspects the repository, asks about real ambiguities, then writes a spec to
-          <code>docs/paddlr/specs/</code> and a step-by-step plan to <code>docs/paddlr/plans/</code>
-          for your approval.
+          <code>docs/paddlr/specs/</code> and a step-by-step plan to <code>docs/paddlr/plans/</code>.
         </p>
       </article>
 
       <article class="example">
-        <h3>Implement test-first</h3>
+        <h3 data-i18n="usage.ex3Title">Implement test-first</h3>
         <div class="code" data-code>
-          <div class="code-head"><span>Prompt</span><button class="copy" type="button">Copy</button></div>
-          <pre><code>Run TDD to implement the CSV export (RED -&gt; GREEN -&gt; REFACTOR)</code></pre>
+          <div class="code-head">
+            <span data-i18n="usage.promptLabel">Prompt</span>
+            <button class="copy" type="button" data-i18n="copy.idle">Copy</button>
+          </div>
+          <pre><code data-i18n="usage.ex3Prompt">Run TDD to implement the CSV export (RED -&gt; GREEN -&gt; REFACTOR)</code></pre>
         </div>
-        <p>
-          The agent writes a failing test, watches it fail, then adds the minimal code to make it
-          pass — and shows you the test output at each step.
+        <p data-i18n="usage.ex3Desc">
+          The agent writes a failing test, watches it fail, adds the minimal code to make it pass,
+          and shows real test output at each step.
         </p>
       </article>
 
       <article class="example">
-        <h3>Debug with evidence</h3>
+        <h3 data-i18n="usage.ex4Title">Debug with evidence</h3>
         <div class="code" data-code>
-          <div class="code-head"><span>Prompt</span><button class="copy" type="button">Copy</button></div>
-          <pre><code>Systematically investigate and debug a failure with sre-debugging: the export job times out</code></pre>
+          <div class="code-head">
+            <span data-i18n="usage.promptLabel">Prompt</span>
+            <button class="copy" type="button" data-i18n="copy.idle">Copy</button>
+          </div>
+          <pre><code data-i18n="usage.ex4Prompt">Systematically investigate and debug a failure with sre-debugging: the export job times out</code></pre>
         </div>
-        <p>
-          The agent reproduces the problem, gathers evidence, and tests hypotheses before
-          proposing a fix.
+        <p data-i18n="usage.ex4Desc">
+          The agent reproduces the failure, gathers evidence, and tests hypotheses before proposing
+          a fix.
         </p>
       </article>
 
-      <p class="muted">
-        In Claude Code, the skills are also available as slash commands, such as
-        <code>/paddlr:writing-specs</code>. Full reference in the
-        <a href="https://github.com/thanhdt942/paddlr#readme">documentation</a>.
+      <p class="muted" data-i18n-html="usage.footnote">
+        In Claude Code, skills are also available as slash commands such as
+        <code>/paddlr:writing-specs</code> and <code>/paddlr:paddlr-mode</code>. Read the full
+        <a href="https://github.com/thanhdt942/paddlr/blob/HEAD/docs/guide/README.md">User Guide</a>.
+      </p>
+    </section>
+
+    <section class="container section" id="acknowledgements" aria-labelledby="ack-title">
+      <h2 id="ack-title" data-i18n="ack.title">Acknowledgements</h2>
+      <p data-i18n-html="ack.body">
+        Paddlr is inspired by and adapts workflows, playbooks, and engineering principles originating
+        from <a href="https://github.com/poteto">Lauren Tan (@poteto)</a> and
+        <a href="https://github.com/cursor/plugins">pstack</a>. Thank you for sharing those ideas
+        openly and shaping how Paddlr brings them to an agent-agnostic, multi-platform setup.
       </p>
     </section>
   </main>
@@ -178,12 +333,12 @@
   <footer class="site-footer">
     <div class="container footer">
       <ul class="footer-links">
-        <li><a href="https://github.com/thanhdt942/paddlr">GitHub</a></li>
-        <li><a href="https://github.com/thanhdt942/paddlr#readme">Docs</a></li>
-        <li><a href="https://github.com/thanhdt942/paddlr/blob/HEAD/LICENSE">License</a></li>
-        <li><a href="https://github.com/thanhdt942/paddlr/blob/HEAD/CONTRIBUTING.md">Contributing</a></li>
+        <li><a href="https://github.com/thanhdt942/paddlr" data-i18n="footer.github">GitHub</a></li>
+        <li><a href="https://github.com/thanhdt942/paddlr/blob/HEAD/docs/guide/README.md" data-i18n="footer.guide">User Guide</a></li>
+        <li><a href="https://github.com/thanhdt942/paddlr/blob/HEAD/LICENSE" data-i18n="footer.license">License</a></li>
+        <li><a href="https://github.com/thanhdt942/paddlr/blob/HEAD/CONTRIBUTING.md" data-i18n="footer.contributing">Contributing</a></li>
       </ul>
-      <p class="muted">Paddlr is open source under the Apache-2.0 License.</p>
+      <p class="muted" data-i18n="footer.notice">Paddlr is open source under the Apache-2.0 License.</p>
     </div>
   </footer>
 

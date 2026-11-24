@@ -1,110 +1,110 @@
 /*
- * Paddlr landing page.
- * Agent install data lives in AGENTS; rendering and interaction below it.
- * To add an agent, append an entry to AGENTS. No markup changes needed.
+ * Paddlr landing page UI logic: i18n, installer tabs, clipboard copy, and theme toggle.
+ * Data lives in assets/js/i18n.js (window.PADDLR_I18N).
  */
 
-const REPO = "https://github.com/thanhdt942/paddlr";
+const { SUPPORTED_LOCALES, STRINGS, AGENTS } = window.PADDLR_I18N;
 
-/**
- * status: "supported" | "experimental" | "planned"
- * methods[].steps[]: one entry per command that must be run separately.
- * steps[].where: label shown above the block (e.g. "Terminal").
- */
-const AGENTS = [
-  {
-    id: "claude-code",
-    name: "Claude Code",
-    status: "supported",
-    prerequisites: ["Claude Code with plugin support (the /plugin command)."],
-    methods: [
-      {
-        label: "One step",
-        note: "Run inside a Claude Code session. Adds the Paddlr marketplace and installs the plugin.",
-        steps: [{ where: "Claude Code", cmd: "/plugin install paddlr --marketplace thanhdt942/paddlr" }],
-      },
-      {
-        label: "Two steps",
-        note: "For Claude Code versions without the --marketplace flag.",
-        steps: [
-          { where: "Claude Code", cmd: "/plugin marketplace add thanhdt942/paddlr" },
-          { where: "Claude Code", cmd: "/plugin install paddlr@paddlr" },
-        ],
-      },
-    ],
-    verify: { text: "paddlr@paddlr should show as enabled.", where: "Terminal", cmd: "claude plugin list" },
-    docs: { label: "Installation guide", href: `${REPO}#claude-code` },
-  },
-  {
-    id: "codex",
-    name: "Codex",
-    status: "supported",
-    prerequisites: ["OpenAI Codex CLI with plugin support (codex plugin)."],
-    methods: [
-      {
-        label: "Codex CLI",
-        note: "Add the Paddlr marketplace, then install the plugin from it.",
-        steps: [
-          { where: "Terminal", cmd: "codex plugin marketplace add thanhdt942/paddlr" },
-          { where: "Terminal", cmd: "codex plugin add paddlr@paddlr" },
-        ],
-      },
-    ],
-    verify: { text: "paddlr@paddlr should show as installed, enabled.", where: "Terminal", cmd: "codex plugin list" },
-    docs: null,
-  },
-  {
-    id: "opencode",
-    name: "OpenCode",
-    status: "supported",
-    prerequisites: ["OpenCode CLI.", "Git, to fetch the plugin from GitHub."],
-    methods: [
-      {
-        label: "OpenCode CLI",
-        note: "Run in your project. Adds Paddlr to .opencode/opencode.json. Add -g to install globally.",
-        steps: [{ where: "Terminal", cmd: "opencode plugin paddlr@git+https://github.com/thanhdt942/paddlr.git" }],
-      },
-      {
-        label: "Config file",
-        note: "Or add Paddlr to the plugin list in your opencode.json.",
-        steps: [
-          {
-            where: "opencode.json",
-            cmd: '{\n  "$schema": "https://opencode.ai/config.json",\n  "plugin": ["paddlr@git+https://github.com/thanhdt942/paddlr.git"]\n}',
-          },
-        ],
-      },
-    ],
-    verify: {
-      text: "The agent should call the pdl_bootstrap tool and print Paddlr's operating principles.",
-      where: "Terminal",
-      cmd: 'opencode run "Show me the Paddlr engineering discipline bootstrap context"',
-    },
-    docs: { label: "OpenCode details and exposed tools", href: `${REPO}/blob/HEAD/.opencode/INSTALL.md` },
-  },
-  {
-    id: "antigravity",
-    name: "Antigravity",
-    fullName: "Google Antigravity",
-    status: "supported",
-    prerequisites: ["Google Antigravity CLI (agy)."],
-    methods: [
-      {
-        label: "agy CLI",
-        note: "Installs the skills, rules, and session-start hook.",
-        steps: [{ where: "Terminal", cmd: "agy plugin install https://github.com/thanhdt942/paddlr" }],
-      },
-    ],
-    verify: { text: "paddlr should be listed as enabled.", where: "Terminal", cmd: "agy plugin list" },
-    docs: { label: "Installation guide", href: `${REPO}#google-antigravity-agy` },
-  },
-];
+let currentLang = "en";
+let installerApi = null;
+let themeApi = null;
 
-const STATUS_LABELS = {
-  supported: "Supported",
-  experimental: "Experimental",
-  planned: "Planned",
-};
+function t(key, lang = currentLang) {
+  const dict = STRINGS[lang] || STRINGS.en;
+  if (Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
+  return STRINGS.en[key] || "";
+}
+
+function pickLocalized(value, lang = currentLang) {
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    return value[lang] !== undefined ? value[lang] : value.en;
+  }
+  return value;
+}
+
+function resolveInitialLang() {
+  const params = new URLSearchParams(window.location.search);
+  const queryLang = params.get("lang");
+  if (queryLang && SUPPORTED_LOCALES.includes(queryLang)) return queryLang;
+
+  try {
+    const saved = localStorage.getItem("paddlr-lang");
+    if (saved && SUPPORTED_LOCALES.includes(saved)) return saved;
+  } catch {
+    // Ignore storage read errors in private browsing.
+  }
+
+  const browserLang = (navigator.language || "").toLowerCase();
+  return browserLang.startsWith("vi") ? "vi" : "en";
+}
+
+function applyLanguage(lang, { persist = false, announce = false } = {}) {
+  const next = SUPPORTED_LOCALES.includes(lang) ? lang : "en";
+  currentLang = next;
+  document.documentElement.lang = next;
+
+  document.title = t("meta.title", next);
+  const desc = document.querySelector('meta[name="description"]');
+  if (desc) desc.setAttribute("content", t("meta.description", next));
+  const ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.setAttribute("content", t("meta.ogTitle", next));
+  const ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.setAttribute("content", t("meta.ogDescription", next));
+
+  document.querySelectorAll("[data-i18n]").forEach((node) => {
+    const key = node.getAttribute("data-i18n");
+    if (node.classList.contains("copy") && node.classList.contains("is-done")) return;
+    node.textContent = t(key, next);
+  });
+
+  document.querySelectorAll("[data-i18n-html]").forEach((node) => {
+    const key = node.getAttribute("data-i18n-html");
+    node.innerHTML = t(key, next);
+  });
+
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((node) => {
+    const key = node.getAttribute("data-i18n-aria-label");
+    node.setAttribute("aria-label", t(key, next));
+  });
+
+  document.querySelectorAll("[data-lang-btn]").forEach((btn) => {
+    const active = btn.getAttribute("data-lang-btn") === next;
+    btn.setAttribute("aria-pressed", String(active));
+  });
+
+  if (themeApi) themeApi.syncLabel();
+  if (installerApi) installerApi.rerender();
+
+  if (persist) {
+    try {
+      localStorage.setItem("paddlr-lang", next);
+    } catch {
+      // Storage may be unavailable in private browsing.
+    }
+
+    const url = new URL(window.location.href);
+    if (url.searchParams.has("lang")) {
+      url.searchParams.set("lang", next);
+      history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+    }
+  }
+
+  if (announce) {
+    const live = document.querySelector("[data-live]");
+    if (live) live.textContent = t(next === "vi" ? "lang.liveVi" : "lang.liveEn", next);
+  }
+}
+
+function initLanguage() {
+  document.querySelectorAll("[data-lang-btn]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const targetLang = btn.getAttribute("data-lang-btn");
+      if (targetLang && targetLang !== currentLang) {
+        applyLanguage(targetLang, { persist: true, announce: true });
+      }
+    });
+  });
+}
 
 /* ---------- Rendering ---------- */
 
@@ -125,7 +125,7 @@ function codeBlock(where, cmd) {
   return el("div", { class: "code", "data-code": true }, [
     el("div", { class: "code-head" }, [
       el("span", { text: where }),
-      el("button", { class: "copy", type: "button", text: "Copy" }),
+      el("button", { class: "copy", type: "button", text: t("copy.idle") }),
     ]),
     el("pre", {}, el("code", { text: cmd })),
   ]);
@@ -134,41 +134,59 @@ function codeBlock(where, cmd) {
 function renderPanel(agent) {
   const nodes = [];
   const title = agent.fullName || agent.name;
+  const statusLabel = t(`status.${agent.status}`);
 
   nodes.push(
     el("div", { class: "panel-head" }, [
       el("h3", { text: title }),
-      el("span", { class: `status status--${agent.status}`, text: STATUS_LABELS[agent.status] }),
+      el("span", { class: `status status--${agent.status}`, text: statusLabel }),
     ])
   );
 
   if (agent.status === "planned") {
-    nodes.push(el("p", { class: "muted", text: `${title} support is planned and not installable yet.` }));
+    nodes.push(el("p", { class: "muted", text: `${title} ${t("install.planned")}` }));
     return nodes;
   }
 
-  if (agent.prerequisites && agent.prerequisites.length) {
+  const prerequisites = pickLocalized(agent.prerequisites);
+  if (prerequisites && prerequisites.length) {
     nodes.push(
       el("div", { class: "block" }, [
-        el("h4", { text: "Prerequisites" }),
-        el("ul", {}, agent.prerequisites.map((p) => el("li", { text: p }))),
+        el("h4", { text: t("install.prerequisites") }),
+        el("ul", {}, prerequisites.map((p) => el("li", { text: p }))),
       ])
     );
   }
 
   agent.methods.forEach((method, i) => {
-    const heading = agent.methods.length > 1 ? `Option ${i + 1}: ${method.label}` : "Install";
-    const steps = method.steps.map((step, n) =>
-      el("li", {}, [
-        method.steps.length > 1 ? el("span", { class: "step-label", text: `Step ${n + 1}` }) : null,
-        codeBlock(step.where, step.cmd),
-      ])
-    );
+    const label = pickLocalized(method.label);
+    const note = pickLocalized(method.note);
+    const heading =
+      agent.methods.length > 1
+        ? `${t("install.option")} ${i + 1}: ${label}`
+        : t("install.install");
+
+    const hasSteps = Array.isArray(method.steps) && method.steps.length > 0;
+    const stepsList = hasSteps
+      ? el(
+          "ol",
+          { class: "steps" },
+          method.steps.map((step, n) =>
+            el("li", {}, [
+              method.steps.length > 1
+                ? el("span", { class: "step-label", text: `${t("install.step")} ${n + 1}` })
+                : null,
+              codeBlock(step.where, step.cmd),
+            ])
+          )
+        )
+      : null;
+
     nodes.push(
       el("div", { class: "block" }, [
         el("h4", { text: heading }),
-        method.note ? el("p", { class: "muted", text: method.note }) : null,
-        el("ol", { class: "steps" }, steps),
+        note ? el("p", { class: "muted", text: note }) : null,
+        stepsList,
       ])
     );
   });
@@ -176,15 +194,18 @@ function renderPanel(agent) {
   if (agent.verify) {
     nodes.push(
       el("div", { class: "block" }, [
-        el("h4", { text: "Verify" }),
+        el("h4", { text: t("install.verify") }),
         codeBlock(agent.verify.where, agent.verify.cmd),
-        el("p", { class: "muted", text: agent.verify.text }),
+        el("p", { class: "muted", text: pickLocalized(agent.verify.text) }),
       ])
     );
   }
 
   if (agent.docs) {
-    nodes.push(el("p", { class: "block" }, el("a", { href: agent.docs.href, text: `${agent.docs.label} →` })));
+    const docsLabel = pickLocalized(agent.docs.label);
+    nodes.push(
+      el("p", { class: "block" }, el("a", { href: agent.docs.href, text: `${docsLabel} →` }))
+    );
   }
 
   return nodes;
@@ -193,6 +214,8 @@ function renderPanel(agent) {
 function initInstaller(root) {
   const tablist = root.querySelector("[data-tablist]");
   const panel = root.querySelector("[data-panel]");
+  let activeIndex = 0;
+
   const tabs = AGENTS.map((agent) =>
     el("button", {
       class: "tab",
@@ -208,6 +231,7 @@ function initInstaller(root) {
   panel.id = "install-panel";
 
   function select(index, { focus = false, updateHash = true } = {}) {
+    activeIndex = index;
     tabs.forEach((tab, i) => {
       const active = i === index;
       tab.setAttribute("aria-selected", String(active));
@@ -216,7 +240,14 @@ function initInstaller(root) {
     panel.setAttribute("aria-labelledby", tabs[index].id);
     panel.replaceChildren(...renderPanel(AGENTS[index]));
     if (focus) tabs[index].focus();
-    if (updateHash) history.replaceState(null, "", `#${AGENTS[index].id}`);
+    if (updateHash) {
+      const url = new URL(window.location.href);
+      history.replaceState(null, "", `${url.pathname}${url.search}#${AGENTS[index].id}`);
+    }
+  }
+
+  function rerender() {
+    panel.replaceChildren(...renderPanel(AGENTS[activeIndex]));
   }
 
   tablist.addEventListener("click", (event) => {
@@ -239,7 +270,6 @@ function initInstaller(root) {
     select(next, { focus: true });
   });
 
-  // Deep link: #codex, #opencode, ... selects that agent and scrolls to the installer.
   function selectFromHash() {
     const index = AGENTS.findIndex((a) => `#${a.id}` === location.hash);
     if (index < 0) return false;
@@ -247,8 +277,11 @@ function initInstaller(root) {
     root.closest("section").scrollIntoView();
     return true;
   }
+
   if (!selectFromHash()) select(0, { updateHash: false });
   window.addEventListener("hashchange", selectFromHash);
+
+  return { rerender };
 }
 
 /* ---------- Copy to clipboard ---------- */
@@ -277,21 +310,21 @@ function initCopy() {
     const code = button.closest("[data-code]").querySelector("code");
     try {
       await writeClipboard(code.textContent);
-      button.textContent = "Copied";
+      button.textContent = t("copy.done");
       button.classList.add("is-done");
-      if (live) live.textContent = "Copied to clipboard";
+      if (live) live.textContent = t("copy.liveDone");
     } catch {
-      button.textContent = "Press Ctrl+C";
+      button.textContent = t("copy.fallback");
       const range = document.createRange();
       range.selectNodeContents(code);
       const selection = window.getSelection();
       selection.removeAllRanges();
       selection.addRange(range);
-      if (live) live.textContent = "Copy failed. Text selected, press Ctrl+C.";
+      if (live) live.textContent = t("copy.liveFail");
     }
     clearTimeout(button._timer);
     button._timer = setTimeout(() => {
-      button.textContent = "Copy";
+      button.textContent = t("copy.idle");
       button.classList.remove("is-done");
     }, 1800);
   });
@@ -301,20 +334,25 @@ function initCopy() {
 
 function initTheme() {
   const toggle = document.querySelector("[data-theme-toggle]");
-  if (!toggle) return;
+  if (!toggle) return null;
 
   const root = document.documentElement;
   const meta = document.querySelector('meta[name="theme-color"]');
   const live = document.querySelector("[data-live]");
   const mq = window.matchMedia("(prefers-color-scheme: dark)");
 
+  function syncLabel() {
+    const dark = root.getAttribute("data-theme") === "dark";
+    toggle.setAttribute("aria-label", dark ? t("theme.toLight") : t("theme.toDark"));
+  }
+
   function apply(theme, announce = false) {
     const dark = theme === "dark";
     root.setAttribute("data-theme", theme);
     toggle.setAttribute("aria-pressed", String(dark));
-    toggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    syncLabel();
     if (meta) meta.setAttribute("content", dark ? "#0f1115" : "#ffffff");
-    if (announce && live) live.textContent = dark ? "Dark mode enabled" : "Light mode enabled";
+    if (announce && live) live.textContent = dark ? t("theme.liveDark") : t("theme.liveLight");
   }
 
   const current = root.getAttribute("data-theme") || (mq.matches ? "dark" : "light");
@@ -338,11 +376,16 @@ function initTheme() {
     }
     apply(event.matches ? "dark" : "light");
   });
+
+  return { syncLabel };
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
+  currentLang = resolveInitialLang();
+  themeApi = initTheme();
   const installer = document.querySelector("[data-installer]");
-  if (installer) initInstaller(installer);
+  if (installer) installerApi = initInstaller(installer);
+  initLanguage();
+  applyLanguage(currentLang, { persist: false, announce: false });
   initCopy();
 });
