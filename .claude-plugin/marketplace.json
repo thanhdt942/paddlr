@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Agent-agnostic software engineering framework providing reusable Agent Skills, structured workflows, and persistent project memory.",
-    "version": "1.2.0"
+    "version": "1.2.1"
   },
   "plugins": [
     {
       "name": "paddlr",
       "source": "./",
       "description": "Agent-agnostic software engineering framework providing reusable Agent Skills, structured workflows, and persistent project memory.",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "license": "Apache-2.0",
       "homepage": "https://github.com/thanhdt942/paddlr#readme"
     }

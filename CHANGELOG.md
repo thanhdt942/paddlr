@@ -4,6 +4,14 @@ All notable changes to the Paddlr project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-11-24
+
+### Removed
+- Removed obsolete legacy `commands/` directory and `tests/test_commands.py` (Claude Code and other supported agents auto-expose skills directly from `skills/*/SKILL.md`).
+
+### Changed
+- Streamlined and aligned top-level documentation (`README.md`, `CONTRIBUTING.md`, `SUPPORT.md`, `SECURITY.md`, `AGENTS.md`) with Paddlr v1.2 (57 skills, Cursor support, `docs/guide/`, `.paddlr.json`, and accurate `1.2.x` version support tables).
+
 ## [1.2.0] - 2026-11-24
 
 ### Added
