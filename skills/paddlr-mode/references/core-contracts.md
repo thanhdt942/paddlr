@@ -65,7 +65,8 @@ interface TaskIntent {
 Governs the storage, lifecycle, and consistency of active engineering tasks.
 
 ### 1. Single Canonical State Principle
-- The Git-tracked Markdown plan located at `docs/paddlr/plans/YYYY-MM-DD-<slug>.md` is the **single canonical Task State**.
+- The Git-tracked Markdown plan located at `docs/paddlr/plans/YYYY-MM-DD-<slug>.md` (or the `plans` path configured in an optional `.paddlr.json` at the repository root) is the **single canonical Task State**.
+- Target repositories may customize `root`, `specs`, `plans`, `decisions`, `decisionsIndex`, or `project` via `.paddlr.json` (all relative paths contained within the repository root; unspecified keys inherit from `root`, default `docs/paddlr`).
 - No secondary file, internal transcript log, or hidden database (e.g. `.paddlr/state.json`) may act as a parallel state store.
 - **Operational Scratchpads:** Local files such as `decision.tsv` in `hillclimb.md` are strictly ephemeral trial logs for raw numerical metric iterations. They are not canonical state stores. Canonical summaries and decisions are committed to the task plan.
 - **Trivial Task Exemption:** Small Level 1 tasks (typo fixes, localized one-file edits) execute in-turn without creating a plan file unless escalated or requested.
@@ -197,6 +198,7 @@ Core v1 establishes a strict Single-Agent baseline. `agent.delegate` and `schedu
 | `search.find` | Discovery | **Required (Mandatory)** | Find paths and search regex. | `GlobTool`/`GrepTool`, `glob`/`grep`, find | Fall back to `shell.exec` (`git ls-files`, `findstr`). |
 | `model.steer` | Reasoning Tier | **Optional Enhancement** | Select model reasoning tier. | Model flags, `Model: "..."`, pstack | Fall back to runtime's default active model. |
 | `ui.prompt` | User Interface | **Optional Enhancement** | Multiple-choice interactive prompt. | `AskQuestion`, `ask_question`, UI prompt | Fall back to plain-text turn prompt. |
+| `ui.todo` | User Interface | **Optional Enhancement** | Live session checklist mirror. | Cursor/Claude Code `TodoWrite`, Antigravity `update_steps`, Codex CLI `update_plan`, OpenCode `todowrite` | Fall back to a compact progress list in chat replies at phase boundaries. |
 | `agent.delegate`| Multi-Agent | **Deferred (Phase 4)** | Spawn isolated worker agent. | `Task`, `invoke_subagent`, subagent | Not required for Core v1. Single-agent runtimes do not implement. |
 | `scheduler.loop`| Automation | **Deferred (Phase 6)** | Automated background loops. | `/loop`, `schedule`, cron | Not required for Core v1. Single-agent runtimes do not implement. |
 
@@ -204,22 +206,22 @@ Core v1 establishes a strict Single-Agent baseline. `agent.delegate` and `schedu
 
 ## Contract 6: Autonomy Policy (AR-09)
 
-Separates decision-making autonomy from operational authorization.
+Applies **Reversibility-First Autonomy**, separating decision-making autonomy from operational authorization:
 
-- **Autonomous (Execute Freely):**
-  - Reading files, searching codebase, analyzing architecture.
-  - Local source edits, unit test execution, linting, formatting.
-  - Creating temporary local scratch files (`.scratch/`).
-  - Executing read-only profiling and diagnostic commands.
-- **Controlled (Requires Implementation Plan Sign-Off):**
-  - Adding or upgrading third-party dependencies.
-  - Introducing new architectural modules or changing public API shapes.
-  - Multi-file refactorings crossing module boundaries.
-- **Mandatory Approval Pause (Never Execute Autonomously):**
+- **Level 1 (Small Bug / Localized Refactor — Execute Directly):**
+  - No Spec or Plan required. Execute the matching playbook directly, verify on the real surface, and report evidence.
+- **Level 2 (Standard Feature, Reversible on Branch/Worktree — Proceed Without Blocking):**
+  - Author Spec + Plan in project memory (`docs/paddlr/` or `.paddlr.json` overrides) and proceed directly through implementation, real-surface verification, and PR creation so the human reviews the complete result.
+  - Pause only when product/UX ambiguity cannot be settled by code or prototyping, or when the user explicitly requests plan review first.
+- **Level 3 (Architectural, Hard to Reverse, Schema/Public API Breaking, or Multi-PR — Mandatory Pre-Code Approval):**
+  - Prototype or red-team unknowns if present, author Spec + ADR + Plan, and **pause for explicit human approval** before modifying production code.
+- **Hard Stops (Always Pause — Never Execute Autonomously):**
   - Force-pushing to shared Git branches (`git push --force`).
   - Deleting persistent data, production databases, or cloud resources.
   - Triggering production deployments or publishing packages.
   - Sending messages to external systems or external human channels.
+- **Session Overrides:**
+  - Explicit user directives ("don't stop", "run until done") allow continuing reversible branch work while recording decisions in Plan/ADR. Hard stops remain enforced unless explicitly authorized.
 
 ---
 

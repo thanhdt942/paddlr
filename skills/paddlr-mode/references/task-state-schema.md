@@ -15,6 +15,9 @@ Paddlr requires an explicit, durable, and human-auditable model of task state. T
 docs/paddlr/plans/YYYY-MM-DD-<slug>.md
 ```
 
+### Optional Path Overrides (`.paddlr.json`)
+Target repositories may place an optional `.paddlr.json` file at the repository root to override default project memory paths (`root`, `specs`, `plans`, `decisions`, `decisionsIndex`, `project`). Unspecified keys inherit from `root` (default `docs/paddlr`). All paths must be relative and remain inside the repository root; malformed JSON or escaping paths fail fast with an error.
+
 This document specifies the YAML frontmatter schema, body section requirements, and lifecycle rules governing canonical Task State.
 
 ---
@@ -30,6 +33,10 @@ This document specifies the YAML frontmatter schema, body section requirements, 
 4. **Boundary with Project Memory:**
    - Task State is initiative-scoped and ephemeral to task completion.
    - Project Memory (`docs/paddlr/PROJECT.md` and `docs/paddlr/DECISIONS.md`) is durable across tasks. `PROJECT.md` is the living current snapshot; `DECISIONS.md` records architectural decisions and their historical evolution.
+5. **Two-Tier Checklist Synchronization (`ui.todo`):**
+   - The Markdown plan file (`docs/paddlr/plans/YYYY-MM-DD-<slug>.md` or `.paddlr.json` override) is always the **canonical source of truth**.
+   - When executing a Level 2/3 plan or a Level 1 playbook, mirror active steps into the host runtime's live checklist via the optional `ui.todo` primitive (`runtime-adapters.md`).
+   - Mark `- [x]` in the canonical plan and `done` in `ui.todo` **only after** concrete verification succeeds. If `ui.todo` is unavailable, emit a compact progress list in chat replies at phase boundaries.
 
 ---
 

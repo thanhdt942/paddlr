@@ -30,6 +30,7 @@ Core v1 establishes a strict Single-Agent baseline. `agent.delegate` and `schedu
 | `search.find` | Discovery | **Required (Mandatory)** | Search paths and content regexes. | `GlobTool`/`GrepTool`, `glob`/`grep`, find | Fall back to `shell.exec` (`git ls-files`, `findstr`, Python). |
 | `model.steer` | Reasoning Tier | **Optional Enhancement** | Select model reasoning tier. | Model flags, `Model: "..."`, pstack | Fall back to runtime's default active model. |
 | `ui.prompt` | User Interface | **Optional Enhancement** | Multiple-choice interactive prompt. | `AskQuestion`, `ask_question`, UI prompt | Fall back to plain-text turn prompt. |
+| `ui.todo` | User Interface | **Optional Enhancement** | Live session checklist / task tracker. | Cursor/Claude Code `TodoWrite`, Antigravity `update_steps`, Codex CLI `update_plan`, OpenCode `todowrite` | Fall back to a compact progress list in chat replies at phase boundaries. |
 | `agent.delegate`| Multi-Agent | **Deferred (Phase 4)** | Spawn isolated worker agent. | `Task`, `invoke_subagent`, subagent | Not required for Core v1. Single-agent runtimes do not implement. |
 | `scheduler.loop`| Automation | **Deferred (Phase 6)** | Automated background loops. | `/loop`, `schedule`, cron | Not required for Core v1. Single-agent runtimes do not implement. |
 

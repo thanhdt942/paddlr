@@ -48,7 +48,7 @@ class WorkflowClassificationEngine:
             requires_spec = True
             requires_design = True
             requires_plan = True
-            requires_approval_before_code = True
+            requires_approval_before_code = is_ambiguous
         elif is_typo_or_doc or files_affected <= 1:
             level = 1
             workflow = "workflows/small-change.md"
@@ -64,7 +64,7 @@ class WorkflowClassificationEngine:
             requires_spec = True
             requires_design = True
             requires_plan = True
-            requires_approval_before_code = True
+            requires_approval_before_code = is_ambiguous
 
         return {
             "title": title,
@@ -122,7 +122,7 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
         self.assertFalse(res["requires_brainstorming"])
 
     def test_scenario_03_multi_module_feature(self):
-        """Scenario 3: Feature involving multiple modules (Level 2)."""
+        """Scenario 3: Clear reversible Level 2 feature proceeds without blocking for pre-code approval."""
         res = WorkflowClassificationEngine.classify_task(
             title="Implement User Notification Service",
             files_affected=5,
@@ -133,10 +133,10 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
         self.assertTrue(res["requires_formal_spec"])
         self.assertTrue(res["requires_technical_design"])
         self.assertTrue(res["requires_implementation_plan"])
-        self.assertTrue(res["requires_approval_before_code"])
+        self.assertFalse(res["requires_approval_before_code"])
 
     def test_scenario_04_new_external_integration(self):
-        """Scenario 4: New external integration (Level 2 with trade-offs)."""
+        """Scenario 4: New external integration (Level 2 reversible with multiple approaches, no ambiguity)."""
         res = WorkflowClassificationEngine.classify_task(
             title="Integrate Stripe Payment Gateway",
             files_affected=4,
@@ -146,7 +146,7 @@ class TestEngineeringWorkflowScenarios(unittest.TestCase):
         self.assertEqual(res["level"], 2)
         self.assertTrue(res["requires_brainstorming"])
         self.assertTrue(res["requires_technical_design"])
-        self.assertTrue(res["requires_approval_before_code"])
+        self.assertFalse(res["requires_approval_before_code"])
 
     def test_scenario_05_database_schema_change(self):
         """Scenario 5: Database schema change (Level 3 Architectural Change)."""

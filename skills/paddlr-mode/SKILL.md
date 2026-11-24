@@ -8,7 +8,7 @@ color: yellow
 
 # Paddlr mode
 
-Bundled skills live at `../<name>/SKILL.md` from this file, so put this file's absolute path in every `poteto-agent` prompt.
+Bundled skills live at `../<name>/SKILL.md` from this file, so pass this file's absolute path in every `paddlr-worker` delegation brief when multi-agent delegation is active.
 
 ## Non-negotiables
 
@@ -26,7 +26,7 @@ The remaining triggers live only here:
 - A number you measured → **benchmark-checklist**.
 - PR status → the **Babysit** playbook. Landing a green stack → the **Shipping** playbook.
 - Bot review comments → judge each on its merits.
-- Persistent task state → track in `docs/paddlr/plans/YYYY-MM-DD-<slug>.md` per the Task State Schema.
+- Persistent task state → track Level 2/3 plans in `docs/paddlr/plans/YYYY-MM-DD-<slug>.md` (or `.paddlr.json` override) per the Task State Schema, and mirror active steps into the host's live checklist via `ui.todo` (`references/runtime-adapters.md`). Mark `- [x]` and `done` only after verification.
 
 ## Principles
 
@@ -53,6 +53,8 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 - **Make Operations Idempotent.** Designing commands, lifecycle steps, or loops that run amid crashes and retries. Converge to the same end state.
 - **Migrate Callers Then Delete Legacy APIs.** Introducing a new internal API while old callers exist. Migrate and delete in one wave.
 - **Separate Before Serializing Shared State.** Concurrent actors might write the same file, branch, key, or object. Eliminate the sharing first.
+- **Spec Before Code.** Before implementing any Level 2 or Level 3 feature or architectural change. Define scope, requirements, and acceptance criteria in `specs/` before writing production code (Level 1 exempt).
+- **Record Decisions Immutably.** Making or changing a Level 3 architectural decision. Write an append-only ADR in `decisions/` and index it in `DECISIONS.md`; supersede prior ADRs instead of rewriting them.
 
 **Verification**
 
@@ -73,11 +75,13 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 ## Autonomy
 
-**Just do it.** Use any MCP tool. Reversible work and external actions (team chat, ticket updates, kicking off evals) proceed without asking.
+Paddlr follows **Reversibility-First Autonomy** (**principle-never-block-on-the-human**):
 
-**Always pause** for irreversible writes: force-push to shared branches, deploys, data deletion, customer messages.
-
-**Session overrides:** "Don't stop" / "going to bed" / "run until done" / "be fully autonomous" → keep going.
+- **Level 1 (Small bug / localized refactor):** No Spec, no Plan. Run the playbook directly.
+- **Level 2 (Standard feature, reversible on a branch/worktree):** Write Spec + Plan in project memory (`docs/paddlr/` or `.paddlr.json` overrides) and proceed straight through implementation, verification, and PR creation without blocking for approval. Pause only for product/UX ambiguity that code/prototyping cannot settle, or when the user asks to review the plan first.
+- **Level 3 (Architectural, hard to reverse, schema/public API breaking, or multi-PR):** Run `prototype`/`arena` if unknowns exist, then **pause for approval** on Spec + ADR + Plan before implementation.
+- **Hard stops (always pause):** Production deploys, persistent data deletion, force-push to shared branches, and messages to external channels.
+- **Session overrides:** "Don't stop" / "going to bed" / "run until done" / "be fully autonomous" → keep going on reversible branch work while recording decisions in Plan/ADR; hard stops remain in effect.
 
 **No is an acceptable answer.** Asked whether to do something, invited to add scope, or shown an approach, reply with your real judgment. Decline, push back, or say "this doesn't earn its place" when true. A recommendation is a judgment, not a validation. Agreement is not the default, candor over sycophancy.
 
@@ -97,6 +101,14 @@ Write short declarative sentences with no long dash and no colon as a connector.
 
 ## Playbooks
 
-Match the task to a playbook and open its steps at `playbooks/<title>.md`, with the title in kebab case. Record active task progress, checkbox steps, and verification logs in the canonical task plan under `docs/paddlr/plans/YYYY-MM-DD-<slug>.md`.
+Match the task to a playbook and open its steps at `playbooks/<title>.md`, with the title in kebab case. For **Level 2 and Level 3** tasks, record active task progress, checkbox steps, and verification logs in the canonical task plan under `docs/paddlr/plans/YYYY-MM-DD-<slug>.md` (or the `plans` path in `.paddlr.json`) and mirror active steps via `ui.todo`. **Level 1** small changes and localized bug fixes are exempt from mandatory plan creation per [references/task-state-schema.md](references/task-state-schema.md) and [rules/AGENTS.md](../../rules/AGENTS.md); mirror their playbook steps in `ui.todo` directly.
 
 Investigation, Bug fix, Perf issue, Hillclimb, Runtime forensics, Trace forensics, Feature, Refactoring, Prototype, Visual parity, Authoring a skill, Eval, Babysit, Shipping, Autonomous run, Autopilot-full, Autopilot-stack, Session pickup, Pause safely, Multi-phase plan, Worktree cleanup, Opening a PR.
+
+### Playbook vs. Standalone Skill Boundaries
+
+| Concern | Playbook (`playbooks/*`) | Standalone Skill (`skills/*`) | When to Use Each |
+|---|---|---|---|
+| **Feature Delivery** | `playbooks/feature.md` (orchestration, throughput checkpoint, autonomy, PR) | `feature-development` (5-phase SDD lifecycle checklist) | Use `playbooks/feature.md` as the Paddlr Mode entry point; it invokes `feature-development` for the 5-phase lifecycle. |
+| **Debugging** | `playbooks/bug-fix.md` (repro, TDD repro commit, PR) | `sre-debugging` (4-phase scientific root-cause analysis) | Use `playbooks/bug-fix.md` to orchestrate the fix and PR; it invokes `sre-debugging` during diagnosis. |
+| **Review** | — | `code-review` (spec alignment & maintainability) vs. `interrogate` (adversarial red-teaming; only empirically reproduced findings survive) | Run `code-review` on every PR; run `interrogate` on high-risk, security-sensitive, or contested designs. |
