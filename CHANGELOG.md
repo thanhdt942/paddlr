@@ -4,6 +4,32 @@ All notable changes to the Paddlr project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0](https://github.com/thanhdt942/paddlr/compare/v1.4.1...v1.5.0) (2026-11-25)
+
+
+### Features
+
+* **autonomy:** pause only on irreversible actions by default and load .paddlr.json autonomy settings ([1e2ddfb](https://github.com/thanhdt942/paddlr/commit/1e2ddfb854aaa42cedf91de629b6e844c3f88fdb))
+* **core:** initial release v1.0.0 of paddlr ([6883442](https://github.com/thanhdt942/paddlr/commit/68834426c0b9a2f905e3935451524c213377aa3a))
+* **paddlr:** add SDD autonomy, .paddlr.json, ui.todo, ADR closure, craft skills, and guide ([25e1aef](https://github.com/thanhdt942/paddlr/commit/25e1aef23eaa17fbbc3c09d3d2b3479677153eb6))
+* **paddlr:** complete phase 1 - foundation and metadata conformance ([9d5f1a6](https://github.com/thanhdt942/paddlr/commit/9d5f1a660cd58d85e1406bf07e99fbfcc026604d))
+* **paddlr:** complete phase 2 - core contracts and task state infrastructure ([0d8ab40](https://github.com/thanhdt942/paddlr/commit/0d8ab40c8b7d23cc54fbd8cdb977e6efc802b473))
+* **paddlr:** complete phase 3 - single-agent core playbook and skill harmonization ([dbca31c](https://github.com/thanhdt942/paddlr/commit/dbca31ce865ee32b1b169c8a08e4ddff3bf0e694))
+* **paddlr:** complete phase 4 - diagnostics, forensics and local subagent delegation ([b003cb5](https://github.com/thanhdt942/paddlr/commit/b003cb5f40be5dad80b19e57f6c1e5c0a9763fda))
+* **paddlr:** complete phase 5 - advanced playbooks and stack watching ([47d58a1](https://github.com/thanhdt942/paddlr/commit/47d58a10a91521ccbe8301d663a1615f911d0a9c))
+* **paddlr:** complete phase 6 - deferred cloud infrastructure and playbook retirement ([1104cee](https://github.com/thanhdt942/paddlr/commit/1104cee520be29994f4878c8f472dbe6456e5843))
+* **skills:** add setup-paddlr, paddlr-help, lazy-loading defaults, and streamlined rules ([3c21224](https://github.com/thanhdt942/paddlr/commit/3c21224a626d174314de7aa41dbf98d230379910))
+* **website:** add dark mode support with system preference and toggle ([d731df3](https://github.com/thanhdt942/paddlr/commit/d731df346265ed8378b6b439f2f1e4f68545dc5e))
+* **website:** add English and Vietnamese i18n support ([9b41d03](https://github.com/thanhdt942/paddlr/commit/9b41d0378b6fd6eacc5c1f40d2dd45bce6021bbf))
+* **website:** add Paddlr landing page, documentation, and GitHub Pages workflow ([2abbfb1](https://github.com/thanhdt942/paddlr/commit/2abbfb1c0b6694257a6e76ab24550d1b24fa1d32))
+* **website:** implement interactive Agent Installation Hub and 9-section layout spec ([0c1ed8c](https://github.com/thanhdt942/paddlr/commit/0c1ed8ca0387ac120a3de2b551fb056468430b4f))
+* **website:** redesign landing page as minimal single-column site ([d5ba3c1](https://github.com/thanhdt942/paddlr/commit/d5ba3c1c98d0a20ebb0bf38f0dac2fbec5115ac0))
+
+
+### Bug Fixes
+
+* **hooks:** resolve SessionStart hook path in external projects ([52a6a45](https://github.com/thanhdt942/paddlr/commit/52a6a45bdc614f32948ab2856703ac53a9313908))
+
 ## [1.4.1](https://github.com/thanhdt942/paddlr/compare/v1.4.0...v1.4.1) (2026-11-25)
 
 

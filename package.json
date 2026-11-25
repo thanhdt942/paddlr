@@ -1,6 +1,6 @@
 {
   "name": "paddlr",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Agent-agnostic software engineering framework turning proven engineering practices into practical, reusable AI Agent Skills.",
   "type": "module",
   "main": "index.js",
