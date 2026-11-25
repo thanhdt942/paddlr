@@ -1,6 +1,6 @@
 {
   "name": "paddlr",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "Paddlr — Agent-Agnostic Software Engineering Framework for Claude Code",
   "author": {
     "name": "thanhdt942"
