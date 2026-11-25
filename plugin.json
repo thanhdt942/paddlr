@@ -2,7 +2,7 @@
   "name": "paddlr",
   "displayName": "Paddlr",
   "description": "Agent-agnostic software engineering framework. Simple on the surface, sophisticated underneath.",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": {
     "name": "thanhdt942",
     "url": "https://github.com/thanhdt942"

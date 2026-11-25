@@ -11,10 +11,12 @@ Validates that Paddlr adheres to:
 """
 
 import json
+import os
 from pathlib import Path
 import re
 import shutil
 import subprocess
+import tempfile
 import unittest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -41,6 +43,48 @@ class TestPlugins(unittest.TestCase):
         data = json.loads(hooks_path.read_text(encoding="utf-8"))
         self.assertIn("hooks", data)
         self.assertIn("SessionStart", data["hooks"])
+
+    def test_02b_claude_session_start_hook_external_cwd(self):
+        """Validate SessionStart hook command resolves and runs when cwd is an external project."""
+        hooks_path = REPO_ROOT / "hooks" / "hooks.json"
+        data = json.loads(hooks_path.read_text(encoding="utf-8"))
+        session_start_hooks = data["hooks"]["SessionStart"][0]["hooks"]
+        command_tmpl = session_start_hooks[0]["command"]
+
+        # Ensure command references ${CLAUDE_PLUGIN_ROOT} and quotes the path
+        self.assertIn("${CLAUDE_PLUGIN_ROOT}", command_tmpl)
+        self.assertIn('"${CLAUDE_PLUGIN_ROOT}/hooks/session-start.py"', command_tmpl)
+
+        with tempfile.TemporaryDirectory() as external_project_dir:
+            # Simulate Claude Code variable substitution and environment
+            expanded_command = command_tmpl.replace("${CLAUDE_PLUGIN_ROOT}", str(REPO_ROOT).replace("\\", "/"))
+            env = dict(os.environ)
+            env["CLAUDE_PLUGIN_ROOT"] = str(REPO_ROOT)
+            stdin_payload = json.dumps({"hook_event_name": "SessionStart", "source": "startup"})
+
+            res = subprocess.run(
+                expanded_command,
+                shell=True,
+                cwd=external_project_dir,
+                input=stdin_payload,
+                capture_output=True,
+                text=True,
+                env=env,
+            )
+            self.assertEqual(
+                res.returncode,
+                0,
+                f"SessionStart hook failed in external directory {external_project_dir}: {res.stderr}",
+            )
+            out_data = json.loads(res.stdout)
+            self.assertEqual(
+                out_data.get("hookSpecificOutput", {}).get("hookEventName"),
+                "SessionStart",
+            )
+            self.assertIn(
+                "Paddlr Engineering Discipline Active",
+                out_data.get("hookSpecificOutput", {}).get("additionalContext", ""),
+            )
 
     def test_03_rules_exist(self):
         """Validate rules/AGENTS.md and rules/CLAUDE.md exist."""
