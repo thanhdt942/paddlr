@@ -26,10 +26,16 @@ Supports both:
 """
 
 import json
+import os
 from pathlib import Path
 import sys
 
-PLUGIN_ROOT = Path(__file__).resolve().parent.parent
+claude_plugin_root = os.environ.get("CLAUDE_PLUGIN_ROOT")
+if claude_plugin_root and Path(claude_plugin_root).is_dir():
+    PLUGIN_ROOT = Path(claude_plugin_root).resolve()
+else:
+    PLUGIN_ROOT = Path(__file__).resolve().parent.parent
+
 if str(PLUGIN_ROOT) not in sys.path:
     sys.path.insert(0, str(PLUGIN_ROOT))
 

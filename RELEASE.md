@@ -8,7 +8,7 @@
 
 ## Versioning
 - Strategy: Confirmed (Semantic Versioning 2.0.0 — `MAJOR.MINOR.PATCH`)
-- Current Version: Confirmed (`1.2.1`)
+- Current Version: Confirmed (`1.4.1`)
 - Version Sources: Confirmed (`plugin.json`, `package.json`, `.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json`, `.release-please-manifest.json`)
 - Format: Confirmed (Manifests: `X.Y.Z`; Git tags: `vX.Y.Z`)
 - Pre-release: Not Applicable
